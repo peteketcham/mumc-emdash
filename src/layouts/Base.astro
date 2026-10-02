@@ -1,0 +1,89 @@
+---
+import { getSiteSettingsWithCacheHint } from "emdash";
+import { EmDashHead, EmDashBodyStart, EmDashBodyEnd } from "emdash/ui";
+import { createPublicPageContext } from "emdash/page";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../site";
+
+interface Props {
+	title: string;
+	description?: string | null;
+	canonical?: string | null;
+	isHome?: boolean;
+	/** Pass the content reference so EmDash can attach edit tooling to the page. */
+	content?: { collection: string; id: string; slug?: string | null };
+}
+
+const { title, description, canonical, isHome = false, content } = Astro.props;
+const settingsResult = await getSiteSettingsWithCacheHint();
+if (Astro.cache?.enabled) Astro.cache.set(settingsResult.cacheHint);
+const siteTitle = settingsResult.data?.title || site.name;
+const fullTitle = isHome ? siteTitle : `${title} | ${siteTitle}`;
+const pageDescription = description || settingsResult.data?.tagline || site.description;
+
+const pageCtx = createPublicPageContext({
+	Astro,
+	kind: content ? "content" : "custom",
+	pageType: "website",
+	title: fullTitle,
+	pageTitle: title,
+	description: pageDescription,
+	canonical,
+	content,
+	siteName: siteTitle,
+});
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{fullTitle}</title>
+		<meta name="keywords" content={site.keywords} />
+		<link rel="icon" href="/favicon.ico" />
+
+		<link rel="stylesheet" href="/layout/style.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" integrity="sha256-dMpqrlRo28kkeQw7TSGaCJuQo0utU6D3yjpz5ztvWrg=" crossorigin="anonymous" />
+		<link rel="stylesheet" href="/layout/plugins/cssanimation/animate.css" />
+		<link rel="stylesheet" href="/layout/plugins/cssanimation/delays.css" />
+		<link rel="stylesheet" href="/css/custom.css" />
+		<EmDashHead page={pageCtx} />
+	</head>
+
+	<body class="sticky_footer">
+		<EmDashBodyStart page={pageCtx} />
+		<a href="#content" class="skip-link">Skip to main content</a>
+
+		<div class="wrapper">
+			<Header />
+
+			<main id="content" role="main">
+				<slot />
+			</main>
+
+			<Footer />
+		</div>
+
+		<script is:inline>
+			// Mobile detection (from the original theme's plugins.js)
+			var isMobile = false;
+			var isiPad = false;
+			(function () {
+				var mobileIds = ["iphone", "android", "ipad", "ipod"];
+				var ua = navigator.userAgent.toLowerCase();
+				for (var i = 0; i < mobileIds.length; i++) {
+					if (ua.indexOf(mobileIds[i]) > -1) {
+						isMobile = true;
+						if (mobileIds[i] === "ipad") isiPad = true;
+					}
+				}
+			})();
+		</script>
+		<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+		<script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" integrity="sha256-mF8SJMDu7JnTZ6nbNeWORLIefrnORYMbFbTBCOQf2X8=" crossorigin="anonymous"></script>
+		<script is:inline src="/layout/js/main.js"></script>
+		<EmDashBodyEnd page={pageCtx} />
+	</body>
+</html>

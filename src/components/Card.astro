@@ -1,0 +1,66 @@
+---
+import { PortableText } from "emdash/ui";
+import { imageSrc, imageAlt } from "../utils/media";
+
+/** One card in a homepage / kids / youth grid (port of Hugo's homepage-card.html). */
+interface Props { card: any }
+const { card } = Astro.props;
+const d = card.data;
+const src = imageSrc(d.image);
+const hasVideo = !!d.video;
+const hasImage = !!src;
+const hasBody = Array.isArray(d.body) && d.body.length > 0;
+const hasLink = !!d.link;
+const external = !!d.external;
+const linkAttrs = external ? { target: "_blank", rel: "noopener" } : {};
+---
+
+<article class={`post_type_1${!hasImage && !hasVideo ? " post_type_3" : ""}`}>
+	{
+		(hasImage || hasVideo) && (
+			<div class="feature">
+				<div class="image">
+					{hasVideo ? (
+						<video width="100%" controls preload="metadata">
+							<source src={d.video} type="video/mp4" />
+							{d.video_ogg && <source src={d.video_ogg} type="video/ogg" />}
+							<p>
+								Your browser does not support the video tag.
+								{d.video_fallback && <a href={d.video_fallback} target="_blank" rel="noopener">Watch on YouTube</a>}
+							</p>
+						</video>
+					) : hasLink ? (
+						<a href={d.link} {...linkAttrs}>
+							<img src={src} alt={imageAlt(d.image, d.title)} width="296" height="200" loading="lazy" />
+							<span class="hover" />
+						</a>
+					) : (
+						<>
+							<img src={src} alt={imageAlt(d.image, d.title)} width="296" height="200" loading="lazy" />
+							<span class="hover" />
+						</>
+					)}
+				</div>
+			</div>
+		)
+	}
+
+	{
+		(hasBody || d.tags) && (
+			<div class="content">
+				<div class="info">{d.tags && <div class="tags">{d.tags}</div>}</div>
+				{hasBody && (
+					<div class="title">
+						{hasLink ? (
+							<a href={d.link} {...linkAttrs} class={external ? "external-link" : undefined}>
+								<PortableText value={d.body} />
+							</a>
+						) : (
+							<PortableText value={d.body} />
+						)}
+					</div>
+				)}
+			</div>
+		)
+	}
+</article>

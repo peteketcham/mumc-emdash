@@ -1,0 +1,79 @@
+---
+import { PortableText } from "emdash/ui";
+import { imageSrc, imageAlt } from "../../utils/media";
+import { site } from "../../site";
+/** Port of Hugo _default/single.html */
+const { page } = Astro.props;
+const d = page.data;
+const banner = imageSrc(d.banner);
+const featImg = imageSrc(d.featured_image);
+const hasFeatured = d.featured_title || d.featured_heading || d.featured_text || featImg;
+const downloads = d.downloads ?? [];
+const embeds = d.embeds ?? [];
+---
+<div class="inner">
+	{banner && <div class="page-banner"><img src={banner} alt={imageAlt(d.banner, d.title)} /></div>}
+
+	<div class="block_general_title_1 w_margin_1">
+		<h1>{d.title}</h1>
+		{d.subtitle && <h2>{d.subtitle}</h2>}
+	</div>
+
+	{hasFeatured && (
+		<div class={`block_featured ${d.featured_position || "right"}`}>
+			<div class="f_title">{d.featured_title}</div>
+			<div class="content">
+				{featImg && <div class="image"><img src={featImg} alt={imageAlt(d.featured_image)} /></div>}
+				<div class="description">
+					{d.featured_heading && <div class="title">{d.featured_heading}</div>}
+					{d.featured_text && <p set:html={d.featured_text} />}
+				</div>
+			</div>
+		</div>
+	)}
+
+	<div class="block_content page-content">
+		{d.content && <PortableText value={d.content} />}
+	</div>
+
+	{d.video && (
+		<div class="page-video">
+			<video width="100%" controls preload="metadata">
+				<source src={d.video} type="video/mp4" />
+				{d.video_ogg && <source src={d.video_ogg} type="video/ogg" />}
+				<p>Your browser does not support the video tag.
+					{d.video_fallback && <a href={d.video_fallback} target="_blank" rel="noopener">Watch on YouTube</a>}
+				</p>
+			</video>
+		</div>
+	)}
+
+	{embeds.map((e: any) => (
+		<div class="page-embed">
+			{e.title && <h3>{e.title}</h3>}
+			<iframe src={e.url} width={e.width || "100%"} height={e.height || "400"} frameborder="0" loading="lazy"></iframe>
+		</div>
+	))}
+
+	{downloads.length > 0 && (
+		<div class="page-downloads">
+			<h3>{d.downloads_title || "Downloads"}</h3>
+			<ul class="download-list">
+				{downloads.map((f: any) => (
+					<li>
+						<a href={f.url} target="_blank" rel="noopener"><span class="download-icon">📄</span> {f.name}</a>
+						{f.description && <p>{f.description}</p>}
+					</li>
+				))}
+			</ul>
+		</div>
+	)}
+
+	{d.location_link && (
+		<div class="page-location">
+			<a href={d.location_link} target="_blank" rel="noopener">
+				<strong>WHERE EXACTLY ARE WE?</strong> At 3701 E. 50th Street in South Minneapolis. Click here to see a Google map.
+			</a>
+		</div>
+	)}
+</div>

@@ -1,0 +1,16 @@
+---
+import { PortableText } from "emdash/ui";
+import Card from "../Card.astro";
+/** Port of Hugo archive.html: archived homepage cards. */
+const { page, cards } = Astro.props;
+const d = page.data;
+---
+<div class="inner">
+	<div class="block_general_title_1 w_margin_1"><h1>{d.title}</h1></div>
+	<div class="archive-intro">{d.content && <PortableText value={d.content} />}</div>
+	<div class="block_posts type_1 type_sort general_not_loaded">
+		<div class="posts">
+			{cards.length ? cards.map((c: any) => <Card card={c} />) : <p>No archived announcements at this time.</p>}
+		</div>
+	</div>
+</div>

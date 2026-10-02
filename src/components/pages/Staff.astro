@@ -1,0 +1,35 @@
+---
+import { PortableText } from "emdash/ui";
+import { imageSrc, imageAlt, byWeight } from "../../utils/media";
+/** Port of Hugo staff.html; people come from the `staff` collection. */
+const { page, staff } = Astro.props;
+const d = page.data;
+const hasContent = Array.isArray(d.content) && d.content.length > 0;
+---
+<div class="inner">
+	<div class="block_general_title_1 w_margin_1">
+		<h1>{d.title}</h1>
+		{d.subtitle && <h2>{d.subtitle}</h2>}
+	</div>
+	{d.intro && <div class="page-intro"><p>{d.intro}</p></div>}
+	<div class="block_posts type_1 type_sort">
+		<div class="posts staff-grid">
+			{byWeight(staff).map((s: any) => (
+				<article class="post_type_1 staff-card">
+					<div class="feature"><div class="image">
+						<img src={imageSrc(s.data.photo) || "/images/placeholder-staff.jpg"} alt={s.data.name} />
+						<span class="hover"></span>
+					</div></div>
+					<div class="content">
+						<div class="title">
+							<span class="staff-name">{s.data.display_title || s.data.name}</span>
+							{s.data.bio && <span set:html={s.data.bio} />}
+						</div>
+						{s.data.email && <div class="staff-email"><a href={`mailto:${s.data.email}`}>{s.data.email}</a></div>}
+					</div>
+				</article>
+			))}
+		</div>
+	</div>
+	{hasContent && <div class="block_content page-content"><PortableText value={d.content} /></div>}
+</div>

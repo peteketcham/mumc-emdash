@@ -1,0 +1,55 @@
+---
+import { getMenu } from "emdash";
+import { site } from "../site";
+
+const links = await getMenu("footer");
+const year = new Date().getFullYear();
+---
+
+<footer>
+	<div id="footer">
+		<section class="top">
+			<div class="inner">
+				<div class="footer-content">
+					<div class="footer-section footer-info">
+						<h4>Minnehaha United Methodist Church</h4>
+						<p><a href="https://www.google.com/maps/place/Minnehaha+United+Methodist+Church/@44.9122631,-93.2207999,17z" target="_blank" rel="noopener">{site.address}</a></p>
+						<p><a href={`tel:${site.phone}`}>{site.phone}</a></p>
+						<p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+					</div>
+
+					<div class="footer-section footer-links">
+						<h4>Quick Links</h4>
+						<ul>
+							{links?.items.map((item) => <li><a href={item.url}>{item.label}</a></li>)}
+						</ul>
+					</div>
+
+					<div class="footer-section footer-social">
+						<h4>Connect With Us</h4>
+						<div class="social-links">
+							<a href={site.facebook} target="_blank" rel="noopener" aria-label="Facebook">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+							</a>
+							<a href={site.instagram} target="_blank" rel="noopener" aria-label="Instagram">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+							</a>
+							<a href={site.youtube} target="_blank" rel="noopener" aria-label="YouTube">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+							</a>
+						</div>
+						<p class="worship-times"><strong>Sunday Worship:</strong> 9:30 AM</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="bottom">
+			<div class="inner">
+				<div class="block_copyrights">
+					<p>&copy; {year} Minnehaha United Methodist Church. All Rights Reserved.</p>
+				</div>
+			</div>
+		</section>
+	</div>
+</footer>

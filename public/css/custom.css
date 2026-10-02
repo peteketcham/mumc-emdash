@@ -1,0 +1,1119 @@
+/**
+ * Minnehaha UMC - Custom Styles
+ *
+ * This stylesheet provides modern CSS overrides and enhancements for the Hugo site.
+ * It loads after the main layout/style.css and provides:
+ * - CSS Custom Properties (variables) for consistent theming
+ * - CSS Grid layout replacing legacy float/Isotope layouts
+ * - Swiper.js slider integration
+ * - Modern accessibility features
+ * - Responsive design with mobile-first considerations
+ *
+ * Table of Contents:
+ * 1. CSS Custom Properties
+ * 2. Modern CSS Grid Layout (replaces Isotope)
+ * 3. Swiper Slider Styles
+ * 4. Typography & Content
+ * 5. Accessibility
+ * 6. External Link Indicator
+ * 7. Layout & Structure
+ * 8. Responsive Adjustments
+ */
+
+/* ==========================================================================
+   1. CSS Custom Properties
+   ========================================================================== */
+
+:root {
+    /* Brand colors */
+    --color-primary: #191919;
+    --color-accent: #33cccd;
+    --color-highlight: darkred;
+    --color-text: #666;
+    --color-heading: #181818;
+    --color-background: #fff;
+
+    /* Spacing scale */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+
+    /* Grid settings */
+    --grid-gap: 26px;
+    --card-width: 296px;
+    --card-min-width: 280px;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.5s ease;
+
+    /* Focus outline */
+    --focus-outline: 2px solid var(--color-accent);
+    --focus-offset: 2px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+    /* Border radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+}
+
+/* ==========================================================================
+   2. Modern CSS Grid Layout (replaces Isotope)
+   ========================================================================== */
+
+/**
+ * Replace the legacy float-based Isotope layout with CSS Grid.
+ * This provides better performance (no JavaScript layout calculation),
+ * native browser support, and easier responsive adjustments.
+ */
+
+/* Override the legacy float layout */
+.block_posts.type_1 .posts,
+.block_posts.type_sort .posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--card-min-width), 1fr));
+    gap: var(--grid-gap);
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+/* Reset float on articles since we're using grid */
+.block_posts.type_1 .posts article,
+.block_posts.type_sort .posts article {
+    float: none;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+/* Archive page grid */
+.archive-intro {
+    margin-bottom: var(--spacing-xl);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   3. Swiper Slider Styles
+   ========================================================================== */
+
+/**
+ * Swiper.js slider integration.
+ * Replaces the legacy Flexslider with a modern, maintained slider library.
+ */
+
+/* Main slider container */
+.block_slider_type_1 .swiper {
+    width: 100%;
+    position: relative;
+}
+
+.block_slider_type_1 .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Navigation arrows - match original site design */
+.block_slider_type_1 .swiper-button-prev,
+.block_slider_type_1 .swiper-button-next {
+    width: 57px;
+    height: 57px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    transition: background-color var(--transition-fast);
+}
+
+.block_slider_type_1 .swiper-button-prev:hover,
+.block_slider_type_1 .swiper-button-next:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.block_slider_type_1 .swiper-button-prev::after,
+.block_slider_type_1 .swiper-button-next::after {
+    font-size: 20px;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Position arrows */
+.block_slider_type_1 .swiper-button-prev {
+    left: 20px;
+}
+
+.block_slider_type_1 .swiper-button-next {
+    right: 20px;
+}
+
+/* Hide pagination dots (matching original design) */
+.block_slider_type_1 .swiper-pagination {
+    display: none;
+}
+
+/* Fade effect for slide transitions */
+.block_slider_type_1 .swiper-slide {
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+}
+
+.block_slider_type_1 .swiper-slide-active {
+    opacity: 1;
+}
+
+/* History slideshow - show pagination as fraction */
+.history-slideshow .swiper-pagination {
+    display: block;
+    position: relative;
+    margin-top: var(--spacing-md);
+    text-align: center;
+    font-size: 1rem;
+    color: var(--color-text);
+}
+
+.history-slideshow .swiper-slide {
+    opacity: 1;
+    transition: none;
+}
+
+/* Legacy flexslider support (fallback) */
+.flexslider {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.flexslider .slides img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* ==========================================================================
+   4. Typography & Content
+   ========================================================================== */
+
+/* Highlight class for emphasized text */
+.highlight {
+    color: var(--color-highlight);
+}
+
+/* Newsletter/text-only section */
+.post_type_3 .title p {
+    line-height: 1.8;
+}
+
+.post_type_3 .title a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.post_type_3 .title a:hover,
+.post_type_3 .title a:focus {
+    color: var(--color-accent);
+}
+
+/* Address/title block - styled like h3 for visual consistency */
+.block_general_title_1 .church-address,
+.block_general_title_1 .church-contact {
+    display: block;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+.block_general_title_1 .church-address a,
+.block_general_title_1 .church-contact a {
+    color: inherit;
+}
+
+.block_general_title_1 .church-address a:hover,
+.block_general_title_1 .church-address a:focus,
+.block_general_title_1 .church-contact a:hover,
+.block_general_title_1 .church-contact a:focus {
+    color: var(--color-accent);
+}
+
+/* Improve content readability */
+.post_type_1 .title,
+.post_type_3 .title {
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   5. Accessibility
+   ========================================================================== */
+
+/**
+ * Focus states for keyboard navigation.
+ * Using a visible, high-contrast outline that meets WCAG 2.1 requirements.
+ */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+[tabindex]:focus {
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-offset);
+}
+
+/* Remove outline for mouse users, keep for keyboard */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-offset);
+}
+
+/**
+ * Skip link for screen reader and keyboard users.
+ * Hidden by default, visible on focus.
+ */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: var(--spacing-md);
+    z-index: 10000;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--color-primary);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Ensure links have sufficient hover/focus indication */
+.block_posts .post_type_1 .title a:hover,
+.block_posts .post_type_1 .title a:focus {
+    text-decoration: underline;
+}
+
+/* Video accessibility */
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .swiper-slide {
+        transition: none !important;
+    }
+}
+
+/* ==========================================================================
+   6. External Link Indicator
+   ========================================================================== */
+
+/**
+ * External links get an arrow icon to indicate they open in a new tab.
+ * Uses CSS ::after pseudo-element with an inline SVG.
+ */
+a[target="_blank"]::after,
+a.external-link::after {
+    content: "";
+    display: inline-block;
+    width: 0.8em;
+    height: 0.8em;
+    margin-left: 0.25em;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'/%3E%3Cpolyline points='15 3 21 3 21 9'/%3E%3Cline x1='10' y1='14' x2='21' y2='3'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+/* Don't show arrow on image links or nav links */
+.block_posts .post_type_1 .image a[target="_blank"]::after,
+.block_posts .post_type_1 .feature a[target="_blank"]::after,
+.block_top_menu a[target="_blank"]::after,
+.block_secondary_menu a[target="_blank"]::after,
+.block_top_social a[target="_blank"]::after,
+.swiper-slide a[target="_blank"]::after {
+    display: none;
+}
+
+/* ==========================================================================
+   7. Layout & Structure
+   ========================================================================== */
+
+/* Main content area */
+#content {
+    padding-bottom: var(--spacing-xl);
+}
+
+/* Modern box-sizing for all elements */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Ensure images don't overflow containers */
+.block_posts .post_type_1 .image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Image hover effects */
+.block_posts .post_type_1 .image a img {
+    transition: transform var(--transition-base);
+}
+
+.block_posts .post_type_1 .image a:hover img,
+.block_posts .post_type_1 .image a:focus img {
+    transform: scale(1.03);
+}
+
+/* Card styling enhancements */
+.block_posts article {
+    background: var(--color-background);
+}
+
+/* ==========================================================================
+   8. Responsive Adjustments
+   ========================================================================== */
+
+/* Large screens - 3 column grid */
+@media (min-width: 961px) {
+    .block_posts.type_1 .posts,
+    .block_posts.type_sort .posts {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tablet - 2 column grid */
+@media (max-width: 960px) {
+    .inner {
+        width: 100%;
+        padding: 0 var(--spacing-md);
+        box-sizing: border-box;
+    }
+
+    .block_posts.type_1 .posts,
+    .block_posts.type_sort .posts {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+    }
+}
+
+/* Mobile - single column */
+@media (max-width: 768px) {
+    .block_posts.type_1 .posts,
+    .block_posts.type_sort .posts {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    /* Ensure touch targets are at least 44x44px (WCAG 2.1 Level AAA) */
+    .block_top_menu nav > ul > li > a,
+    .block_secondary_menu nav li a {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 12px 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Dropdown menu items also need adequate touch targets */
+    .block_top_menu nav > ul > li ul li a {
+        min-height: 44px;
+        padding: 12px 16px;
+        display: block;
+    }
+
+    /* Social icons touch targets */
+    .general_social_1 li a {
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Improve slider nav touch targets on mobile */
+    .block_slider_type_1 .swiper-button-prev,
+    .block_slider_type_1 .swiper-button-next {
+        width: 50px;
+        height: 50px;
+    }
+
+    .block_slider_type_1 .swiper-button-prev::after,
+    .block_slider_type_1 .swiper-button-next::after {
+        font-size: 16px;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+    :root {
+        --spacing-md: 0.75rem;
+        --grid-gap: 16px;
+    }
+
+    .block_slider_type_1 .swiper-button-prev,
+    .block_slider_type_1 .swiper-button-next {
+        width: 40px;
+        height: 40px;
+    }
+
+    .block_slider_type_1 .swiper-button-prev {
+        left: 10px;
+    }
+
+    .block_slider_type_1 .swiper-button-next {
+        right: 10px;
+    }
+}
+
+/* ==========================================================================
+   Mobile Menu Fix - wider dropdown for longer text
+   ========================================================================== */
+
+.block_top_menu nav > ul > li ul {
+    width: 180px;
+}
+
+/* ==========================================================================
+   Staff Page Mobile Fix - don't crop images
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .staff-card .feature .image img {
+        height: auto;
+        max-height: 300px;
+        object-fit: contain;
+        object-position: center;
+    }
+}
+
+/* ==========================================================================
+   9. Footer
+   ========================================================================== */
+
+footer {
+    background: var(--color-primary);
+    color: #fff;
+    margin-top: var(--spacing-2xl);
+}
+
+#footer .top {
+    padding: var(--spacing-2xl) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#footer .bottom {
+    padding: var(--spacing-md) 0;
+}
+
+/* Footer grid layout */
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
+}
+
+.footer-section h4 {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Footer info section */
+.footer-info p {
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.6;
+}
+
+.footer-info a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.footer-info a:hover,
+.footer-info a:focus {
+    color: var(--color-accent);
+}
+
+/* Footer links */
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    font-size: inherit;
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.footer-links a:hover,
+.footer-links a:focus {
+    color: var(--color-accent);
+}
+
+/* Social links */
+.social-links {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #fff;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.social-links a:hover,
+.social-links a:focus {
+    background: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+.social-links svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Don't show external link icon on social links */
+.social-links a[target="_blank"]::after {
+    display: none;
+}
+
+.worship-times {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+}
+
+/* Copyright section */
+.block_copyrights {
+    text-align: center;
+}
+
+.block_copyrights p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* Footer responsive */
+@media (max-width: 960px) {
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-social {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-social {
+        grid-column: span 1;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    #footer .top {
+        padding: var(--spacing-xl) 0;
+    }
+}
+
+/* ==========================================================================
+   10. Content Pages
+   ========================================================================== */
+
+/* Page banner */
+.page-banner {
+    margin-bottom: var(--spacing-xl);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.page-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Page content */
+.page-content {
+    max-width: 800px;
+    line-height: 1.7;
+}
+
+.page-content h2 {
+    margin-top: var(--spacing-2xl);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-heading);
+}
+
+.page-content h3 {
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-heading);
+}
+
+.page-content p {
+    margin-bottom: var(--spacing-md);
+}
+
+.page-content ul,
+.page-content ol {
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+}
+
+.page-content li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.page-content hr {
+    margin: var(--spacing-xl) 0;
+    border: none;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Featured box */
+.block_featured {
+    background: #f8f8f8;
+    padding: var(--spacing-xl);
+    margin: var(--spacing-xl) 0;
+    border-radius: 4px;
+    width: 300px;
+    border: 1px solid #e6ecec;
+    border-top: 2px solid var(--color-accent);
+}
+
+.block_featured.left {
+    float: left;
+    margin: 0 var(--spacing-xl) var(--spacing-md) 0;
+}
+
+.block_featured.right {
+    float: right;
+    margin: 0 0 var(--spacing-md) var(--spacing-xl);
+}
+
+.block_featured .f_title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-md);
+}
+
+.block_featured .content {
+    display: block;
+    overflow: visible;
+}
+
+.block_featured .description {
+    overflow: visible;
+}
+
+.block_featured .image {
+    float: left;
+    width: 80px;
+    margin: 0 var(--spacing-md) var(--spacing-sm) 0;
+}
+
+.block_featured .image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.block_featured .description .title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-heading);
+    margin-bottom: var(--spacing-sm);
+}
+
+@media (max-width: 768px) {
+    .block_featured {
+        width: 100%;
+        float: none;
+        margin: var(--spacing-xl) 0;
+    }
+
+    .block_featured.left,
+    .block_featured.right {
+        float: none;
+        margin: var(--spacing-xl) 0;
+    }
+
+    .block_featured .content {
+        flex-direction: column;
+    }
+
+    .block_featured .image {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+/* Page video */
+.page-video {
+    margin: var(--spacing-xl) 0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.page-video video {
+    display: block;
+    width: 100%;
+}
+
+/* Page embeds (Google Sheets, etc.) */
+.page-embed {
+    margin: var(--spacing-xl) 0;
+}
+
+.page-embed h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-heading);
+}
+
+.page-embed iframe {
+    max-width: 100%;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+/* Downloads section */
+.page-downloads {
+    background: #f8f8f8;
+    padding: var(--spacing-xl);
+    margin: var(--spacing-xl) 0;
+    border-radius: 4px;
+}
+
+.page-downloads h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-heading);
+}
+
+.download-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.download-list li {
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.download-list li:last-child {
+    border-bottom: none;
+}
+
+.download-list a {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-weight: 500;
+    color: var(--color-heading);
+    text-decoration: none;
+}
+
+.download-list a:hover {
+    color: var(--color-accent);
+}
+
+.download-list .download-icon {
+    font-size: 1.25rem;
+}
+
+.download-list p {
+    margin: var(--spacing-xs) 0 0 calc(var(--spacing-sm) + 1.25rem);
+    font-size: 0.9rem;
+    color: var(--color-text);
+}
+
+/* Location link */
+.page-location {
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-md);
+    background: var(--color-accent);
+    border-radius: 4px;
+}
+
+.page-location a {
+    color: white;
+    text-decoration: none;
+}
+
+.page-location a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   11. Staff Page
+   ========================================================================== */
+
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.staff-card .feature .image img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: top;
+}
+
+.staff-card .staff-name {
+    display: block;
+    font-weight: 600;
+    color: var(--color-heading);
+    margin-bottom: var(--spacing-sm);
+}
+
+.staff-card .staff-email {
+    margin-top: var(--spacing-sm);
+}
+
+.staff-card .staff-email a {
+    color: var(--color-accent);
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   12. Contact Page
+   ========================================================================== */
+
+.contact-page-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--spacing-2xl);
+}
+
+@media (max-width: 768px) {
+    .contact-page-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contact-info {
+    background: #f8f8f8;
+    padding: var(--spacing-xl);
+    border-radius: 4px;
+}
+
+.contact-info h2 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+}
+
+.contact-info h3 {
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1rem;
+}
+
+.contact-info address {
+    font-style: normal;
+    line-height: 1.6;
+}
+
+.contact-info a {
+    color: var(--color-accent);
+}
+
+.staff-photo-preview {
+    margin: var(--spacing-md) 0;
+}
+
+.staff-photo-preview img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.staff-contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.staff-contact-list li {
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 0.9rem;
+}
+
+.staff-contact-list li:last-child {
+    border-bottom: none;
+}
+
+/* Contact form */
+.contact-form-section h2 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-sm);
+}
+
+.contact-form {
+    margin-top: var(--spacing-xl);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+    color: var(--color-heading);
+}
+
+.form-group .required {
+    color: #e74c3c;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-form button[type="submit"],
+.contact-form .general_button_type_3 {
+    height: 34px;
+    line-height: 34px;
+    padding: 0 18px;
+    display: inline-block;
+    background-color: #161e26;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+.contact-form button[type="submit"]:hover,
+.contact-form .general_button_type_3:hover {
+    background-color: var(--color-accent);
+    text-decoration: none;
+}
+
+/* ==========================================================================
+   13. Page Intro
+   ========================================================================== */
+
+.page-intro {
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* ==========================================================================
+   14. Calendar Page
+   ========================================================================== */
+
+.responsiveCal {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin: var(--spacing-xl) 0;
+}
+
+.responsiveCal iframe {
+    max-width: 100%;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .responsiveCal iframe {
+        height: 750px;
+    }
+}

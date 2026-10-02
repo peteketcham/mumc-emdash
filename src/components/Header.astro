@@ -1,0 +1,84 @@
+---
+import { getMenu } from "emdash";
+import { site } from "../site";
+
+const [primary, secondary] = await Promise.all([getMenu("primary"), getMenu("secondary")]);
+const norm = (u: string) => (u.replace(/\/+$/, "") || "/");
+const here = norm(Astro.url.pathname);
+const isCurrent = (url: string) => url !== "#" && !url.startsWith("http") && norm(url) === here;
+
+// The theme's CSS keys some styles off these values.
+const dataContent: Record<string, string> = {
+	HOME: "homepage", WELCOME: "welcome", "FIRST VISIT": "first visit", "WE SEEK": "seek",
+	"WE SERVE": "serve", "WE CELEBRATE": "celebrate", STAFF: "staff", "CONTACT US": "contact",
+};
+---
+
+<header>
+	<div id="header">
+		<section class="top">
+			<div class="inner">
+				<div class="block_top_menu">
+					<nav aria-label="Primary navigation">
+						<ul>
+							{
+								primary?.items.map((item) => (
+									<li class={isCurrent(item.url) ? "current_page_item" : undefined}>
+										<a href={item.url} target={item.target} rel={item.target === "_blank" ? "noopener noreferrer" : undefined}>{item.label}</a>
+										{item.children.length > 0 && (
+											<ul>
+												{item.children.map((child) => (
+													<li class={isCurrent(child.url) ? "current_page_item" : undefined}>
+														<a href={child.url} target={child.target} rel={child.target === "_blank" ? "noopener noreferrer" : undefined}>{child.label}</a>
+													</li>
+												))}
+											</ul>
+										)}
+									</li>
+								))
+							}
+						</ul>
+					</nav>
+				</div>
+
+				<div class="block_top_social">
+					<ul class="general_social_1">
+						<li><a href="https://www.facebook.com/pages/Minnehaha-United-Methodist-Church/444457380248" class="social_2" aria-label="Facebook">Facebook</a></li>
+						<li><a href="https://www.instagram.com/minnehahaumc/" class="social_5" aria-label="Instagram">Instagram</a></li>
+					</ul>
+				</div>
+
+				<div class="clearboth"></div>
+			</div>
+		</section>
+
+		<section class="middle">
+			<div class="inner">
+				<div id="logo_top">
+					<a href="/" aria-label="Minnehaha United Methodist Church - Home">
+						<img src="/images/logo-top.png" alt="MUMC - Minnehaha United Methodist Church" title="MUMC" />
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="bottom">
+			<div class="inner">
+				<div class="block_secondary_menu">
+					<nav aria-label="Secondary navigation">
+						<ul>
+							{
+								secondary?.items.map((item) => (
+									<li data-content={dataContent[item.label] ?? item.label.toLowerCase()}>
+										<a href={item.url}>{item.label}</a>
+										{item.label === "FIRST VISIT" && <div class="tail" />}
+									</li>
+								))
+							}
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</section>
+	</div>
+</header>

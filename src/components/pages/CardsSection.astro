@@ -1,0 +1,34 @@
+---
+import { PortableText } from "emdash/ui";
+import Card from "../Card.astro";
+import { imageSrc, imageAlt } from "../../utils/media";
+/** Port of Hugo _default/section-with-cards.html (kids + youth). */
+const { page, cards } = Astro.props;
+const d = page.data;
+const banner = imageSrc(d.banner);
+const hasContent = Array.isArray(d.content) && d.content.length > 0;
+---
+<div class="inner">
+	{banner && <div class="page-banner"><img src={banner} alt={imageAlt(d.banner, d.title)} /></div>}
+	{d.video && (
+		<div class="section-video">
+			<article class="post_type_1"><div class="feature">
+				<video width="100%" controls preload="metadata">
+					<source src={d.video} type="video/mp4" />
+					{d.video_ogg && <source src={d.video_ogg} type="video/ogg" />}
+					<p>Your browser does not support the video tag.</p>
+				</video>
+			</div></article>
+		</div>
+	)}
+	<div class="block_general_title_1 w_margin_1">
+		<h2><a>{d.title}</a></h2>
+		{d.subtitle && <h2>{d.subtitle}</h2>}
+	</div>
+	{hasContent && <div class="block_content section-intro"><PortableText value={d.content} /></div>}
+	<div class="block_posts type_1 type_sort">
+		<div class="posts">
+			{cards.map((c: any) => <Card card={c} />)}
+		</div>
+	</div>
+</div>
