@@ -3,9 +3,11 @@ import react from "@astrojs/react";
 import { defineConfig } from "astro/config";
 import emdash, { local } from "emdash/astro";
 import { sqlite } from "emdash/db";
+import { legacyRedirects } from "./legacy-redirects.mjs";
 
 export default defineConfig({
 	output: "server",
+	redirects: legacyRedirects,
 	adapter: node({
 		mode: "standalone",
 	}),

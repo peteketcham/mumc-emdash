@@ -1,0 +1,55 @@
+---
+import { getEmDashCollection, getTaxonomyTerms } from "emdash";
+import Base from "../../layouts/Base.astro";
+import Card from "../../components/Card.astro";
+import { byWeight } from "../../utils/media";
+import { isCurrent } from "../../utils/cards";
+
+const { slug } = Astro.params;
+const terms = await getTaxonomyTerms("ministry");
+const flat = terms.flatMap((t) => [t, ...t.children]);
+const term = flat.find((t) => t.slug === slug);
+if (!term) return new Response(null, { status: 404 });
+const parent = terms.find((t) => t.children.some((c) => c.slug === slug));
+// A parent area also includes everything filed under its sub-areas.
+const slugs = [term.slug, ...term.children.map((c) => c.slug)];
+
+const where = { ministry: slugs };
+const [pages, home, kids, youth] = await Promise.all([
+	getEmDashCollection("pages", { where, limit: 100 }),
+	getEmDashCollection("homepage_cards", { where, limit: 200 }),
+	getEmDashCollection("kids_cards", { where, limit: 200 }),
+	getEmDashCollection("youth_cards", { where, limit: 200 }),
+]);
+const cards = [
+	...byWeight(home.entries.filter((c: any) => isCurrent(c))),
+	...byWeight(kids.entries.filter((c: any) => isCurrent(c))),
+	...byWeight(youth.entries.filter((c: any) => isCurrent(c))),
+];
+// Pages that are not just the landing pages for kids/youth sections list as links.
+const pageLinks = pages.entries.filter((p: any) => p.data.template !== "archive");
+---
+<Base title={term.label} description={term.description}>
+	<div class="inner">
+		<div class="block_general_title_1 w_margin_1">
+			<h1>{term.label}</h1>
+			<h2>{parent ? <a href={`/ministries/${parent.slug}/`}>{parent.label}</a> : <a href="/ministries/">All ministries</a>}</h2>
+		</div>
+		{term.description && <div class="block_content page-content"><p>{term.description}</p></div>}
+		{pageLinks.length > 0 && (
+			<div class="block_content page-content">
+				<h3>Learn more</h3>
+				<ul>{pageLinks.map((p: any) => <li><a href={`/${p.slug}/`}>{p.data.title}</a></li>)}</ul>
+			</div>
+		)}
+		{cards.length > 0 && (
+			<div class="block_posts type_1 type_sort"><div class="posts">{cards.map((c: any) => <Card card={c} />)}</div></div>
+		)}
+		{term.children.length > 0 && (
+			<div class="block_content page-content">
+				<h3>Sub-areas</h3>
+				<ul>{term.children.map((c) => <li><a href={`/ministries/${c.slug}/`}>{c.label}</a></li>)}</ul>
+			</div>
+		)}
+	</div>
+</Base>

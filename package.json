@@ -12,7 +12,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "start": "node ./dist/server/entry.mjs",
-    "typecheck": "astro check"
+    "typecheck": "astro check",
+    "content:load": "emdash seed seed/seed-schema.json && node scripts/import-media.mjs && emdash seed seed/seed.json",
+    "content:migrate": "node scripts/migrate-from-hugo.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^11.1.5",
@@ -24,6 +26,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "image-size": "^2.0.4",
     "mdast-util-from-markdown": "^2.0.3",
     "yaml": "^2.9.1"
   }

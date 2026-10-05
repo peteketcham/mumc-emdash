@@ -1,9 +1,18 @@
-/** Image field value: either a media object (from the admin or the seed) or a plain path. */
-export type ImageValue = { src?: string; alt?: string; width?: number; height?: number } | string | null | undefined;
+/** Image field value: a media-library item (local), an external URL, or a plain path. */
+export type ImageValue =
+	| { provider?: string; id?: string; src?: string; alt?: string; width?: number; height?: number; meta?: { storageKey?: string } }
+	| string
+	| null
+	| undefined;
+
+const MEDIA_ROUTE = "/_emdash/api/media/file";
 
 export function imageSrc(image: ImageValue): string | undefined {
 	if (!image) return undefined;
-	return typeof image === "string" ? image : image.src;
+	if (typeof image === "string") return image;
+	if (image.src) return image.src;
+	if (image.meta?.storageKey) return `${MEDIA_ROUTE}/${image.meta.storageKey}`;
+	return undefined;
 }
 
 export function imageAlt(image: ImageValue, fallback = ""): string {

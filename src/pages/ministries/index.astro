@@ -1,0 +1,28 @@
+---
+import { getTaxonomyTerms } from "emdash";
+import Base from "../../layouts/Base.astro";
+
+const terms = await getTaxonomyTerms("ministry");
+---
+<Base title="Ministries" description="Browse everything happening at Minnehaha UMC by ministry area.">
+	<div class="inner">
+		<div class="block_general_title_1 w_margin_1">
+			<h1>Ministries</h1>
+			<h2>Find what you're looking for by area of church life</h2>
+		</div>
+		<div class="block_content page-content">
+			<ul>
+				{terms.map((t) => (
+					<li>
+						<a href={`/ministries/${t.slug}/`}><strong>{t.label}</strong></a>{t.description && <> &mdash; {t.description}</>}
+						{t.children.length > 0 && (
+							<ul>
+								{t.children.map((c) => <li><a href={`/ministries/${c.slug}/`}>{c.label}</a></li>)}
+							</ul>
+						)}
+					</li>
+				))}
+			</ul>
+		</div>
+	</div>
+</Base>

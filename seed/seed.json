@@ -294,6 +294,13 @@
 				"drafts",
 				"revisions"
 			],
+			"admin": {
+				"listColumns": [
+					"archived",
+					"expires",
+					"weight"
+				]
+			},
 			"fields": [
 				{
 					"slug": "title",
@@ -311,6 +318,11 @@
 					"slug": "archived",
 					"label": "Archived (moves to the Archive page)",
 					"type": "boolean"
+				},
+				{
+					"slug": "expires",
+					"label": "Hide after (moves to the Archive page automatically)",
+					"type": "datetime"
 				},
 				{
 					"slug": "image",
@@ -366,6 +378,13 @@
 				"drafts",
 				"revisions"
 			],
+			"admin": {
+				"listColumns": [
+					"archived",
+					"expires",
+					"weight"
+				]
+			},
 			"fields": [
 				{
 					"slug": "title",
@@ -383,6 +402,11 @@
 					"slug": "archived",
 					"label": "Archived (moves to the Archive page)",
 					"type": "boolean"
+				},
+				{
+					"slug": "expires",
+					"label": "Hide after (moves to the Archive page automatically)",
+					"type": "datetime"
 				},
 				{
 					"slug": "image",
@@ -438,6 +462,13 @@
 				"drafts",
 				"revisions"
 			],
+			"admin": {
+				"listColumns": [
+					"archived",
+					"expires",
+					"weight"
+				]
+			},
 			"fields": [
 				{
 					"slug": "title",
@@ -455,6 +486,11 @@
 					"slug": "archived",
 					"label": "Archived (moves to the Archive page)",
 					"type": "boolean"
+				},
+				{
+					"slug": "expires",
+					"label": "Hide after (moves to the Archive page automatically)",
+					"type": "datetime"
 				},
 				{
 					"slug": "image",
@@ -526,6 +562,168 @@
 					"label": "Slide image (wide, about 1600x738)",
 					"type": "image",
 					"required": true
+				}
+			]
+		}
+	],
+	"taxonomies": [
+		{
+			"name": "ministry",
+			"label": "Ministry areas",
+			"labelSingular": "Ministry area",
+			"hierarchical": true,
+			"collections": [
+				"pages",
+				"homepage_cards",
+				"kids_cards",
+				"youth_cards"
+			],
+			"terms": [
+				{
+					"slug": "worship",
+					"label": "Worship & Music",
+					"description": "Sunday worship, Taizé, music and special services."
+				},
+				{
+					"slug": "kids-families",
+					"label": "Kids & Families",
+					"description": "Sunday School, Playgroup, family dinners, camps and more for children and their families."
+				},
+				{
+					"slug": "sunday-school",
+					"label": "Sunday School",
+					"parent": "kids-families"
+				},
+				{
+					"slug": "playgroup",
+					"label": "Playgroup",
+					"parent": "kids-families"
+				},
+				{
+					"slug": "family-events",
+					"label": "Family Events",
+					"parent": "kids-families"
+				},
+				{
+					"slug": "camps",
+					"label": "Camps & Retreats",
+					"parent": "kids-families"
+				},
+				{
+					"slug": "youth",
+					"label": "Youth",
+					"description": "Programs, trips and camps for middle school and high school youth."
+				},
+				{
+					"slug": "food",
+					"label": "Food & Hunger Relief",
+					"description": "MinneHarvest, the Minnehaha Food Shelf, Meals on Wheels and other ways we fight hunger."
+				},
+				{
+					"slug": "justice",
+					"label": "Justice & Inclusion",
+					"description": "Welcoming everyone and working for racial and social justice."
+				},
+				{
+					"slug": "racial-justice",
+					"label": "Racial Justice",
+					"parent": "justice"
+				},
+				{
+					"slug": "welcome",
+					"label": "Welcome & Reconciling",
+					"parent": "justice"
+				},
+				{
+					"slug": "creation",
+					"label": "Climate & Creation",
+					"description": "Solar power, carbon-free energy and caring for creation."
+				},
+				{
+					"slug": "community",
+					"label": "Community & Building",
+					"description": "Our building, groups and neighborhood partnerships."
+				},
+				{
+					"slug": "giving",
+					"label": "Giving & Mission",
+					"description": "Giving, disaster relief and mission support."
+				},
+				{
+					"slug": "connect",
+					"label": "Connect & Communicate",
+					"description": "Newcomers, membership, staff, newsletters and ways to stay in touch."
+				}
+			]
+		},
+		{
+			"name": "audience",
+			"label": "Audiences",
+			"labelSingular": "Audience",
+			"hierarchical": false,
+			"collections": [
+				"pages",
+				"homepage_cards",
+				"kids_cards",
+				"youth_cards"
+			],
+			"terms": [
+				{
+					"slug": "everyone",
+					"label": "Everyone"
+				},
+				{
+					"slug": "families",
+					"label": "Families with kids"
+				},
+				{
+					"slug": "youth",
+					"label": "Youth"
+				},
+				{
+					"slug": "adults",
+					"label": "Adults"
+				},
+				{
+					"slug": "newcomers",
+					"label": "Visitors & new members"
+				}
+			]
+		},
+		{
+			"name": "card_type",
+			"label": "Card types",
+			"labelSingular": "Card type",
+			"hierarchical": false,
+			"collections": [
+				"homepage_cards",
+				"kids_cards",
+				"youth_cards"
+			],
+			"terms": [
+				{
+					"slug": "event",
+					"label": "Event",
+					"description": "A dated happening or a photo from one."
+				},
+				{
+					"slug": "announcement",
+					"label": "Announcement",
+					"description": "Time-sensitive news."
+				},
+				{
+					"slug": "program",
+					"label": "Ongoing program",
+					"description": "Something that happens regularly."
+				},
+				{
+					"slug": "resource",
+					"label": "Information / resource"
+				},
+				{
+					"slug": "action",
+					"label": "Call to action",
+					"description": "Sign up, donate, subscribe, volunteer."
 				}
 			]
 		}
@@ -763,134 +961,18 @@
 				},
 				{
 					"type": "custom",
+					"label": "Ministries",
+					"url": "/ministries/"
+				},
+				{
+					"type": "custom",
 					"label": "Contact Us",
 					"url": "/contact/"
 				}
 			]
 		}
 	],
-	"redirects": [
-		{
-			"source": "/index.html",
-			"destination": "/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/welcome.html",
-			"destination": "/welcome/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/1firstvisit.html",
-			"destination": "/first-visit/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/firstvisit.html",
-			"destination": "/first-visit/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/seek.html",
-			"destination": "/we-seek/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/serve.html",
-			"destination": "/we-serve/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/celebrate.html",
-			"destination": "/we-celebrate/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/MUMC_staff.html",
-			"destination": "/staff/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/contact.html",
-			"destination": "/contact/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/calendar.html",
-			"destination": "/calendar/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/kids.html",
-			"destination": "/kids/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/youth.html",
-			"destination": "/youth/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/racialjustice.html",
-			"destination": "/racial-justice/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/climateaction.html",
-			"destination": "/climate-action/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/goodthingshappenhere.html",
-			"destination": "/good-things-happen-here/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/solar.html",
-			"destination": "/solar/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/building.html",
-			"destination": "/building/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/umw.html",
-			"destination": "/uwf/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/weddings_funerals.html",
-			"destination": "/weddings-funerals/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		},
-		{
-			"source": "/slideshow.html",
-			"destination": "/church-history/",
-			"type": 301,
-			"groupName": "Old minnehaha.org pages"
-		}
-	],
+	"redirects": [],
 	"content": {
 		"pages": [
 			{
@@ -916,6 +998,14 @@
 							]
 						}
 					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"everyone"
+					]
 				}
 			},
 			{
@@ -927,10 +1017,16 @@
 					"description": "Our south Minneapolis church rents space to people and groups in the community. Talk to us about rooms for rent for schools, music or community events, including our commercial kitchen.",
 					"template": "default",
 					"banner": {
-						"provider": "external",
-						"id": "mig-3c29ff851ee509e6",
-						"src": "/images/sanctuary.jpg",
-						"alt": "Minnehaha UMC Sanctuary"
+						"provider": "local",
+						"id": "01K0000000W9Z5Y596GTZVSAX4",
+						"alt": "Minnehaha UMC Sanctuary",
+						"width": 950,
+						"height": 590,
+						"mimeType": "image/jpeg",
+						"filename": "sanctuary.jpg",
+						"meta": {
+							"storageKey": "01K0000000W9Z5Y596GTZVSAX4.jpg"
+						}
 					},
 					"content": [
 						{
@@ -1402,6 +1498,14 @@
 							]
 						}
 					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"community"
+					],
+					"audience": [
+						"everyone"
+					]
 				}
 			},
 			{
@@ -1437,6 +1541,14 @@
 							]
 						}
 					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"everyone"
+					]
 				}
 			},
 			{
@@ -1451,428 +1563,754 @@
 					"slides": [
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-1d795d41dc54905b",
-								"src": "/images/church-history/History_Page_01.jpg",
-								"alt": "History of Minnehaha UMC - Page 1"
+								"provider": "local",
+								"id": "01K0000000XSX1WMGV2GW40KCB",
+								"alt": "History of Minnehaha UMC - Page 1",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_01.jpg",
+								"meta": {
+									"storageKey": "01K0000000XSX1WMGV2GW40KCB.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-5012f75363a1c7da",
-								"src": "/images/church-history/History_Page_02.jpg",
-								"alt": "History of Minnehaha UMC - Page 2"
+								"provider": "local",
+								"id": "01K0000000GJQK317T8P2FKBZD",
+								"alt": "History of Minnehaha UMC - Page 2",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_02.jpg",
+								"meta": {
+									"storageKey": "01K0000000GJQK317T8P2FKBZD.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-6ac70dc96b4cfd6a",
-								"src": "/images/church-history/History_Page_03.jpg",
-								"alt": "History of Minnehaha UMC - Page 3"
+								"provider": "local",
+								"id": "01K0000000A7D9BCXA5BJM737F",
+								"alt": "History of Minnehaha UMC - Page 3",
+								"width": 950,
+								"height": 735,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_03.jpg",
+								"meta": {
+									"storageKey": "01K0000000A7D9BCXA5BJM737F.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-d9e475f7b2cb3520",
-								"src": "/images/church-history/History_Page_04.jpg",
-								"alt": "History of Minnehaha UMC - Page 4"
+								"provider": "local",
+								"id": "01K0000000S4NQJBN0E6EPT2Y4",
+								"alt": "History of Minnehaha UMC - Page 4",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_04.jpg",
+								"meta": {
+									"storageKey": "01K0000000S4NQJBN0E6EPT2Y4.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-91445f6ab3489e3a",
-								"src": "/images/church-history/History_Page_05.jpg",
-								"alt": "History of Minnehaha UMC - Page 5"
+								"provider": "local",
+								"id": "01K0000000H4ZAK8YTFGAVZQ1V",
+								"alt": "History of Minnehaha UMC - Page 5",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_05.jpg",
+								"meta": {
+									"storageKey": "01K0000000H4ZAK8YTFGAVZQ1V.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-3fea9e803443f665",
-								"src": "/images/church-history/History_Page_06.jpg",
-								"alt": "History of Minnehaha UMC - Page 6"
+								"provider": "local",
+								"id": "01K0000000ZAY0M3P59CZGKV9B",
+								"alt": "History of Minnehaha UMC - Page 6",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_06.jpg",
+								"meta": {
+									"storageKey": "01K0000000ZAY0M3P59CZGKV9B.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-a6fac2371602ca46",
-								"src": "/images/church-history/History_Page_07.jpg",
-								"alt": "History of Minnehaha UMC - Page 7"
+								"provider": "local",
+								"id": "01K00000006T2QP2A6AWVZDZKQ",
+								"alt": "History of Minnehaha UMC - Page 7",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_07.jpg",
+								"meta": {
+									"storageKey": "01K00000006T2QP2A6AWVZDZKQ.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-c64a04d88d3f3600",
-								"src": "/images/church-history/History_Page_08.jpg",
-								"alt": "History of Minnehaha UMC - Page 8"
+								"provider": "local",
+								"id": "01K00000006A4RDZP0YAD35XWC",
+								"alt": "History of Minnehaha UMC - Page 8",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_08.jpg",
+								"meta": {
+									"storageKey": "01K00000006A4RDZP0YAD35XWC.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-cf8caefbaeedd5ff",
-								"src": "/images/church-history/History_Page_09.jpg",
-								"alt": "History of Minnehaha UMC - Page 9"
+								"provider": "local",
+								"id": "01K0000000FCEVEDNZGQRBFJRJ",
+								"alt": "History of Minnehaha UMC - Page 9",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_09.jpg",
+								"meta": {
+									"storageKey": "01K0000000FCEVEDNZGQRBFJRJ.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-8a04f3c02c7f77d9",
-								"src": "/images/church-history/History_Page_10.jpg",
-								"alt": "History of Minnehaha UMC - Page 10"
+								"provider": "local",
+								"id": "01K0000000A4K0CZQS0P3MPD2Z",
+								"alt": "History of Minnehaha UMC - Page 10",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_10.jpg",
+								"meta": {
+									"storageKey": "01K0000000A4K0CZQS0P3MPD2Z.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-11f1025f7ffa3857",
-								"src": "/images/church-history/History_Page_11.jpg",
-								"alt": "History of Minnehaha UMC - Page 11"
+								"provider": "local",
+								"id": "01K0000000HH2ZZTRQNKA7HBQJ",
+								"alt": "History of Minnehaha UMC - Page 11",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_11.jpg",
+								"meta": {
+									"storageKey": "01K0000000HH2ZZTRQNKA7HBQJ.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-e8fcae903dd49212",
-								"src": "/images/church-history/History_Page_12.jpg",
-								"alt": "History of Minnehaha UMC - Page 12"
+								"provider": "local",
+								"id": "01K00000008WEGXMJJ4491AZ08",
+								"alt": "History of Minnehaha UMC - Page 12",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_12.jpg",
+								"meta": {
+									"storageKey": "01K00000008WEGXMJJ4491AZ08.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-4d672e5986cee746",
-								"src": "/images/church-history/History_Page_13.jpg",
-								"alt": "History of Minnehaha UMC - Page 13"
+								"provider": "local",
+								"id": "01K0000000D7ES6E76KAMKTXEA",
+								"alt": "History of Minnehaha UMC - Page 13",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_13.jpg",
+								"meta": {
+									"storageKey": "01K0000000D7ES6E76KAMKTXEA.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-2a6227a3993aa133",
-								"src": "/images/church-history/History_Page_14.jpg",
-								"alt": "History of Minnehaha UMC - Page 14"
+								"provider": "local",
+								"id": "01K0000000A273ST1KGNRWCFB2",
+								"alt": "History of Minnehaha UMC - Page 14",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_14.jpg",
+								"meta": {
+									"storageKey": "01K0000000A273ST1KGNRWCFB2.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-5137fb0bd38f4d50",
-								"src": "/images/church-history/History_Page_15.jpg",
-								"alt": "History of Minnehaha UMC - Page 15"
+								"provider": "local",
+								"id": "01K0000000HQVBKFDGN547K5CH",
+								"alt": "History of Minnehaha UMC - Page 15",
+								"width": 950,
+								"height": 610,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_15.jpg",
+								"meta": {
+									"storageKey": "01K0000000HQVBKFDGN547K5CH.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-247cf6556b6c7d11",
-								"src": "/images/church-history/History_Page_16.jpg",
-								"alt": "History of Minnehaha UMC - Page 16"
+								"provider": "local",
+								"id": "01K00000004WPNBCXHNVHMR8J0",
+								"alt": "History of Minnehaha UMC - Page 16",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_16.jpg",
+								"meta": {
+									"storageKey": "01K00000004WPNBCXHNVHMR8J0.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-07fd9668e37333b6",
-								"src": "/images/church-history/History_Page_17.jpg",
-								"alt": "History of Minnehaha UMC - Page 17"
+								"provider": "local",
+								"id": "01K00000007XP83KKPGA04352D",
+								"alt": "History of Minnehaha UMC - Page 17",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_17.jpg",
+								"meta": {
+									"storageKey": "01K00000007XP83KKPGA04352D.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-ba21efdbd5894004",
-								"src": "/images/church-history/History_Page_18.jpg",
-								"alt": "History of Minnehaha UMC - Page 18"
+								"provider": "local",
+								"id": "01K0000000T1FVN904DKSY0KAK",
+								"alt": "History of Minnehaha UMC - Page 18",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_18.jpg",
+								"meta": {
+									"storageKey": "01K0000000T1FVN904DKSY0KAK.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-1575b15dd6c34218",
-								"src": "/images/church-history/History_Page_19.jpg",
-								"alt": "History of Minnehaha UMC - Page 19"
+								"provider": "local",
+								"id": "01K0000000NNHXP32RGFJM92D6",
+								"alt": "History of Minnehaha UMC - Page 19",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_19.jpg",
+								"meta": {
+									"storageKey": "01K0000000NNHXP32RGFJM92D6.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-e447a88d669428ef",
-								"src": "/images/church-history/History_Page_20.jpg",
-								"alt": "History of Minnehaha UMC - Page 20"
+								"provider": "local",
+								"id": "01K0000000478D6M8FZGTPTCSG",
+								"alt": "History of Minnehaha UMC - Page 20",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_20.jpg",
+								"meta": {
+									"storageKey": "01K0000000478D6M8FZGTPTCSG.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-e3bff4254954aea1",
-								"src": "/images/church-history/History_Page_21.jpg",
-								"alt": "History of Minnehaha UMC - Page 21"
+								"provider": "local",
+								"id": "01K00000003ZM59ME1PV0Y7KAD",
+								"alt": "History of Minnehaha UMC - Page 21",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_21.jpg",
+								"meta": {
+									"storageKey": "01K00000003ZM59ME1PV0Y7KAD.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-b207a6084c58ad22",
-								"src": "/images/church-history/History_Page_22.jpg",
-								"alt": "History of Minnehaha UMC - Page 22"
+								"provider": "local",
+								"id": "01K0000000J768CRD2B9QHB43E",
+								"alt": "History of Minnehaha UMC - Page 22",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_22.jpg",
+								"meta": {
+									"storageKey": "01K0000000J768CRD2B9QHB43E.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-8684d9605153b43a",
-								"src": "/images/church-history/History_Page_23.jpg",
-								"alt": "History of Minnehaha UMC - Page 23"
+								"provider": "local",
+								"id": "01K000000064S0HKMT9AJ8EBV9",
+								"alt": "History of Minnehaha UMC - Page 23",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_23.jpg",
+								"meta": {
+									"storageKey": "01K000000064S0HKMT9AJ8EBV9.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-ed356c48c0f93eeb",
-								"src": "/images/church-history/History_Page_24.jpg",
-								"alt": "History of Minnehaha UMC - Page 24"
+								"provider": "local",
+								"id": "01K0000000DNC80SYBQ7JJX25R",
+								"alt": "History of Minnehaha UMC - Page 24",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_24.jpg",
+								"meta": {
+									"storageKey": "01K0000000DNC80SYBQ7JJX25R.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-0d7c4f3225ae73ec",
-								"src": "/images/church-history/History_Page_25.jpg",
-								"alt": "History of Minnehaha UMC - Page 25"
+								"provider": "local",
+								"id": "01K0000000DWFJ5EKCN5N4H3TH",
+								"alt": "History of Minnehaha UMC - Page 25",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_25.jpg",
+								"meta": {
+									"storageKey": "01K0000000DWFJ5EKCN5N4H3TH.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-c828a57370022d3e",
-								"src": "/images/church-history/History_Page_26.jpg",
-								"alt": "History of Minnehaha UMC - Page 26"
+								"provider": "local",
+								"id": "01K0000000885KG2DY1D8Q1V3W",
+								"alt": "History of Minnehaha UMC - Page 26",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_26.jpg",
+								"meta": {
+									"storageKey": "01K0000000885KG2DY1D8Q1V3W.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-8b14332771289542",
-								"src": "/images/church-history/History_Page_27.jpg",
-								"alt": "History of Minnehaha UMC - Page 27"
+								"provider": "local",
+								"id": "01K0000000BMK7H8N2WW7FA6V0",
+								"alt": "History of Minnehaha UMC - Page 27",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_27.jpg",
+								"meta": {
+									"storageKey": "01K0000000BMK7H8N2WW7FA6V0.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-211b032b5eb8cf66",
-								"src": "/images/church-history/History_Page_28.jpg",
-								"alt": "History of Minnehaha UMC - Page 28"
+								"provider": "local",
+								"id": "01K00000001V3BYRF6CQ78WP7W",
+								"alt": "History of Minnehaha UMC - Page 28",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_28.jpg",
+								"meta": {
+									"storageKey": "01K00000001V3BYRF6CQ78WP7W.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-5fff7639937683ce",
-								"src": "/images/church-history/History_Page_29.jpg",
-								"alt": "History of Minnehaha UMC - Page 29"
+								"provider": "local",
+								"id": "01K0000000ZZPSKP3EPAKJ724M",
+								"alt": "History of Minnehaha UMC - Page 29",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_29.jpg",
+								"meta": {
+									"storageKey": "01K0000000ZZPSKP3EPAKJ724M.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-284a3b5ad4b8dde6",
-								"src": "/images/church-history/History_Page_30.jpg",
-								"alt": "History of Minnehaha UMC - Page 30"
+								"provider": "local",
+								"id": "01K00000008AVTMRX67F1A4PMW",
+								"alt": "History of Minnehaha UMC - Page 30",
+								"width": 950,
+								"height": 729,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_30.jpg",
+								"meta": {
+									"storageKey": "01K00000008AVTMRX67F1A4PMW.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-7001f02142be9748",
-								"src": "/images/church-history/History_Page_31.jpg",
-								"alt": "History of Minnehaha UMC - Page 31"
+								"provider": "local",
+								"id": "01K0000000G1G12YQ8546TKM31",
+								"alt": "History of Minnehaha UMC - Page 31",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_31.jpg",
+								"meta": {
+									"storageKey": "01K0000000G1G12YQ8546TKM31.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-ba9d4b5977654bf6",
-								"src": "/images/church-history/History_Page_32.jpg",
-								"alt": "History of Minnehaha UMC - Page 32"
+								"provider": "local",
+								"id": "01K0000000TXBSQ5BPF9ASGV7F",
+								"alt": "History of Minnehaha UMC - Page 32",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_32.jpg",
+								"meta": {
+									"storageKey": "01K0000000TXBSQ5BPF9ASGV7F.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-3e2b15a3140205dd",
-								"src": "/images/church-history/History_Page_33.jpg",
-								"alt": "History of Minnehaha UMC - Page 33"
+								"provider": "local",
+								"id": "01K0000000YBN3M25XM468APD1",
+								"alt": "History of Minnehaha UMC - Page 33",
+								"width": 950,
+								"height": 735,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_33.jpg",
+								"meta": {
+									"storageKey": "01K0000000YBN3M25XM468APD1.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-297e1ac7f7ca93ea",
-								"src": "/images/church-history/History_Page_34.jpg",
-								"alt": "History of Minnehaha UMC - Page 34"
+								"provider": "local",
+								"id": "01K00000009YT7QAKA2Z18PE61",
+								"alt": "History of Minnehaha UMC - Page 34",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_34.jpg",
+								"meta": {
+									"storageKey": "01K00000009YT7QAKA2Z18PE61.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-055b1bc8157754e9",
-								"src": "/images/church-history/History_Page_35.jpg",
-								"alt": "History of Minnehaha UMC - Page 35"
+								"provider": "local",
+								"id": "01K00000005VV8NQM9ETFJ7W75",
+								"alt": "History of Minnehaha UMC - Page 35",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_35.jpg",
+								"meta": {
+									"storageKey": "01K00000005VV8NQM9ETFJ7W75.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-b2a302b4ea770e30",
-								"src": "/images/church-history/History_Page_36.jpg",
-								"alt": "History of Minnehaha UMC - Page 36"
+								"provider": "local",
+								"id": "01K0000000J32MAQEGXTDDXHPF",
+								"alt": "History of Minnehaha UMC - Page 36",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_36.jpg",
+								"meta": {
+									"storageKey": "01K0000000J32MAQEGXTDDXHPF.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-b42345ef3befaa5c",
-								"src": "/images/church-history/History_Page_37.jpg",
-								"alt": "History of Minnehaha UMC - Page 37"
+								"provider": "local",
+								"id": "01K0000000M35FVFAWQCWSNVKR",
+								"alt": "History of Minnehaha UMC - Page 37",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_37.jpg",
+								"meta": {
+									"storageKey": "01K0000000M35FVFAWQCWSNVKR.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-4393a79fe42beb66",
-								"src": "/images/church-history/History_Page_38.jpg",
-								"alt": "History of Minnehaha UMC - Page 38"
+								"provider": "local",
+								"id": "01K00000003K7Z4BB6MVHKC6AR",
+								"alt": "History of Minnehaha UMC - Page 38",
+								"width": 950,
+								"height": 735,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_38.jpg",
+								"meta": {
+									"storageKey": "01K00000003K7Z4BB6MVHKC6AR.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-186b660eeb73383b",
-								"src": "/images/church-history/History_Page_39.jpg",
-								"alt": "History of Minnehaha UMC - Page 39"
+								"provider": "local",
+								"id": "01K0000000RB6EBKRVX3WZGF7B",
+								"alt": "History of Minnehaha UMC - Page 39",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_39.jpg",
+								"meta": {
+									"storageKey": "01K0000000RB6EBKRVX3WZGF7B.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-3ff18612d53364e6",
-								"src": "/images/church-history/History_Page_40.jpg",
-								"alt": "History of Minnehaha UMC - Page 40"
+								"provider": "local",
+								"id": "01K0000000ZH6JNK46HS4W8WG6",
+								"alt": "History of Minnehaha UMC - Page 40",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_40.jpg",
+								"meta": {
+									"storageKey": "01K0000000ZH6JNK46HS4W8WG6.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-53d3252b71ffb98f",
-								"src": "/images/church-history/History_Page_41.jpg",
-								"alt": "History of Minnehaha UMC - Page 41"
+								"provider": "local",
+								"id": "01K0000000KK5BHZSF8F3JA97G",
+								"alt": "History of Minnehaha UMC - Page 41",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_41.jpg",
+								"meta": {
+									"storageKey": "01K0000000KK5BHZSF8F3JA97G.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-10603ad406a325d5",
-								"src": "/images/church-history/History_Page_42.jpg",
-								"alt": "History of Minnehaha UMC - Page 42"
+								"provider": "local",
+								"id": "01K0000000G0TM635NM7C6BDNB",
+								"alt": "History of Minnehaha UMC - Page 42",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_42.jpg",
+								"meta": {
+									"storageKey": "01K0000000G0TM635NM7C6BDNB.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-b898797c3617b4b1",
-								"src": "/images/church-history/History_Page_43.jpg",
-								"alt": "History of Minnehaha UMC - Page 43"
+								"provider": "local",
+								"id": "01K0000000RRSWPQMHM71N19RE",
+								"alt": "History of Minnehaha UMC - Page 43",
+								"width": 950,
+								"height": 735,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_43.jpg",
+								"meta": {
+									"storageKey": "01K0000000RRSWPQMHM71N19RE.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-763322018ef72d89",
-								"src": "/images/church-history/History_Page_44.jpg",
-								"alt": "History of Minnehaha UMC - Page 44"
+								"provider": "local",
+								"id": "01K0000000PK21EQD9KSC58AS4",
+								"alt": "History of Minnehaha UMC - Page 44",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_44.jpg",
+								"meta": {
+									"storageKey": "01K0000000PK21EQD9KSC58AS4.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-835a901d3ac0837c",
-								"src": "/images/church-history/History_Page_45.jpg",
-								"alt": "History of Minnehaha UMC - Page 45"
+								"provider": "local",
+								"id": "01K00000003TGXT03W2VQHXXKB",
+								"alt": "History of Minnehaha UMC - Page 45",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_45.jpg",
+								"meta": {
+									"storageKey": "01K00000003TGXT03W2VQHXXKB.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-bf94d7eec7b7c9ea",
-								"src": "/images/church-history/History_Page_46.jpg",
-								"alt": "History of Minnehaha UMC - Page 46"
+								"provider": "local",
+								"id": "01K0000000ZMQE7Q9ASRJT7TGJ",
+								"alt": "History of Minnehaha UMC - Page 46",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_46.jpg",
+								"meta": {
+									"storageKey": "01K0000000ZMQE7Q9ASRJT7TGJ.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-1e87dcca4ff8165a",
-								"src": "/images/church-history/History_Page_47.jpg",
-								"alt": "History of Minnehaha UMC - Page 47"
+								"provider": "local",
+								"id": "01K0000000Y7WAFRPTWH06WSTM",
+								"alt": "History of Minnehaha UMC - Page 47",
+								"width": 950,
+								"height": 735,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_47.jpg",
+								"meta": {
+									"storageKey": "01K0000000Y7WAFRPTWH06WSTM.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-01d23ca37a6cd189",
-								"src": "/images/church-history/History_Page_48.jpg",
-								"alt": "History of Minnehaha UMC - Page 48"
+								"provider": "local",
+								"id": "01K00000001JW3TCH9RFCZE1W1",
+								"alt": "History of Minnehaha UMC - Page 48",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_48.jpg",
+								"meta": {
+									"storageKey": "01K00000001JW3TCH9RFCZE1W1.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-ba97ee94e26241f7",
-								"src": "/images/church-history/History_Page_49.jpg",
-								"alt": "History of Minnehaha UMC - Page 49"
+								"provider": "local",
+								"id": "01K0000000TQEM221QGZNG3B2C",
+								"alt": "History of Minnehaha UMC - Page 49",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_49.jpg",
+								"meta": {
+									"storageKey": "01K0000000TQEM221QGZNG3B2C.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-91c2751a3941477d",
-								"src": "/images/church-history/History_Page_50.jpg",
-								"alt": "History of Minnehaha UMC - Page 50"
+								"provider": "local",
+								"id": "01K0000000H2NTS17XY8ADW8RY",
+								"alt": "History of Minnehaha UMC - Page 50",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_50.jpg",
+								"meta": {
+									"storageKey": "01K0000000H2NTS17XY8ADW8RY.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-3e05700289320000",
-								"src": "/images/church-history/History_Page_51.jpg",
-								"alt": "History of Minnehaha UMC - Page 51"
+								"provider": "local",
+								"id": "01K0000000Y5G29J001X3CX1GQ",
+								"alt": "History of Minnehaha UMC - Page 51",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_51.jpg",
+								"meta": {
+									"storageKey": "01K0000000Y5G29J001X3CX1GQ.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-7991011ba653d37e",
-								"src": "/images/church-history/History_Page_52.jpg",
-								"alt": "History of Minnehaha UMC - Page 52"
+								"provider": "local",
+								"id": "01K0000000SH1V6KKY3KYD2NX4",
+								"alt": "History of Minnehaha UMC - Page 52",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_52.jpg",
+								"meta": {
+									"storageKey": "01K0000000SH1V6KKY3KYD2NX4.jpg"
+								}
 							}
 						},
 						{
 							"image": {
-								"provider": "external",
-								"id": "mig-07731a9bb8a9bfc4",
-								"src": "/images/church-history/History_Page_53.jpg",
-								"alt": "History of Minnehaha UMC - Page 53"
+								"provider": "local",
+								"id": "01K00000007KTVR9Z4VG119RC1",
+								"alt": "History of Minnehaha UMC - Page 53",
+								"width": 950,
+								"height": 734,
+								"mimeType": "image/jpeg",
+								"filename": "History_Page_53.jpg",
+								"meta": {
+									"storageKey": "01K00000007KTVR9Z4VG119RC1.jpg"
+								}
 							}
 						}
+					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"newcomers"
 					]
 				}
 			},
@@ -1885,10 +2323,16 @@
 					"description": "At Minnehaha United Methodist Church, we're committed to a sustainable, climate-friendly future. Join us.",
 					"template": "default",
 					"banner": {
-						"provider": "external",
-						"id": "mig-c19076c2b74330f0",
-						"src": "/images/mumc-solar-wide.jpg",
-						"alt": "Solar panels on Minnehaha UMC"
+						"provider": "local",
+						"id": "01K00000001GP2Q3GGHQ7XPBA6",
+						"alt": "Solar panels on Minnehaha UMC",
+						"width": 950,
+						"height": 493,
+						"mimeType": "image/jpeg",
+						"filename": "mumc-solar-wide.jpg",
+						"meta": {
+							"storageKey": "01K00000001GP2Q3GGHQ7XPBA6.jpg"
+						}
 					},
 					"content": [
 						{
@@ -2123,6 +2567,14 @@
 							]
 						}
 					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"creation"
+					],
+					"audience": [
+						"everyone"
+					]
 				}
 			},
 			{
@@ -2137,10 +2589,16 @@
 					"content": [],
 					"office_hours": "10:00 a.m. – 4:00 p.m., Tuesdays & Thursdays",
 					"staff_photo": {
-						"provider": "external",
-						"id": "mig-0d30d38d321d9ac9",
-						"src": "/images/mumc-staff-2020-wjean.jpg",
-						"alt": "Minnehaha UMC Staff"
+						"provider": "local",
+						"id": "01K0000000DGKDJXT9B530SV0S",
+						"alt": "Minnehaha UMC Staff",
+						"width": 600,
+						"height": 600,
+						"mimeType": "image/jpeg",
+						"filename": "mumc-staff-2020-wjean.jpg",
+						"meta": {
+							"storageKey": "01K0000000DGKDJXT9B530SV0S.jpg"
+						}
 					},
 					"staff_contacts": [
 						{
@@ -2192,6 +2650,14 @@
 							"role": "Contemporary Band Co-leader"
 						}
 					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"everyone"
+					]
 				}
 			},
 			{
@@ -2203,10 +2669,16 @@
 					"description": "Your first time going to Minnehaha? Here's what to expect once you walk through the doors – including how to find us, deal with ushers and make it through the sermon.",
 					"template": "default",
 					"banner": {
-						"provider": "external",
-						"id": "mig-52d0e193743a84b6",
-						"src": "/images/streetsign-master.jpg",
-						"alt": "Street sign showing the way to Minnehaha UMC"
+						"provider": "local",
+						"id": "01K0000000JG1KMT4PRW4Y4KH0",
+						"alt": "Street sign showing the way to Minnehaha UMC",
+						"width": 950,
+						"height": 346,
+						"mimeType": "image/jpeg",
+						"filename": "streetsign-master.jpg",
+						"meta": {
+							"storageKey": "01K0000000JG1KMT4PRW4Y4KH0.jpg"
+						}
 					},
 					"content": [
 						{
@@ -2668,12 +3140,414 @@
 					"featured_heading": "Check out our Taizé worship service, too",
 					"featured_text": "Minnehaha UMC holds an ecumenical Taizé service of music and meditation on the second Friday of each month at 7:00 p.m. Singing, scripture, meditation and silence allow an encounter with the mystery of God through the beauty of simplicity. Join us October through May.",
 					"featured_image": {
-						"provider": "external",
-						"id": "mig-bdc1a9e4d55b5544",
-						"src": "/images/soul.jpg",
-						"alt": ""
+						"provider": "local",
+						"id": "01K0000000X194NVN47DFHK2EJ",
+						"alt": "",
+						"width": 87,
+						"height": 87,
+						"mimeType": "image/jpeg",
+						"filename": "soul.jpg",
+						"meta": {
+							"storageKey": "01K0000000X194NVN47DFHK2EJ.jpg"
+						}
 					},
 					"featured_position": "left"
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"newcomers"
+					]
+				}
+			},
+			{
+				"id": "page-food-ministries",
+				"slug": "food-ministries",
+				"status": "published",
+				"data": {
+					"title": "Minnehaha Supports 3 Food Missions",
+					"subtitle": "One in 10 Minnesotans — more than 500,000 state residents — is food insecure on a regular basis.",
+					"description": "Minnehaha United Methodist Church supports three food missions in south Minneapolis: MinneHarvest on the fourth Saturday, the Minnehaha Food Shelf every Tuesday, and Meals on Wheels.",
+					"template": "default",
+					"banner": {
+						"provider": "local",
+						"id": "01K0000000PXTY9QTQ61PXRHSR",
+						"alt": "Feed the hungry",
+						"width": 720,
+						"height": 360,
+						"mimeType": "image/jpeg",
+						"filename": "feed-the-hungry.jpg",
+						"meta": {
+							"storageKey": "01K0000000PXTY9QTQ61PXRHSR.jpg"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"_key": "page-food-ministries-1",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-0",
+									"text": "About 10% of Minnesota households are affected by hunger. Minnehaha United Methodist Church is fighting food insecurity in our neighborhood through three food missions. Here is how each one works, and how you can help.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-food-ministries-3",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-2",
+									"text": "MinneHarvest: Every 4th Saturday",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-food-ministries-5",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-4",
+									"text": "MinneHarvest is Minnehaha United Methodist Church’s once-a-month free food giveaway. It usually takes place at the church on the morning of the fourth Saturday of each month. The address is 3701 East 50th Street in Minneapolis, Minnesota.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-food-ministries-8",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-6",
+									"text": "How it works.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-7",
+									"text": " Each month we receive a truckload of produce and other surplus items from grocery stores and warehouses, plus bread from the New French Bakery. It’s about 10,000 pounds of food! We give the food to anyone who comes to the church. Anyone. No questions asked. Each adult gets as much food as they need.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-food-ministries-b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-9",
+									"text": "Helping the food insecure.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-a",
+									"text": " MinneHarvest feeds an average of 500 to 600 people each month. About 50% are adults, 34% children and 16% senior citizens.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-food-ministries-h",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "page-food-ministries-e",
+									"href": "mailto:janos3@juno.com"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-c",
+									"text": "Want to help?",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-d",
+									"text": " Individuals and groups are encouraged to volunteer. Opportunities include setting up tables and moving the food out of the church at 7:30 a.m.; bagging produce, helping clients select and carry groceries to their cars starting at 8:00 a.m.; and helping with clean-up at 10:00 a.m. If you’d like to know more, contact Renee Beymer: 612-722-1782 (phone); ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-f",
+									"text": "janos3@juno.com",
+									"marks": [
+										"page-food-ministries-e"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-g",
+									"text": " (email).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-food-ministries-j",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-i",
+									"text": "Minnehaha Food Shelf: Every Tuesday",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-food-ministries-l",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-k",
+									"text": "The Minnehaha Food Shelf is an ecumenical mission of Minnehaha United Methodist Church, Lake Nokomis Lutheran Church, Living Table United Church of Christ and Grace Episcopal Church. All are welcome regardless of religious affiliation. The Food Shelf is open every Tuesday from 10:00 a.m. to 3:00 p.m. and is located at Minnehaha United Methodist Church, 3701 East 50th Street in Minneapolis.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-food-ministries-r",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "page-food-ministries-o",
+									"href": "mailto:foodshelfvolunteers@minnehaha.org"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-m",
+									"text": "Volunteer at the Food Shelf.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-n",
+									"text": " We need assistance with unloading trucks, food distribution setup and takedown, inventory management, registering/checking in clients, Spanish-English interpretation, community outreach, volunteer coordination, social media support and other vital tasks. Many volunteer positions require being on-site during our open hours (Tuesday from 10:00 a.m. to 3:00 p.m.), but others do not. If you’re interested in becoming a volunteer, please contact us at ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-p",
+									"text": "foodshelfvolunteers@minnehaha.org",
+									"marks": [
+										"page-food-ministries-o"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-q",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-food-ministries-u",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-s",
+									"text": "Give to the Food Shelf.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-t",
+									"text": " We welcome donations of non-perishable food items and personal care products. Drop them in the blue bins at Minnehaha United Methodist Church.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-food-ministries-10",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "page-food-ministries-x",
+									"href": "mailto:foodshelf@minnehaha.org"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-v",
+									"text": "Questions?",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-w",
+									"text": " Contact us at ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-y",
+									"text": "foodshelf@minnehaha.org",
+									"marks": [
+										"page-food-ministries-x"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-z",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-food-ministries-12",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-11",
+									"text": "Meals on Wheels: Every 6 Weeks",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-food-ministries-14",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-13",
+									"text": "About every six weeks, drivers from Minnehaha United Methodist Church deliver meals over the lunch hour to elderly people in the neighborhood of the church who have difficulty getting out of their homes and apartments.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-food-ministries-17",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-15",
+									"text": "What is Meals on Wheels?",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-16",
+									"text": " Meals on Wheels is an international organization that originated in the United Kingdom in the 1940s. Meals on Wheels America was established in 1974. Through more than 5,000 community-based programs, volunteers provide healthful food and human contact to elderly people from coast to coast.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-food-ministries-1d",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "page-food-ministries-1a",
+									"href": "https://meals-on-wheels.com/volunteer/sign-up-to-volunteer"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-18",
+									"text": "Want to help?",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-19",
+									"text": " Volunteer drivers from the church pick up the meals from Nokomis Square and deliver them to the clients’ homes. ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-1b",
+									"text": "Sign up to volunteer",
+									"marks": [
+										"page-food-ministries-1a"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-food-ministries-1c",
+									"text": ".",
+									"marks": []
+								}
+							]
+						}
+					],
+					"location_link": "https://www.google.com/maps/place/Minnehaha+United+Methodist+Church/@44.9122631,-93.2207999,17z/data=!3m1!4b1!4m5!3m4!1s0x87f628fdfa9d5cbf:0x1e01a06ebc6f8804!8m2!3d44.9122593!4d-93.2186059"
+				},
+				"taxonomies": {
+					"ministry": [
+						"food"
+					],
+					"audience": [
+						"everyone"
+					]
 				}
 			},
 			{
@@ -2685,10 +3559,16 @@
 					"description": "Minnehaha United Methodist Church (3701 E. 50th Street) is a progressive, inclusive church in South Minneapolis.",
 					"template": "default",
 					"banner": {
-						"provider": "external",
-						"id": "mig-76feeabc348a3e98",
-						"src": "/images/puzzle-top-22.jpg",
-						"alt": "Good Things Happen Here"
+						"provider": "local",
+						"id": "01K0000000PYAWMAYR28A4RP0A",
+						"alt": "Good Things Happen Here",
+						"width": 950,
+						"height": 438,
+						"mimeType": "image/jpeg",
+						"filename": "puzzle-top-22.jpg",
+						"meta": {
+							"storageKey": "01K0000000PYAWMAYR28A4RP0A.jpg"
+						}
 					},
 					"content": [
 						{
@@ -2889,6 +3769,632 @@
 							]
 						}
 					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"welcome"
+					],
+					"audience": [
+						"newcomers"
+					]
+				}
+			},
+			{
+				"id": "page-got-kids",
+				"slug": "got-kids",
+				"status": "published",
+				"data": {
+					"title": "A Good Place for Kids (and Adults, too)",
+					"subtitle": "There's lots of stuff for kids to do at Minnehaha United Methodist Church.",
+					"description": "Got kids? We love it when you bring them to church. Children's message, Sunday School at 10:45 a.m., Wednesday dinners, Thursday Playgroup, and more at Minnehaha UMC.",
+					"template": "default",
+					"banner": {
+						"provider": "local",
+						"id": "01K00000006KXTZW3YWT5H7RD6",
+						"alt": "Sunday School at Minnehaha UMC",
+						"width": 950,
+						"height": 438,
+						"mimeType": "image/jpeg",
+						"filename": "sunday-school-banner.jpg",
+						"meta": {
+							"storageKey": "01K00000006KXTZW3YWT5H7RD6.jpg"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"_key": "page-got-kids-1",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-got-kids-0",
+									"text": "Here’s what’s happening on Sunday mornings:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-got-kids-3",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-got-kids-2",
+									"text": "Bring your kid(s) into 9:30 a.m. worship. (We’re serious!)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-got-kids-5",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-got-kids-4",
+									"text": "We love it when you bring kids into the church service. Really. On Sunday mornings, we leave our scowls and frowns at home. (Except for Brad.)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-got-kids-8",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-got-kids-6",
+									"text": "Worship lasts about an hour.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-got-kids-7",
+									"text": " It’s not exactly made for kids, but there’s music, paper and crayons, and lots of opportunities to stand up and sit down. Plus, early in the service there’s a Children’s Message where everyone can learn about the day’s lesson in a fun way.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-got-kids-b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-got-kids-9",
+									"text": "Coffee, lemonade and cookies.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-got-kids-a",
+									"text": " When the service is over at around 10:30 a.m., there’s cookies and lemonade and coffee and new people to meet. And sometimes doughnuts. You don’t want to miss that.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-got-kids-e",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-got-kids-c",
+									"text": "Sunday School starts at 10:45 a.m.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-got-kids-d",
+									"text": " Preschool, K/1st Grades, 2nd/3rd Grades, 4th/5th Grades, Middle School, High School and Adults all meet in separate classrooms upstairs. While that’s going on, you can stay downstairs and relax and visit and drink coffee. Sunday School is pretty much done at 11:30 a.m.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-got-kids-g",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-got-kids-f",
+									"text": "Plus, there’s even more fun family things",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-got-kids-j",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-got-kids-h",
+									"text": "Wednesday Night Dinners.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-got-kids-i",
+									"text": " There’s Wednesday night dinners at 5:30 p.m. on most Wednesdays. And outdoor picnics on Wednesdays during the summer.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-got-kids-m",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-got-kids-k",
+									"text": "Minnehaha Playgroup on Thursday mornings.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-got-kids-l",
+									"text": " If you or your caregiver is looking for a break during the week, Minnehaha Playgroup, for children five and under, meets at the church every Thursday from 9:30 to 11:30 a.m. Kids and their caregivers gather on the second floor to play, talk, explore, support and learn together.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-got-kids-p",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-got-kids-n",
+									"text": "All-Church Christmas Pageant.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-got-kids-o",
+									"text": " At our All-church Christmas Pageant in December, kids dress up as animals, shepherds, magi and angels. Plus there’s singing, handbells and puppets. And a happy ending, of course. (Okay, Herod’s not all that happy but that’s just him.) Hallelujah!",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-got-kids-s",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-got-kids-q",
+									"text": "Summer camps, VBS, mission trips, etc., etc.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-got-kids-r",
+									"text": " During the summer there’s camps, vacation bible school, mission trips, and more. And the church service is outside (weather permitting) on Sundays at 10:00 a.m.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-got-kids-v",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "page-got-kids-t",
+									"href": "/kids/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-got-kids-u",
+									"text": "See everything for children and youth →",
+									"marks": [
+										"page-got-kids-t"
+									]
+								}
+							]
+						}
+					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"kids-families"
+					],
+					"audience": [
+						"families"
+					]
+				}
+			},
+			{
+				"id": "page-groups",
+				"slug": "groups",
+				"status": "published",
+				"data": {
+					"title": "Groups at Minnehaha",
+					"subtitle": "Come join us. There's a place for you.",
+					"description": "Minnehaha United Methodist Church is home to a wide range of groups and organizations, including United Women of Faith, Racial Justice, Scouts, exercise and more.",
+					"template": "default",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "page-groups-1",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-groups-0",
+									"text": "Minnehaha UMC is home to a wide range of groups and organizations. Some are part of our church life, and others are community groups that meet in our building.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-groups-3",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-groups-2",
+									"text": "Church groups",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-groups-7",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "page-groups-4",
+									"href": "/uwf/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-groups-5",
+									"text": "United Women of Faith",
+									"marks": [
+										"strong",
+										"page-groups-4"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-groups-6",
+									"text": " welcomes women of any age or interest to grow in spirit and support missions in the neighborhood and around the world.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "page-groups-b",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "page-groups-8",
+									"href": "/racial-justice/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-groups-9",
+									"text": "Racial Justice",
+									"marks": [
+										"strong",
+										"page-groups-8"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-groups-a",
+									"text": " is our response to the call of our Christian faith to love our neighbor and work for justice. Visit the page for books and resources we recommend.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "page-groups-f",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "page-groups-c",
+									"href": "/youth/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-groups-d",
+									"text": "Youth Ministries",
+									"marks": [
+										"strong",
+										"page-groups-c"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-groups-e",
+									"text": " offers teens and tweens great opportunities to know God as we seek, serve and celebrate.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "page-groups-j",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "page-groups-g",
+									"href": "/kids/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-groups-h",
+									"text": "Children, Sunday School and Playgroup",
+									"marks": [
+										"strong",
+										"page-groups-g"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-groups-i",
+									"text": " has programs for kids and their families all year long.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "page-groups-p",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "page-groups-m",
+									"href": "/we-seek/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-groups-k",
+									"text": "Chancel Choir",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-groups-l",
+									"text": " enriches our traditional service with hymns, piano and organ music. See ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "page-groups-n",
+									"text": "Worship",
+									"marks": [
+										"page-groups-m"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-groups-o",
+									"text": ".",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "page-groups-s",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-groups-q",
+									"text": "Bible study",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-groups-r",
+									"text": " and discussion groups help all people grow in their faith and knowledge of God.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "page-groups-w",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "page-groups-t",
+									"href": "/food-ministries/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-groups-u",
+									"text": "Food ministries",
+									"marks": [
+										"strong",
+										"page-groups-t"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-groups-v",
+									"text": ": MinneHarvest, the Minnehaha Food Shelf and Meals on Wheels all rely on volunteers.",
+									"marks": []
+								}
+							],
+							"listItem": "bullet",
+							"level": 1
+						},
+						{
+							"_type": "block",
+							"_key": "page-groups-y",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-groups-x",
+									"text": "Groups that meet here",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-groups-10",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-groups-z",
+									"text": "Our building is also home to Scouts (Troop 1), Fun and Fitness (exercise), Taleweavers Toastmasters, Overeaters Anonymous, Alcoholics Anonymous (AA) and more.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "page-groups-18",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "page-groups-12",
+									"href": "/calendar/"
+								},
+								{
+									"_type": "link",
+									"_key": "page-groups-15",
+									"href": "/contact/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "page-groups-11",
+									"text": "To check meeting days and times, see the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "page-groups-13",
+									"text": "calendar",
+									"marks": [
+										"page-groups-12"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-groups-14",
+									"text": " or ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "page-groups-16",
+									"text": "contact the church office",
+									"marks": [
+										"page-groups-15"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "page-groups-17",
+									"text": ".",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"community"
+					],
+					"audience": [
+						"everyone"
+					]
 				}
 			},
 			{
@@ -2900,10 +4406,16 @@
 					"description": "We are called by our Christian faith to love our neighbor and work for justice.",
 					"template": "default",
 					"banner": {
-						"provider": "external",
-						"id": "mig-72805d545e31f4e6",
-						"src": "/images/black-lives-matter-banner-header.jpg",
-						"alt": "Black Lives Matter banner"
+						"provider": "local",
+						"id": "01K0000000J0XMYHM6X4NBJYEJ",
+						"alt": "Black Lives Matter banner",
+						"width": 950,
+						"height": 438,
+						"mimeType": "image/jpeg",
+						"filename": "black-lives-matter-banner-header.jpg",
+						"meta": {
+							"storageKey": "01K0000000J0XMYHM6X4NBJYEJ.jpg"
+						}
 					},
 					"content": [
 						{
@@ -3207,6 +4719,14 @@
 							"description": "From The United Methodist Church's General Commission on Religion & Race (GCORR)"
 						}
 					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"racial-justice"
+					],
+					"audience": [
+						"everyone"
+					]
 				}
 			},
 			{
@@ -3295,6 +4815,14 @@
 							"height": "380"
 						}
 					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"creation"
+					],
+					"audience": [
+						"everyone"
+					]
 				}
 			},
 			{
@@ -3307,6 +4835,14 @@
 					"template": "staff",
 					"intro": "Get to know the staff of Minnehaha United Methodist Church.",
 					"content": []
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"newcomers"
+					]
 				}
 			},
 			{
@@ -3318,10 +4854,16 @@
 					"description": "United Women of Faith (UWF) at Minnehaha United Methodist Church welcomes women of any age or interest to grow in spirit and support missions in the neighborhood and around the world.",
 					"template": "default",
 					"banner": {
-						"provider": "external",
-						"id": "mig-b4d292fd7fc8b993",
-						"src": "/images/uwf-logo-w-text-and-quote.jpg",
-						"alt": "United Women of Faith logo"
+						"provider": "local",
+						"id": "01K0000000MJJXZ8SKK3JX8Y7B",
+						"alt": "United Women of Faith logo",
+						"width": 950,
+						"height": 688,
+						"mimeType": "image/jpeg",
+						"filename": "uwf-logo-w-text-and-quote.jpg",
+						"meta": {
+							"storageKey": "01K0000000MJJXZ8SKK3JX8Y7B.jpg"
+						}
 					},
 					"content": [
 						{
@@ -4721,6 +6263,14 @@
 							"level": 1
 						}
 					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"community"
+					],
+					"audience": [
+						"adults"
+					]
 				}
 			},
 			{
@@ -4732,10 +6282,16 @@
 					"description": "At Minnehaha United Methodist Church, we celebrate God and life and good things. Here are some of the events, programs and activities that take place here.",
 					"template": "default",
 					"banner": {
-						"provider": "external",
-						"id": "mig-560a7e76f68a9de9",
-						"src": "/images/wecelebrate.jpg",
-						"alt": "We Celebrate"
+						"provider": "local",
+						"id": "01K0000000PAYPPAX9C7NSA1PQ",
+						"alt": "We Celebrate",
+						"width": 950,
+						"height": 380,
+						"mimeType": "image/jpeg",
+						"filename": "wecelebrate.jpg",
+						"meta": {
+							"storageKey": "01K0000000PAYPPAX9C7NSA1PQ.jpg"
+						}
 					},
 					"content": [
 						{
@@ -5255,12 +6811,26 @@
 					"featured_heading": "Minnehaha United Methodist Church",
 					"featured_text": "is a progressive congregation. Our hearts, minds and doors are open to everyone. Especially you.",
 					"featured_image": {
-						"provider": "external",
-						"id": "mig-bdc1a9e4d55b5544",
-						"src": "/images/soul.jpg",
-						"alt": ""
+						"provider": "local",
+						"id": "01K0000000X194NVN47DFHK2EJ",
+						"alt": "",
+						"width": 87,
+						"height": 87,
+						"mimeType": "image/jpeg",
+						"filename": "soul.jpg",
+						"meta": {
+							"storageKey": "01K0000000X194NVN47DFHK2EJ.jpg"
+						}
 					},
 					"featured_position": "left"
+				},
+				"taxonomies": {
+					"ministry": [
+						"worship"
+					],
+					"audience": [
+						"everyone"
+					]
 				}
 			},
 			{
@@ -5272,10 +6842,16 @@
 					"description": "At Minnehaha United Methodist Church, worship isn't limited to one hour of the week every Sunday. It's a part of who we are – and who we are becoming.",
 					"template": "default",
 					"banner": {
-						"provider": "external",
-						"id": "mig-6cd03643b572fb47",
-						"src": "/images/seekbanner.jpg",
-						"alt": "Worship at Minnehaha"
+						"provider": "local",
+						"id": "01K0000000CGP3NJV7EHRGATJH",
+						"alt": "Worship at Minnehaha",
+						"width": 950,
+						"height": 380,
+						"mimeType": "image/jpeg",
+						"filename": "seekbanner.jpg",
+						"meta": {
+							"storageKey": "01K0000000CGP3NJV7EHRGATJH.jpg"
+						}
 					},
 					"content": [
 						{
@@ -5649,6 +7225,14 @@
 							]
 						}
 					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"worship"
+					],
+					"audience": [
+						"everyone"
+					]
 				}
 			},
 			{
@@ -5660,10 +7244,16 @@
 					"description": "At Minnehaha United Methodist Church, we serve our south Minneapolis neighborhood – and our world. We're a church of action, sharing our blessings with those around us.",
 					"template": "default",
 					"banner": {
-						"provider": "external",
-						"id": "mig-2d415d2c247b7f88",
-						"src": "/images/servingbanner.jpg",
-						"alt": "We Serve"
+						"provider": "local",
+						"id": "01K0000000D1XC4VZ8AJ9SY22C",
+						"alt": "We Serve",
+						"width": 950,
+						"height": 373,
+						"mimeType": "image/jpeg",
+						"filename": "servingbanner.jpg",
+						"meta": {
+							"storageKey": "01K0000000D1XC4VZ8AJ9SY22C.jpg"
+						}
 					},
 					"content": [
 						{
@@ -5953,6 +7543,14 @@
 							]
 						}
 					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"giving"
+					],
+					"audience": [
+						"everyone"
+					]
 				}
 			},
 			{
@@ -5964,10 +7562,16 @@
 					"description": "Our south Minneapolis church is a beautiful and welcoming gathering space for weddings, funerals and memorial services.",
 					"template": "default",
 					"banner": {
-						"provider": "external",
-						"id": "mig-88430892e5a54890",
-						"src": "/images/wedding.jpg",
-						"alt": "Wedding at Minnehaha UMC"
+						"provider": "local",
+						"id": "01K0000000838J558G2F8VQ98E",
+						"alt": "Wedding at Minnehaha UMC",
+						"width": 950,
+						"height": 633,
+						"mimeType": "image/jpeg",
+						"filename": "wedding.jpg",
+						"meta": {
+							"storageKey": "01K0000000838J558G2F8VQ98E.jpg"
+						}
 					},
 					"content": [
 						{
@@ -6166,6 +7770,14 @@
 								}
 							]
 						}
+					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"worship"
+					],
+					"audience": [
+						"everyone"
 					]
 				}
 			},
@@ -6393,16 +8005,30 @@
 					"featured_heading": "Minnehaha United Methodist Church",
 					"featured_text": "is a progressive congregation. Our hearts, minds and doors are open to everyone. Especially you.",
 					"featured_image": {
-						"provider": "external",
-						"id": "mig-bdc1a9e4d55b5544",
-						"src": "/images/soul.jpg",
-						"alt": ""
+						"provider": "local",
+						"id": "01K0000000X194NVN47DFHK2EJ",
+						"alt": "",
+						"width": 87,
+						"height": 87,
+						"mimeType": "image/jpeg",
+						"filename": "soul.jpg",
+						"meta": {
+							"storageKey": "01K0000000X194NVN47DFHK2EJ.jpg"
+						}
 					},
 					"featured_position": "left",
 					"video": "/images/becky-welcome-tab.mp4",
 					"video_ogg": "/images/becky-welcome-tab.ogg",
 					"video_fallback": "https://www.youtube.com/watch?v=5_AW9mDExZ0",
 					"location_link": "https://www.google.com/maps/place/Minnehaha+United+Methodist+Church/@44.9122631,-93.2207999,17z/data=!3m1!4b1!4m5!3m4!1s0x87f628fdfa9d5cbf:0x1e01a06ebc6f8804!8m2!3d44.9122593!4d-93.2186059"
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"newcomers"
+					]
 				}
 			},
 			{
@@ -6415,12 +8041,26 @@
 					"description": "Minnehaha has lots of great programs and events for kids and their families, including Sunday school, music, VBS, retreats, Playgroup, and more.",
 					"template": "kids",
 					"banner": {
-						"provider": "external",
-						"id": "mig-f6ca414f2218c72f",
-						"src": "/images/minnehaha-kids-banner-header.jpg",
-						"alt": "Minnehaha UMC rainbow m logo with a fish, modeled in clay"
+						"provider": "local",
+						"id": "01K0000000PA1F2R7FWG3CXHG6",
+						"alt": "Minnehaha UMC rainbow m logo with a fish, modeled in clay",
+						"width": 1200,
+						"height": 554,
+						"mimeType": "image/jpeg",
+						"filename": "minnehaha-kids-banner-header.jpg",
+						"meta": {
+							"storageKey": "01K0000000PA1F2R7FWG3CXHG6.jpg"
+						}
 					},
 					"content": []
+				},
+				"taxonomies": {
+					"ministry": [
+						"kids-families"
+					],
+					"audience": [
+						"families"
+					]
 				}
 			},
 			{
@@ -6433,10 +8073,16 @@
 					"description": "Minnehaha's youth programs offer teens and tweens great opportunities to know God as we seek, serve and celebrate.",
 					"template": "youth",
 					"banner": {
-						"provider": "external",
-						"id": "mig-f01dff9fd301bc48",
-						"src": "/images/header-with-canoe.jpg",
-						"alt": "Youth canoeing"
+						"provider": "local",
+						"id": "01K0000000GXZZK1W89JN60DBN",
+						"alt": "Youth canoeing",
+						"width": 600,
+						"height": 314,
+						"mimeType": "image/jpeg",
+						"filename": "header-with-canoe.jpg",
+						"meta": {
+							"storageKey": "01K0000000GXZZK1W89JN60DBN.jpg"
+						}
 					},
 					"content": [
 						{
@@ -6500,6 +8146,14 @@
 							]
 						}
 					]
+				},
+				"taxonomies": {
+					"ministry": [
+						"youth"
+					],
+					"audience": [
+						"youth"
+					]
 				}
 			}
 		],
@@ -6513,10 +8167,16 @@
 					"display_title": "REV. BECKY SECHRIST, PASTOR:",
 					"weight": 10,
 					"photo": {
-						"provider": "external",
-						"id": "mig-8e88c8c1837fdeb0",
-						"src": "/images/staff/Becky.jpg",
-						"alt": "Becky Sechrist"
+						"provider": "local",
+						"id": "01K0000000E8813ZYGG6APN5B8",
+						"alt": "Becky Sechrist",
+						"width": 450,
+						"height": 450,
+						"mimeType": "image/jpeg",
+						"filename": "Becky.jpg",
+						"meta": {
+							"storageKey": "01K0000000E8813ZYGG6APN5B8.jpg"
+						}
 					},
 					"bio": "\"I help coordinate and direct all the great things people do at Minnehaha United Methodist Church. Plus, I get to teach confirmation, lead adult studies, preach, and visit folks who can't make it to church anymore. I also play clarinet in the Seward Concert Band, and I'm training my dog, Raz, to play Agility. Martha and I like to camp, hike, bike, canoe, and generally spend as much time outside as possible.\"",
 					"email": "becky@minnehaha.org"
@@ -6531,10 +8191,16 @@
 					"display_title": "REV. JEAN ELLIOTT, DIRECTOR OF CHILDREN, YOUTH & THEIR FAMILIES:",
 					"weight": 20,
 					"photo": {
-						"provider": "external",
-						"id": "mig-813a8b15351ae914",
-						"src": "/images/staff/Jean.jpg",
-						"alt": "Jean Elliott"
+						"provider": "local",
+						"id": "01K00000001TBNNT9M49SG5VK0",
+						"alt": "Jean Elliott",
+						"width": 459,
+						"height": 459,
+						"mimeType": "image/jpeg",
+						"filename": "Jean.jpg",
+						"meta": {
+							"storageKey": "01K00000001TBNNT9M49SG5VK0.jpg"
+						}
 					},
 					"bio": "\"Jean is an ordained deacon in the United Methodist Church. She has a passion for helping children and youth develop a robust faith life that is lived out in their entire lives. Jean loves the outdoors, spending time in her kayak, attending live music concerts, and traveling.\"",
 					"email": "education@minnehaha.org"
@@ -6549,10 +8215,16 @@
 					"display_title": "HEATHER KLEIN, CHURCH SECRETARY:",
 					"weight": 30,
 					"photo": {
-						"provider": "external",
-						"id": "mig-32d83c6ecae1c4ba",
-						"src": "/images/staff/Heather.jpg",
-						"alt": "Heather Klein"
+						"provider": "local",
+						"id": "01K0000000JRWEA14TAYF9E011",
+						"alt": "Heather Klein",
+						"width": 450,
+						"height": 450,
+						"mimeType": "image/jpeg",
+						"filename": "Heather.jpg",
+						"meta": {
+							"storageKey": "01K0000000JRWEA14TAYF9E011.jpg"
+						}
 					},
 					"bio": "\"I handle all office communications, publications and scheduling for the church, including newsletters, e-news, bulletins and more! On my own time, I'm busy with child care. Plus I'm a professional actor, dancer and singer. And I'm also involved with dog rescue and an avid reader.\"",
 					"email": "office@minnehaha.org"
@@ -6567,10 +8239,16 @@
 					"display_title": "ANDERS NELSON, ORGANIST:",
 					"weight": 40,
 					"photo": {
-						"provider": "external",
-						"id": "mig-644856a53dd3cfa4",
-						"src": "/images/staff/Anders.jpg",
-						"alt": "Anders Nelson"
+						"provider": "local",
+						"id": "01K000000048P5XKF48VMMJ46A",
+						"alt": "Anders Nelson",
+						"width": 429,
+						"height": 429,
+						"mimeType": "image/jpeg",
+						"filename": "Anders.jpg",
+						"meta": {
+							"storageKey": "01K000000048P5XKF48VMMJ46A.jpg"
+						}
 					},
 					"bio": "\"I prepare and perform music for the first worship service at Minnehaha. I accompany the choir and select preludes, offertories, and postludes. Outside of church, I'm a full-time student studying software engineering. I live in Roseville with my girlfriend, plus our cats Tuna and Oscar. I enjoy creating and listening to music, cooking, and spending time outdoors. And I play guitar in a band and run a home recording studio with a couple friends.\""
 				}
@@ -6584,10 +8262,16 @@
 					"display_title": "STEVE MEIER, CUSTODIAN:",
 					"weight": 50,
 					"photo": {
-						"provider": "external",
-						"id": "mig-f2c40f91268c4fe7",
-						"src": "/images/staff/Steve.jpg",
-						"alt": "Steve Meier"
+						"provider": "local",
+						"id": "01K0000000J4FH6CF7JA9RZC4Y",
+						"alt": "Steve Meier",
+						"width": 469,
+						"height": 469,
+						"mimeType": "image/jpeg",
+						"filename": "Steve.jpg",
+						"meta": {
+							"storageKey": "01K0000000J4FH6CF7JA9RZC4Y.jpg"
+						}
 					},
 					"bio": "\"At Minnehaha, I try to have the building clean and ready to go for worship and church business, and also for all the committees and neighborhood groups and schools that use the building. When I'm not at church I like trips to the cabin up north and I play a lot of disc golf.\""
 				}
@@ -6601,10 +8285,16 @@
 					"display_title": "TIM SIEFKES, CONTEMPORARY BAND LEADER:",
 					"weight": 60,
 					"photo": {
-						"provider": "external",
-						"id": "mig-067de47a9ad7f06d",
-						"src": "/images/staff/Tim.jpg",
-						"alt": "Tim Siefkes"
+						"provider": "local",
+						"id": "01K00000006X4TTQGDTHWNPJ7M",
+						"alt": "Tim Siefkes",
+						"width": 419,
+						"height": 419,
+						"mimeType": "image/jpeg",
+						"filename": "Tim.jpg",
+						"meta": {
+							"storageKey": "01K00000006X4TTQGDTHWNPJ7M.jpg"
+						}
 					},
 					"bio": "\"I seek out, arrange, teach and play music selections for the second worship service at Minnehaha. I try to find a wide variety of interesting music to play that is inspiring and fun to hear (I hope), and that might give us something to think about as well. The band is a dedicated and enthusiastic group of singers and players, and it's very rewarding to hear it all come together. When I'm not playing music I enjoy traveling with my wife, and motorcycling, boating and camping.\""
 				}
@@ -6618,10 +8308,16 @@
 					"display_title": "CINDY BERGSTROM, CHOIR DIRECTOR:",
 					"weight": 70,
 					"photo": {
-						"provider": "external",
-						"id": "mig-a23878882132c137",
-						"src": "/images/staff/Cindy.jpg",
-						"alt": "Cindy Bergstrom"
+						"provider": "local",
+						"id": "01K00000002RR81J1QQJJDWV29",
+						"alt": "Cindy Bergstrom",
+						"width": 550,
+						"height": 550,
+						"mimeType": "image/jpeg",
+						"filename": "Cindy.jpg",
+						"meta": {
+							"storageKey": "01K00000002RR81J1QQJJDWV29.jpg"
+						}
 					},
 					"bio": "\"I really enjoy working with the choir at Minnehaha preparing for the traditional services. I am also the Office Manager at Good Samaritan UMC in Edina. I live in Minneapolis with my husband and have two young adult children. I enjoy tennis, gardening, my dog and cat, and word games.\""
 				}
@@ -6635,10 +8331,16 @@
 					"display_title": "ANNETTE SANDAGER, TREASURER:",
 					"weight": 80,
 					"photo": {
-						"provider": "external",
-						"id": "mig-05d5389e1a4f666e",
-						"src": "/images/staff/Annette_Sandager.jpg",
-						"alt": "Annette Sandager"
+						"provider": "local",
+						"id": "01K00000005NRYTF6EDVN29T90",
+						"alt": "Annette Sandager",
+						"width": 422,
+						"height": 422,
+						"mimeType": "image/jpeg",
+						"filename": "Annette_Sandager.jpg",
+						"meta": {
+							"storageKey": "01K00000005NRYTF6EDVN29T90.jpg"
+						}
 					},
 					"bio": "\"As Treasurer, I pay bills, process payroll and do monthly financial reports. The church has a lot going on with its finances, and I make sure it's tracked and monitored accurately. What I love best about Minnehaha is the people. So many individuals work together and volunteer lots of time to make things run smoothly. Outside of work I spend most of my days with my husband and two kids. (Outside, if the weather allows.) I'm also involved in the Minnehaha Playgroup.\"",
 					"email": "finance@minnehaha.org"
@@ -6654,14 +8356,32 @@
 					"title": "All-Church Service Project",
 					"weight": 140,
 					"archived": false,
+					"expires": "2026-10-19T05:00:00.000Z",
 					"image": {
-						"provider": "external",
-						"id": "mig-ad48a5d34d182d52",
-						"src": "/images/all-church-service-project.jpg",
-						"alt": "Join us for an all-church service project on October 18 following worship"
+						"provider": "local",
+						"id": "01K0000000D85KDRDJ88HNAGNR",
+						"alt": "Join us for an all-church service project on October 18 following worship",
+						"width": 600,
+						"height": 597,
+						"mimeType": "image/jpeg",
+						"filename": "all-church-service-project.jpg",
+						"meta": {
+							"storageKey": "01K0000000D85KDRDJ88HNAGNR.jpg"
+						}
 					},
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"giving"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -6673,10 +8393,16 @@
 					"weight": 230,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-f98c14e440347a92",
-						"src": "/images/building-community.jpg",
-						"alt": "Minnehaha UMC: A progressive, inclusive, affirming church in South Minneapolis."
+						"provider": "local",
+						"id": "01K0000000SCM40MTJ5E7XBSFP",
+						"alt": "Minnehaha UMC: A progressive, inclusive, affirming church in South Minneapolis.",
+						"width": 600,
+						"height": 600,
+						"mimeType": "image/jpeg",
+						"filename": "building-community.jpg",
+						"meta": {
+							"storageKey": "01K0000000SCM40MTJ5E7XBSFP.jpg"
+						}
 					},
 					"body": [
 						{
@@ -6704,6 +8430,17 @@
 					],
 					"link": "https://youtu.be/ZnigS3C7tRQ",
 					"external": true
+				},
+				"taxonomies": {
+					"ministry": [
+						"community"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -6715,10 +8452,16 @@
 					"weight": 280,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-f06c4d38bbc86788",
-						"src": "/images/carbonfree-logo-small.jpg",
-						"alt": "Minnehaha United Methodist Church is carbon-free"
+						"provider": "local",
+						"id": "01K0000000GCDRV878GT2CZRAS",
+						"alt": "Minnehaha United Methodist Church is carbon-free",
+						"width": 600,
+						"height": 241,
+						"mimeType": "image/jpeg",
+						"filename": "carbonfree-logo-small.jpg",
+						"meta": {
+							"storageKey": "01K0000000GCDRV878GT2CZRAS.jpg"
+						}
 					},
 					"body": [
 						{
@@ -6745,6 +8488,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"creation"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -6756,10 +8510,16 @@
 					"weight": 70,
 					"archived": true,
 					"image": {
-						"provider": "external",
-						"id": "mig-bf89356d0e019251",
-						"src": "/images/minneapolis-choir-collective-sm.jpg",
-						"alt": "2 concerts to benefit Minnehaha Food Shelf February 13 and 14 at 7:00 p.m."
+						"provider": "local",
+						"id": "01K0000000Z9NDE1JHMV84QHEK",
+						"alt": "2 concerts to benefit Minnehaha Food Shelf February 13 and 14 at 7:00 p.m.",
+						"width": 600,
+						"height": 400,
+						"mimeType": "image/jpeg",
+						"filename": "minneapolis-choir-collective-sm.jpg",
+						"meta": {
+							"storageKey": "01K0000000Z9NDE1JHMV84QHEK.jpg"
+						}
 					},
 					"body": [
 						{
@@ -6787,6 +8547,18 @@
 					],
 					"link": "https://minneapolischoircollective.com/buytickets",
 					"external": true
+				},
+				"taxonomies": {
+					"ministry": [
+						"worship",
+						"food"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -6798,10 +8570,16 @@
 					"weight": 250,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-4c808e16efae1c7e",
-						"src": "/images/mumc-history.jpg",
-						"alt": "Our Church History - A Slideshow"
+						"provider": "local",
+						"id": "01K0000000C0EPFEWY9S82AZQX",
+						"alt": "Our Church History - A Slideshow",
+						"width": 500,
+						"height": 333,
+						"mimeType": "image/jpeg",
+						"filename": "mumc-history.jpg",
+						"meta": {
+							"storageKey": "01K0000000C0EPFEWY9S82AZQX.jpg"
+						}
 					},
 					"body": [
 						{
@@ -6829,6 +8607,17 @@
 					],
 					"link": "https://youtu.be/e1qPotnfwVo",
 					"external": true
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"newcomers"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -6840,13 +8629,30 @@
 					"weight": 150,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-cb33e5317af8b49e",
-						"src": "/images/do-all-the-good-u-can-4web.jpg",
-						"alt": "Do all the good you can in all the ways you can"
+						"provider": "local",
+						"id": "01K0000000BK5HTRMYC5GJHX6Y",
+						"alt": "Do all the good you can in all the ways you can",
+						"width": 600,
+						"height": 600,
+						"mimeType": "image/jpeg",
+						"filename": "do-all-the-good-u-can-4web.jpg",
+						"meta": {
+							"storageKey": "01K0000000BK5HTRMYC5GJHX6Y.jpg"
+						}
 					},
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"giving"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -6858,10 +8664,16 @@
 					"weight": 190,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-968eb430d5285312",
-						"src": "/images/click2donate.jpg",
-						"alt": "Click Here to Donate to Minnehaha United Methodist Church"
+						"provider": "local",
+						"id": "01K0000000PEMGN8KJJCN8Y1RS",
+						"alt": "Click Here to Donate to Minnehaha United Methodist Church",
+						"width": 450,
+						"height": 449,
+						"mimeType": "image/jpeg",
+						"filename": "click2donate.jpg",
+						"meta": {
+							"storageKey": "01K0000000PEMGN8KJJCN8Y1RS.jpg"
+						}
 					},
 					"body": [
 						{
@@ -6889,6 +8701,17 @@
 					],
 					"link": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DNUCJMVUUHCFA",
 					"external": true
+				},
+				"taxonomies": {
+					"ministry": [
+						"giving"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"action"
+					]
 				}
 			},
 			{
@@ -6900,10 +8723,16 @@
 					"weight": 360,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-0e9d368460cd8bce",
-						"src": "/images/end-racism.jpg",
-						"alt": "Minnehaha United Methodist Church is fighting for racial justice and equity"
+						"provider": "local",
+						"id": "01K0000000EXP40DBEF204XV1V",
+						"alt": "Minnehaha United Methodist Church is fighting for racial justice and equity",
+						"width": 600,
+						"height": 338,
+						"mimeType": "image/jpeg",
+						"filename": "end-racism.jpg",
+						"meta": {
+							"storageKey": "01K0000000EXP40DBEF204XV1V.jpg"
+						}
 					},
 					"body": [
 						{
@@ -6930,6 +8759,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"racial-justice"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"action"
+					]
 				}
 			},
 			{
@@ -6941,10 +8781,16 @@
 					"weight": 80,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-13ca29a09be1bb78",
-						"src": "/images/yourfirstvisit2.jpg",
-						"alt": "This is what you can expect on your first visit to Minnehaha United Methodist Church"
+						"provider": "local",
+						"id": "01K0000000KA90V1VR6TMDG3KH",
+						"alt": "This is what you can expect on your first visit to Minnehaha United Methodist Church",
+						"width": 600,
+						"height": 400,
+						"mimeType": "image/jpeg",
+						"filename": "yourfirstvisit2.jpg",
+						"meta": {
+							"storageKey": "01K0000000KA90V1VR6TMDG3KH.jpg"
+						}
 					},
 					"body": [
 						{
@@ -6972,6 +8818,17 @@
 					],
 					"link": "/first-visit/",
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"newcomers"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -6983,10 +8840,16 @@
 					"weight": 330,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-68a22369a2ce42ad",
-						"src": "/images/3foodmissions.jpg",
-						"alt": "3 Food Missions - Volunteer, Donate, Pray"
+						"provider": "local",
+						"id": "01K000000082392E2DNQHAH7QV",
+						"alt": "3 Food Missions - Volunteer, Donate, Pray",
+						"width": 600,
+						"height": 400,
+						"mimeType": "image/jpeg",
+						"filename": "3foodmissions.jpg",
+						"meta": {
+							"storageKey": "01K000000082392E2DNQHAH7QV.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7014,6 +8877,17 @@
 					],
 					"link": "/food-ministries/",
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"food"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			},
 			{
@@ -7025,10 +8899,16 @@
 					"weight": 100,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-c17214828491070e",
-						"src": "/images/food-shelf-logo.jpg",
-						"alt": "Support the Minnehaha Food Shelf in Minneapolis"
+						"provider": "local",
+						"id": "01K00000001JM24H7E8FAB1RA7",
+						"alt": "Support the Minnehaha Food Shelf in Minneapolis",
+						"width": 600,
+						"height": 600,
+						"mimeType": "image/jpeg",
+						"filename": "food-shelf-logo.jpg",
+						"meta": {
+							"storageKey": "01K00000001JM24H7E8FAB1RA7.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7056,6 +8936,17 @@
 					],
 					"link": "/food-shelf/",
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"food"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			},
 			{
@@ -7067,10 +8958,16 @@
 					"weight": 200,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-1c39acc241b0e22f",
-						"src": "/images/4george.jpg",
-						"alt": "George Floyd Memorial"
+						"provider": "local",
+						"id": "01K0000000WSC21G2F1ZJZ0TTX",
+						"alt": "George Floyd Memorial",
+						"width": 600,
+						"height": 223,
+						"mimeType": "image/jpeg",
+						"filename": "4george.jpg",
+						"meta": {
+							"storageKey": "01K0000000WSC21G2F1ZJZ0TTX.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7097,6 +8994,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"racial-justice"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -7108,10 +9016,16 @@
 					"weight": 350,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-7a59d96def750184",
-						"src": "/images/progressive.jpg",
-						"alt": "Minnehaha UMC: A progressive, inclusive, affirming church in South Minneapolis."
+						"provider": "local",
+						"id": "01K0000000TSSDFN14FV61Q4XY",
+						"alt": "Minnehaha UMC: A progressive, inclusive, affirming church in South Minneapolis.",
+						"width": 600,
+						"height": 217,
+						"mimeType": "image/jpeg",
+						"filename": "progressive.jpg",
+						"meta": {
+							"storageKey": "01K0000000TSSDFN14FV61Q4XY.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7138,6 +9052,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"welcome"
+					],
+					"audience": [
+						"newcomers"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -7149,10 +9074,16 @@
 					"weight": 90,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-d24b8773224dbf72",
-						"src": "/images/got-kids-v2.jpg",
-						"alt": "We encourage you to bring your kids into the church service"
+						"provider": "local",
+						"id": "01K0000000JB7K2DZJ863ZS2AW",
+						"alt": "We encourage you to bring your kids into the church service",
+						"width": 600,
+						"height": 516,
+						"mimeType": "image/jpeg",
+						"filename": "got-kids-v2.jpg",
+						"meta": {
+							"storageKey": "01K0000000JB7K2DZJ863ZS2AW.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7180,6 +9111,17 @@
 					],
 					"link": "/got-kids/",
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"kids-families"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -7191,10 +9133,16 @@
 					"weight": 240,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-136f4cb4a73076aa",
-						"src": "/images/mumc-gym.jpg",
-						"alt": "We have a gym inside the church that you can use"
+						"provider": "local",
+						"id": "01K0000000KFCM7GPAVZF0GANE",
+						"alt": "We have a gym inside the church that you can use",
+						"width": 600,
+						"height": 400,
+						"mimeType": "image/jpeg",
+						"filename": "mumc-gym.jpg",
+						"meta": {
+							"storageKey": "01K0000000KFCM7GPAVZF0GANE.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7221,6 +9169,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"community"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"announcement"
+					]
 				}
 			},
 			{
@@ -7232,10 +9191,16 @@
 					"weight": 40,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-1bb103a3ff81559b",
-						"src": "/images/land-acknowledgement-image-2025.jpg",
-						"alt": "We gather on the traditional, ancestral, and contemporary land of Dakota People"
+						"provider": "local",
+						"id": "01K0000000VH33Z1NVNF9W9XJK",
+						"alt": "We gather on the traditional, ancestral, and contemporary land of Dakota People",
+						"width": 600,
+						"height": 373,
+						"mimeType": "image/jpeg",
+						"filename": "land-acknowledgement-image-2025.jpg",
+						"meta": {
+							"storageKey": "01K0000000VH33Z1NVNF9W9XJK.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7262,6 +9227,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"justice"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -7273,10 +9249,16 @@
 					"weight": 30,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-ead161b2b82e35e5",
-						"src": "/images/another-1-service-1-sm.jpg",
-						"alt": "Sunday Worship at 9:30 a.m. - Join us!"
+						"provider": "local",
+						"id": "01K0000000AH1JREN55AD4CWRC",
+						"alt": "Sunday Worship at 9:30 a.m. - Join us!",
+						"width": 550,
+						"height": 550,
+						"mimeType": "image/jpeg",
+						"filename": "another-1-service-1-sm.jpg",
+						"meta": {
+							"storageKey": "01K0000000AH1JREN55AD4CWRC.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7336,6 +9318,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"worship"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			},
 			{
@@ -7347,10 +9340,16 @@
 					"weight": 320,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-0d30d38d321d9ac9",
-						"src": "/images/mumc-staff-2020-wjean.jpg",
-						"alt": "Photos of the staff members at Minnehaha United Methodist Church"
+						"provider": "local",
+						"id": "01K0000000DGKDJXT9B530SV0S",
+						"alt": "Photos of the staff members at Minnehaha United Methodist Church",
+						"width": 600,
+						"height": 600,
+						"mimeType": "image/jpeg",
+						"filename": "mumc-staff-2020-wjean.jpg",
+						"meta": {
+							"storageKey": "01K0000000DGKDJXT9B530SV0S.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7378,6 +9377,17 @@
 					],
 					"link": "/staff/",
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"newcomers"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -7389,10 +9399,16 @@
 					"weight": 340,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-f6d8fd8b3ba77b38",
-						"src": "/images/membership.jpg",
-						"alt": "Become a member of Minnehaha United Methodist Church"
+						"provider": "local",
+						"id": "01K0000000PRXBV7VRPA600HTP",
+						"alt": "Become a member of Minnehaha United Methodist Church",
+						"width": 600,
+						"height": 600,
+						"mimeType": "image/jpeg",
+						"filename": "membership.jpg",
+						"meta": {
+							"storageKey": "01K0000000PRXBV7VRPA600HTP.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7420,6 +9436,17 @@
 					],
 					"link": "/documents/member_info.pdf",
 					"external": true
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"newcomers"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -7431,10 +9458,16 @@
 					"weight": 70,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-e97e193612b1bb5b",
-						"src": "/images/minneharvest-update.jpg",
-						"alt": "Free Food on the fourth Saturday of the month from 8:00 to 10:00 a.m."
+						"provider": "local",
+						"id": "01K00000009YSPJHVVHQGDYHF9",
+						"alt": "Free Food on the fourth Saturday of the month from 8:00 to 10:00 a.m.",
+						"width": 600,
+						"height": 600,
+						"mimeType": "image/jpeg",
+						"filename": "minneharvest-update.jpg",
+						"meta": {
+							"storageKey": "01K00000009YSPJHVVHQGDYHF9.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7461,6 +9494,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"food"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			},
 			{
@@ -7472,10 +9516,16 @@
 					"weight": 290,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-d9fd3f7a20ba9f27",
-						"src": "/images/enewssignup.jpg",
-						"alt": "Subscribe to our e-News newsletter"
+						"provider": "local",
+						"id": "01K0000000SXZT0TZ76GNN3TB0",
+						"alt": "Subscribe to our e-News newsletter",
+						"width": 450,
+						"height": 190,
+						"mimeType": "image/jpeg",
+						"filename": "enewssignup.jpg",
+						"meta": {
+							"storageKey": "01K0000000SXZT0TZ76GNN3TB0.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7502,6 +9552,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"action"
+					]
 				}
 			},
 			{
@@ -7684,6 +9745,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -7694,15 +9766,33 @@
 					"title": "Pasta Dinner Benefit",
 					"weight": 60,
 					"archived": false,
+					"expires": "2026-10-23T00:30:00.000Z",
 					"image": {
-						"provider": "external",
-						"id": "mig-8ae71b73e1ebc32c",
-						"src": "/images/pasta-dinner-2026-tickets.jpg",
-						"alt": "Pasta dinner benefit for Minnehaha Food Shelf on October 22, 5:30-7:30 p.m. at New Branches Church. Early bird tickets $32; October 17-21, $37. Click here to buy tickets."
+						"provider": "local",
+						"id": "01K0000000A7VK1B3CYT9GW8KN",
+						"alt": "Pasta dinner benefit for Minnehaha Food Shelf on October 22, 5:30-7:30 p.m. at New Branches Church. Early bird tickets $32; October 17-21, $37. Click here to buy tickets.",
+						"width": 600,
+						"height": 600,
+						"mimeType": "image/jpeg",
+						"filename": "pasta-dinner-2026-tickets.jpg",
+						"meta": {
+							"storageKey": "01K0000000A7VK1B3CYT9GW8KN.jpg"
+						}
 					},
 					"body": [],
 					"link": "https://ticketstripe.com/events/473109416619331",
 					"external": true
+				},
+				"taxonomies": {
+					"ministry": [
+						"food"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -7714,10 +9804,16 @@
 					"weight": 210,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-2543af1a76fcc041",
-						"src": "/images/planned-giving-circle.png",
-						"alt": "Planned Giving at Minnehaha United Methodist Church"
+						"provider": "local",
+						"id": "01K000000053FTPW01WQEA06A7",
+						"alt": "Planned Giving at Minnehaha United Methodist Church",
+						"width": 600,
+						"height": 600,
+						"mimeType": "image/png",
+						"filename": "planned-giving-circle.png",
+						"meta": {
+							"storageKey": "01K000000053FTPW01WQEA06A7.png"
+						}
 					},
 					"body": [
 						{
@@ -7744,6 +9840,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"giving"
+					],
+					"audience": [
+						"adults"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -7755,10 +9862,16 @@
 					"weight": 180,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-678b3cab54bab5b8",
-						"src": "/images/playgroup-returns-2023.jpg",
-						"alt": "Minnehaha Playgroup every Thursday morning from 9:30 to 11:30 a.m."
+						"provider": "local",
+						"id": "01K00000007BWBMTNRTYEQD8P0",
+						"alt": "Minnehaha Playgroup every Thursday morning from 9:30 to 11:30 a.m.",
+						"width": 550,
+						"height": 712,
+						"mimeType": "image/jpeg",
+						"filename": "playgroup-returns-2023.jpg",
+						"meta": {
+							"storageKey": "01K00000007BWBMTNRTYEQD8P0.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7785,6 +9898,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"playgroup"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			},
 			{
@@ -7796,10 +9920,16 @@
 					"weight": 170,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-bb3b5c97268df9bb",
-						"src": "/images/mumc-racial-justice-logo-w-rj.jpg",
-						"alt": "Racial Justice - In a Racist Society it's not enough to be Non-Racist, we must be Anti-Racist"
+						"provider": "local",
+						"id": "01K0000000VVWQ6DSVA3YZQ0ZX",
+						"alt": "Racial Justice - In a Racist Society it's not enough to be Non-Racist, we must be Anti-Racist",
+						"width": 600,
+						"height": 526,
+						"mimeType": "image/jpeg",
+						"filename": "mumc-racial-justice-logo-w-rj.jpg",
+						"meta": {
+							"storageKey": "01K0000000VVWQ6DSVA3YZQ0ZX.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7827,6 +9957,17 @@
 					],
 					"link": "/racial-justice/",
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"racial-justice"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			},
 			{
@@ -7838,10 +9979,16 @@
 					"weight": 110,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-c6f458b5a4503b73",
-						"src": "/images/m-logo-rainbow.png",
-						"alt": "Minnehaha United Methodist Church welcomes everyone from the LGBTQ+ community"
+						"provider": "local",
+						"id": "01K00000006MRN4GVKMZ0JZQDD",
+						"alt": "Minnehaha United Methodist Church welcomes everyone from the LGBTQ+ community",
+						"width": 750,
+						"height": 531,
+						"mimeType": "image/png",
+						"filename": "m-logo-rainbow.png",
+						"meta": {
+							"storageKey": "01K00000006MRN4GVKMZ0JZQDD.png"
+						}
 					},
 					"body": [
 						{
@@ -7868,6 +10015,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"welcome"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -7879,10 +10037,16 @@
 					"weight": 370,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-03e32488ee027f21",
-						"src": "/images/reconciling-minnesota.jpg",
-						"alt": "Minnehaha United Methodist Church is a progressive, reconciling church in South Minneapolis"
+						"provider": "local",
+						"id": "01K00000003348E2Z1DF831W3P",
+						"alt": "Minnehaha United Methodist Church is a progressive, reconciling church in South Minneapolis",
+						"width": 506,
+						"height": 582,
+						"mimeType": "image/jpeg",
+						"filename": "reconciling-minnesota.jpg",
+						"meta": {
+							"storageKey": "01K00000003348E2Z1DF831W3P.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7909,6 +10073,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"welcome"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -7920,13 +10095,30 @@
 					"weight": 310,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-2bb77a044783f70b",
-						"src": "/images/social-media.jpg",
-						"alt": "Follow Minnehaha United Methodist Church on YouTube, Facebook and Instagram"
+						"provider": "local",
+						"id": "01K0000000BQT473QBQ7RJ92PJ",
+						"alt": "Follow Minnehaha United Methodist Church on YouTube, Facebook and Instagram",
+						"width": 600,
+						"height": 475,
+						"mimeType": "image/jpeg",
+						"filename": "social-media.jpg",
+						"meta": {
+							"storageKey": "01K0000000BQT473QBQ7RJ92PJ.jpg"
+						}
 					},
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"action"
+					]
 				}
 			},
 			{
@@ -7938,10 +10130,16 @@
 					"weight": 300,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-4d09c2e526fd72d9",
-						"src": "/images/solar-power-update.jpg",
-						"alt": "Today's solar power update"
+						"provider": "local",
+						"id": "01K0000000D9256XJS19C8V1AD",
+						"alt": "Today's solar power update",
+						"width": 600,
+						"height": 602,
+						"mimeType": "image/jpeg",
+						"filename": "solar-power-update.jpg",
+						"meta": {
+							"storageKey": "01K0000000D9256XJS19C8V1AD.jpg"
+						}
 					},
 					"body": [
 						{
@@ -7969,6 +10167,17 @@
 					],
 					"link": "/solar/",
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"creation"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -7980,13 +10189,30 @@
 					"weight": 160,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-f2cc6c6c8b56421f",
-						"src": "/images/sunday-school-4-all.jpg",
-						"alt": "Sunday School for all ages at 10:45 Sunday mornings"
+						"provider": "local",
+						"id": "01K0000000JCCCBP2Z9CY2Q6PF",
+						"alt": "Sunday School for all ages at 10:45 Sunday mornings",
+						"width": 550,
+						"height": 550,
+						"mimeType": "image/jpeg",
+						"filename": "sunday-school-4-all.jpg",
+						"meta": {
+							"storageKey": "01K0000000JCCCBP2Z9CY2Q6PF.jpg"
+						}
 					},
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"sunday-school"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			},
 			{
@@ -7998,14 +10224,31 @@
 					"weight": 260,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-b1c3a7abbcfbf807",
-						"src": "/images/supportyourlocal-food-shelf-sm.jpg",
-						"alt": "Support Your Local Food Shelf"
+						"provider": "local",
+						"id": "01K0000000H37BWVR79SS4GG7Q",
+						"alt": "Support Your Local Food Shelf",
+						"width": 500,
+						"height": 500,
+						"mimeType": "image/jpeg",
+						"filename": "supportyourlocal-food-shelf-sm.jpg",
+						"meta": {
+							"storageKey": "01K0000000H37BWVR79SS4GG7Q.jpg"
+						}
 					},
 					"body": [],
 					"link": "/food-shelf/",
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"food"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"action"
+					]
 				}
 			},
 			{
@@ -8016,11 +10259,18 @@
 					"title": "Taizé Worship",
 					"weight": 50,
 					"archived": false,
+					"expires": "2026-10-10T03:00:00.000Z",
 					"image": {
-						"provider": "external",
-						"id": "mig-ea5c88ad58d3103a",
-						"src": "/images/october-2026-taize-promo.jpg",
-						"alt": "Our next Taizé service of prayer and song and silence will be on Friday, October 9 at 7:00 p.m. Join us!"
+						"provider": "local",
+						"id": "01K0000000AW8DRKGT3R3FK1HR",
+						"alt": "Our next Taizé service of prayer and song and silence will be on Friday, October 9 at 7:00 p.m. Join us!",
+						"width": 600,
+						"height": 600,
+						"mimeType": "image/jpeg",
+						"filename": "october-2026-taize-promo.jpg",
+						"meta": {
+							"storageKey": "01K0000000AW8DRKGT3R3FK1HR.jpg"
+						}
 					},
 					"body": [
 						{
@@ -8047,6 +10297,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"worship"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -8058,10 +10319,16 @@
 					"weight": 130,
 					"archived": true,
 					"image": {
-						"provider": "external",
-						"id": "mig-f847027ea4470912",
-						"src": "/images/aid-for-ukraine.jpg",
-						"alt": "Support Ukraine through UMCOR"
+						"provider": "local",
+						"id": "01K0000000R72Y479JZCSYM9MM",
+						"alt": "Support Ukraine through UMCOR",
+						"width": 400,
+						"height": 223,
+						"mimeType": "image/jpeg",
+						"filename": "aid-for-ukraine.jpg",
+						"meta": {
+							"storageKey": "01K0000000R72Y479JZCSYM9MM.jpg"
+						}
 					},
 					"body": [
 						{
@@ -8089,6 +10356,17 @@
 					],
 					"link": "https://umcmission.org/umcor/",
 					"external": true
+				},
+				"taxonomies": {
+					"ministry": [
+						"giving"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"action"
+					]
 				}
 			},
 			{
@@ -8100,10 +10378,16 @@
 					"weight": 220,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-dd056c02bcf109e6",
-						"src": "/images/disaster.jpg",
-						"alt": "UMCOR helps people in need around the world"
+						"provider": "local",
+						"id": "01K0000000X5C2WH9612NSRRER",
+						"alt": "UMCOR helps people in need around the world",
+						"width": 600,
+						"height": 315,
+						"mimeType": "image/jpeg",
+						"filename": "disaster.jpg",
+						"meta": {
+							"storageKey": "01K0000000X5C2WH9612NSRRER.jpg"
+						}
 					},
 					"body": [
 						{
@@ -8131,6 +10415,17 @@
 					],
 					"link": "https://umcmission.org/umcor/",
 					"external": true
+				},
+				"taxonomies": {
+					"ministry": [
+						"giving"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"action"
+					]
 				}
 			},
 			{
@@ -8142,13 +10437,30 @@
 					"weight": 130,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-9ce067494e3b317a",
-						"src": "/images/wed-night-childcare-2026.jpg",
-						"alt": "Free childcare on Wednesday nights from 6:00 to 7:15 p.m."
+						"provider": "local",
+						"id": "01K0000000W079EVHTS268NZ6S",
+						"alt": "Free childcare on Wednesday nights from 6:00 to 7:15 p.m.",
+						"width": 600,
+						"height": 338,
+						"mimeType": "image/jpeg",
+						"filename": "wed-night-childcare-2026.jpg",
+						"meta": {
+							"storageKey": "01K0000000W079EVHTS268NZ6S.jpg"
+						}
 					},
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"family-events"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			},
 			{
@@ -8160,13 +10472,31 @@
 					"weight": 120,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-6fd73af2502d16c0",
-						"src": "/images/wed-night-dinners-2026.jpg",
-						"alt": "Dinner on Wednesday nights from 5:30 to 6:15 p.m. Cost is $5 or max of $20 per family"
+						"provider": "local",
+						"id": "01K0000000FQTJGDP0MP4ASD3B",
+						"alt": "Dinner on Wednesday nights from 5:30 to 6:15 p.m. Cost is $5 or max of $20 per family",
+						"width": 600,
+						"height": 822,
+						"mimeType": "image/jpeg",
+						"filename": "wed-night-dinners-2026.jpg",
+						"meta": {
+							"storageKey": "01K0000000FQTJGDP0MP4ASD3B.jpg"
+						}
 					},
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"family-events",
+						"community"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			},
 			{
@@ -8206,6 +10536,17 @@
 					"video": "/images/becky-welcome-home.mp4",
 					"video_ogg": "/images/becky-welcome-home-2.ogg",
 					"video_fallback": "https://www.youtube.com/watch?v=5_AW9mDExZ0"
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"newcomers"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -8217,10 +10558,16 @@
 					"weight": 40,
 					"archived": true,
 					"image": {
-						"provider": "external",
-						"id": "mig-0e030ffff55ff363",
-						"src": "/images/rockin-tale-website-2026.jpg",
-						"alt": "Be part of the church's Winter Musical - all are invited"
+						"provider": "local",
+						"id": "01K0000000E3FZNZK3WDNY7WXJ",
+						"alt": "Be part of the church's Winter Musical - all are invited",
+						"width": 600,
+						"height": 800,
+						"mimeType": "image/jpeg",
+						"filename": "rockin-tale-website-2026.jpg",
+						"meta": {
+							"storageKey": "01K0000000E3FZNZK3WDNY7WXJ.jpg"
+						}
 					},
 					"body": [
 						{
@@ -8247,6 +10594,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"community"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -8258,10 +10616,16 @@
 					"weight": 10,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-264ed82234e8a999",
-						"src": "/images/summer-2022-worship.jpg",
-						"alt": "Come worship with us! Sundays at 9:30 AM. In summer, join us outdoors at 10 AM."
+						"provider": "local",
+						"id": "01K00000006ER2M89SSMV16HYQ",
+						"alt": "Come worship with us! Sundays at 9:30 AM. In summer, join us outdoors at 10 AM.",
+						"width": 600,
+						"height": 600,
+						"mimeType": "image/jpeg",
+						"filename": "summer-2022-worship.jpg",
+						"meta": {
+							"storageKey": "01K00000006ER2M89SSMV16HYQ.jpg"
+						}
 					},
 					"body": [
 						{
@@ -8289,6 +10653,17 @@
 					],
 					"link": "https://www.youtube.com/@MinnehahaUMC",
 					"external": true
+				},
+				"taxonomies": {
+					"ministry": [
+						"worship"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"announcement"
+					]
 				}
 			},
 			{
@@ -8300,10 +10675,16 @@
 					"weight": 90,
 					"archived": true,
 					"image": {
-						"provider": "external",
-						"id": "mig-6fefbb7cfbef7639",
-						"src": "/images/youth-group-2025.jpg",
-						"alt": "Youth Group meets on Sundays from 4:00 to 5:30 p.m. Join us!"
+						"provider": "local",
+						"id": "01K0000000FFVWVFPSQ2KZFE3Q",
+						"alt": "Youth Group meets on Sundays from 4:00 to 5:30 p.m. Join us!",
+						"width": 550,
+						"height": 550,
+						"mimeType": "image/jpeg",
+						"filename": "youth-group-2025.jpg",
+						"meta": {
+							"storageKey": "01K0000000FFVWVFPSQ2KZFE3Q.jpg"
+						}
 					},
 					"body": [
 						{
@@ -8330,6 +10711,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"youth"
+					],
+					"audience": [
+						"youth"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			},
 			{
@@ -8341,14 +10733,31 @@
 					"weight": 270,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-3959e212663fe33d",
-						"src": "/images/subscribe-2-youtubestation.png",
-						"alt": "Subscribe to Our YouTube Station - Minnehaha UMC"
+						"provider": "local",
+						"id": "01K0000000SS2J6Z3X3DANWTQH",
+						"alt": "Subscribe to Our YouTube Station - Minnehaha UMC",
+						"width": 600,
+						"height": 590,
+						"mimeType": "image/png",
+						"filename": "subscribe-2-youtubestation.png",
+						"meta": {
+							"storageKey": "01K0000000SS2J6Z3X3DANWTQH.png"
+						}
 					},
 					"body": [],
 					"link": "https://www.youtube.com/channel/UCzwZQ34D3RZEncTf6fAe0hQ",
 					"external": true
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"action"
+					]
 				}
 			}
 		],
@@ -8362,14 +10771,31 @@
 					"weight": 60,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-f4b9fe9070149a6b",
-						"src": "/images/kids-page/10-Commandments-1_4x6-FINAL_SM.jpg",
-						"alt": "Sunday School Art - Moses and the 10 Commandments"
+						"provider": "local",
+						"id": "01K0000000MSYGGMTBAK1CVFB4",
+						"alt": "Sunday School Art - Moses and the 10 Commandments",
+						"width": 750,
+						"height": 500,
+						"mimeType": "image/jpeg",
+						"filename": "10-Commandments-1_4x6-FINAL_SM.jpg",
+						"meta": {
+							"storageKey": "01K0000000MSYGGMTBAK1CVFB4.jpg"
+						}
 					},
 					"tags": "MOSES AND THE 10 COMMANDMENTS",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"sunday-school"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -8381,14 +10807,31 @@
 					"weight": 80,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-e7711eeb60be2471",
-						"src": "/images/kids-page/10-Plagues-1_4x6-FINAL_SM.jpg",
-						"alt": "Sunday School Art - The 10 Plagues"
+						"provider": "local",
+						"id": "01K00000007HYB0Y4HJNX1SR9C",
+						"alt": "Sunday School Art - The 10 Plagues",
+						"width": 750,
+						"height": 500,
+						"mimeType": "image/jpeg",
+						"filename": "10-Plagues-1_4x6-FINAL_SM.jpg",
+						"meta": {
+							"storageKey": "01K00000007HYB0Y4HJNX1SR9C.jpg"
+						}
 					},
 					"tags": "THE 10 PLAGUES",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"sunday-school"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -8400,14 +10843,31 @@
 					"weight": 90,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-4a64dfe8cc284c2e",
-						"src": "/images/kids-page/2-Blessed-are-those-who-mourn_sm.jpg",
-						"alt": "Sunday School Art - The Beatitudes"
+						"provider": "local",
+						"id": "01K0000000A4Z8C8CE96CXS0RV",
+						"alt": "Sunday School Art - The Beatitudes",
+						"width": 750,
+						"height": 500,
+						"mimeType": "image/jpeg",
+						"filename": "2-Blessed-are-those-who-mourn_sm.jpg",
+						"meta": {
+							"storageKey": "01K0000000A4Z8C8CE96CXS0RV.jpg"
+						}
 					},
 					"tags": "THE BEATITUDES",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"sunday-school"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -8419,14 +10879,31 @@
 					"weight": 70,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-19690354d528e228",
-						"src": "/images/kids-page/Blind-to-See-30APR2023_FINAL_SM.jpg",
-						"alt": "Sunday School Art - Jesus Gives Sight to the Blind"
+						"provider": "local",
+						"id": "01K0000000S93MN828M9R5RQMY",
+						"alt": "Sunday School Art - Jesus Gives Sight to the Blind",
+						"width": 750,
+						"height": 500,
+						"mimeType": "image/jpeg",
+						"filename": "Blind-to-See-30APR2023_FINAL_SM.jpg",
+						"meta": {
+							"storageKey": "01K0000000S93MN828M9R5RQMY.jpg"
+						}
 					},
 					"tags": "JESUS GIVES SIGHT TO THE BLIND",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"sunday-school"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -8438,14 +10915,31 @@
 					"weight": 40,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-69c8196810585a59",
-						"src": "/images/kids-page/Miracle-of-the-Fish-30APR2023_newFINAL_SM.jpg",
-						"alt": "Sunday School Art - Miracle of the Fish"
+						"provider": "local",
+						"id": "01K000000098S8GRTSA25JTAPP",
+						"alt": "Sunday School Art - Miracle of the Fish",
+						"width": 750,
+						"height": 500,
+						"mimeType": "image/jpeg",
+						"filename": "Miracle-of-the-Fish-30APR2023_newFINAL_SM.jpg",
+						"meta": {
+							"storageKey": "01K000000098S8GRTSA25JTAPP.jpg"
+						}
 					},
 					"tags": "MIRACLE OF THE FISH",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"sunday-school"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -8457,14 +10951,32 @@
 					"weight": 50,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-e90d3aed0e30f66d",
-						"src": "/images/kids-page/Playground-Worship.jpg",
-						"alt": "Worship on Sunday mornings takes many different forms"
+						"provider": "local",
+						"id": "01K00000009DTDEGPDZ0GH8KVM",
+						"alt": "Worship on Sunday mornings takes many different forms",
+						"width": 550,
+						"height": 694,
+						"mimeType": "image/jpeg",
+						"filename": "Playground-Worship.jpg",
+						"meta": {
+							"storageKey": "01K00000009DTDEGPDZ0GH8KVM.jpg"
+						}
 					},
 					"tags": "WORSHIP ON SUNDAY MORNINGS TAKES MANY DIFFERENT FORMS.",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"worship",
+						"sunday-school"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -8476,10 +10988,16 @@
 					"weight": 260,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-5b33de786e3946bf",
-						"src": "/images/camp-minnesota-2022.jpg",
-						"alt": "Camp Minnesota"
+						"provider": "local",
+						"id": "01K0000000VKYRES6ZGFZGGJW5",
+						"alt": "Camp Minnesota",
+						"width": 450,
+						"height": 450,
+						"mimeType": "image/jpeg",
+						"filename": "camp-minnesota-2022.jpg",
+						"meta": {
+							"storageKey": "01K0000000VKYRES6ZGFZGGJW5.jpg"
+						}
 					},
 					"body": [
 						{
@@ -8507,6 +11025,17 @@
 					],
 					"link": "https://www.campminnesota.org",
 					"external": true
+				},
+				"taxonomies": {
+					"ministry": [
+						"camps"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"action"
+					]
 				}
 			},
 			{
@@ -8518,10 +11047,16 @@
 					"weight": 280,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-cc252608751afa1b",
-						"src": "/images/childcare.jpg",
-						"alt": "Childcare is available Sunday mornings"
+						"provider": "local",
+						"id": "01K0000000C568NTTV93102GA6",
+						"alt": "Childcare is available Sunday mornings",
+						"width": 600,
+						"height": 139,
+						"mimeType": "image/jpeg",
+						"filename": "childcare.jpg",
+						"meta": {
+							"storageKey": "01K0000000C568NTTV93102GA6.jpg"
+						}
 					},
 					"tags": "CHILDCARE IS AVAILABLE SUNDAY MORNINGS",
 					"body": [
@@ -8550,6 +11085,17 @@
 					],
 					"link": "/documents/Child%20care%20info.pdf",
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"family-events"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			},
 			{
@@ -8561,10 +11107,16 @@
 					"weight": 230,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-5c8f97b5c273e333",
-						"src": "/images/childcare-night.jpg",
-						"alt": "Child Care Night"
+						"provider": "local",
+						"id": "01K0000000WFQN2K3KKJR3E530",
+						"alt": "Child Care Night",
+						"width": 600,
+						"height": 638,
+						"mimeType": "image/jpeg",
+						"filename": "childcare-night.jpg",
+						"meta": {
+							"storageKey": "01K0000000WFQN2K3KKJR3E530.jpg"
+						}
 					},
 					"body": [
 						{
@@ -8591,6 +11143,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"family-events"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -8602,10 +11165,16 @@
 					"weight": 250,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-1f96039b4a26108c",
-						"src": "/images/click-for-pageant-11am.jpg",
-						"alt": "Christmas Pageant"
+						"provider": "local",
+						"id": "01K0000000ZP3VA6GCBG0J17ER",
+						"alt": "Christmas Pageant",
+						"width": 450,
+						"height": 450,
+						"mimeType": "image/jpeg",
+						"filename": "click-for-pageant-11am.jpg",
+						"meta": {
+							"storageKey": "01K0000000ZP3VA6GCBG0J17ER.jpg"
+						}
 					},
 					"body": [
 						{
@@ -8633,6 +11202,18 @@
 					],
 					"link": "https://www.youtube.com/watch?v=zUZoYcbfFwE&t=2s",
 					"external": true
+				},
+				"taxonomies": {
+					"ministry": [
+						"worship",
+						"kids-families"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -8644,10 +11225,16 @@
 					"weight": 100,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-5567d2e3d95a931a",
-						"src": "/images/crybaby3.jpg",
-						"alt": "Bring your kids into the worship service"
+						"provider": "local",
+						"id": "01K0000000N7J3STKTCP7THRHK",
+						"alt": "Bring your kids into the worship service",
+						"width": 600,
+						"height": 304,
+						"mimeType": "image/jpeg",
+						"filename": "crybaby3.jpg",
+						"meta": {
+							"storageKey": "01K0000000N7J3STKTCP7THRHK.jpg"
+						}
 					},
 					"tags": "BRING YOUR KIDS INTO THE WORSHIP SERVICE",
 					"body": [
@@ -8675,6 +11262,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"worship"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"resource"
+					]
 				}
 			},
 			{
@@ -8686,10 +11284,16 @@
 					"weight": 120,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-d9fd3f7a20ba9f27",
-						"src": "/images/enewssignup.jpg",
-						"alt": "Sign up for our eNews"
+						"provider": "local",
+						"id": "01K0000000SXZT0TZ76GNN3TB0",
+						"alt": "Sign up for our eNews",
+						"width": 450,
+						"height": 190,
+						"mimeType": "image/jpeg",
+						"filename": "enewssignup.jpg",
+						"meta": {
+							"storageKey": "01K0000000SXZT0TZ76GNN3TB0.jpg"
+						}
 					},
 					"body": [
 						{
@@ -8717,6 +11321,17 @@
 					],
 					"link": "mailto:office@minnehaha.org?subject=Add%20me%20to%20the%20eNews%20mailing%20list",
 					"external": true
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"action"
+					]
 				}
 			},
 			{
@@ -8729,7 +11344,7 @@
 					"archived": false,
 					"image": {
 						"provider": "external",
-						"id": "mig-59bcab112ceaf127",
+						"id": "01K0000000SWBHCAH7DGKJX5GT",
 						"src": "/images/book_club_march.png",
 						"alt": "Minnehaha Family Book Club"
 					},
@@ -8759,6 +11374,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"family-events"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			},
 			{
@@ -8770,13 +11396,30 @@
 					"weight": 20,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-678b3cab54bab5b8",
-						"src": "/images/playgroup-returns-2023.jpg",
-						"alt": "Playgroup Returns"
+						"provider": "local",
+						"id": "01K00000007BWBMTNRTYEQD8P0",
+						"alt": "Playgroup Returns",
+						"width": 550,
+						"height": 712,
+						"mimeType": "image/jpeg",
+						"filename": "playgroup-returns-2023.jpg",
+						"meta": {
+							"storageKey": "01K00000007BWBMTNRTYEQD8P0.jpg"
+						}
 					},
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"playgroup"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			},
 			{
@@ -8788,13 +11431,30 @@
 					"weight": 110,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-2bb77a044783f70b",
-						"src": "/images/social-media.jpg",
-						"alt": "Follow us on social media"
+						"provider": "local",
+						"id": "01K0000000BQT473QBQ7RJ92PJ",
+						"alt": "Follow us on social media",
+						"width": 600,
+						"height": 475,
+						"mimeType": "image/jpeg",
+						"filename": "social-media.jpg",
+						"meta": {
+							"storageKey": "01K0000000BQT473QBQ7RJ92PJ.jpg"
+						}
 					},
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"action"
+					]
 				}
 			},
 			{
@@ -8806,10 +11466,16 @@
 					"weight": 240,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-281fbea669776cc9",
-						"src": "/images/2022-summer-camp-registration.jpg",
-						"alt": "Summer Camp Registration"
+						"provider": "local",
+						"id": "01K00000008ZY69QC9XG3JEKPC",
+						"alt": "Summer Camp Registration",
+						"width": 450,
+						"height": 450,
+						"mimeType": "image/jpeg",
+						"filename": "2022-summer-camp-registration.jpg",
+						"meta": {
+							"storageKey": "01K00000008ZY69QC9XG3JEKPC.jpg"
+						}
 					},
 					"body": [
 						{
@@ -8836,6 +11502,18 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"camps"
+					],
+					"audience": [
+						"families",
+						"youth"
+					],
+					"card_type": [
+						"action"
+					]
 				}
 			},
 			{
@@ -8847,13 +11525,30 @@
 					"weight": 30,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-f2cc6c6c8b56421f",
-						"src": "/images/sunday-school-4-all.jpg",
-						"alt": "Sunday School for All Ages"
+						"provider": "local",
+						"id": "01K0000000JCCCBP2Z9CY2Q6PF",
+						"alt": "Sunday School for All Ages",
+						"width": 550,
+						"height": 550,
+						"mimeType": "image/jpeg",
+						"filename": "sunday-school-4-all.jpg",
+						"meta": {
+							"storageKey": "01K0000000JCCCBP2Z9CY2Q6PF.jpg"
+						}
 					},
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"sunday-school"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			},
 			{
@@ -8865,10 +11560,16 @@
 					"weight": 270,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-48f4279d8ec638fc",
-						"src": "/images/rallyday-sm.jpg",
-						"alt": "Sunday School Rally Day"
+						"provider": "local",
+						"id": "01K00000008M7XE6RW0MEB2VX0",
+						"alt": "Sunday School Rally Day",
+						"width": 600,
+						"height": 400,
+						"mimeType": "image/jpeg",
+						"filename": "rallyday-sm.jpg",
+						"meta": {
+							"storageKey": "01K00000008M7XE6RW0MEB2VX0.jpg"
+						}
 					},
 					"body": [
 						{
@@ -8895,6 +11596,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"sunday-school"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -8906,10 +11618,16 @@
 					"weight": 290,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-087f90ea66225b47",
-						"src": "/images/wed-night-supper.jpg",
-						"alt": "Wednesday Night Suppers"
+						"provider": "local",
+						"id": "01K00000008ZGA62V74WWDE92C",
+						"alt": "Wednesday Night Suppers",
+						"width": 600,
+						"height": 232,
+						"mimeType": "image/jpeg",
+						"filename": "wed-night-supper.jpg",
+						"meta": {
+							"storageKey": "01K00000008ZGA62V74WWDE92C.jpg"
+						}
 					},
 					"body": [
 						{
@@ -8936,6 +11654,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"family-events"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			},
 			{
@@ -8947,10 +11676,16 @@
 					"weight": 10,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-264ed82234e8a999",
-						"src": "/images/summer-2022-worship.jpg",
-						"alt": "Join us for worship"
+						"provider": "local",
+						"id": "01K00000006ER2M89SSMV16HYQ",
+						"alt": "Join us for worship",
+						"width": 600,
+						"height": 600,
+						"mimeType": "image/jpeg",
+						"filename": "summer-2022-worship.jpg",
+						"meta": {
+							"storageKey": "01K00000006ER2M89SSMV16HYQ.jpg"
+						}
 					},
 					"body": [
 						{
@@ -8978,6 +11713,17 @@
 					],
 					"link": "/welcome/",
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"worship"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"announcement"
+					]
 				}
 			},
 			{
@@ -8989,10 +11735,16 @@
 					"weight": 220,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-e3a6c19e810472f4",
-						"src": "/images/family-meal.jpg",
-						"alt": "Minnehaha Young Families Dinner"
+						"provider": "local",
+						"id": "01K0000000361Y14JMC43YDWNX",
+						"alt": "Minnehaha Young Families Dinner",
+						"width": 600,
+						"height": 600,
+						"mimeType": "image/jpeg",
+						"filename": "family-meal.jpg",
+						"meta": {
+							"storageKey": "01K0000000361Y14JMC43YDWNX.jpg"
+						}
 					},
 					"body": [
 						{
@@ -9019,6 +11771,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"family-events"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -9030,10 +11793,16 @@
 					"weight": 200,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-22f3192085ae3fc6",
-						"src": "/images/young-family-sunday-school.jpg",
-						"alt": "Young Family Sunday School"
+						"provider": "local",
+						"id": "01K00000002KS05EZ6R5A0D479",
+						"alt": "Young Family Sunday School",
+						"width": 600,
+						"height": 204,
+						"mimeType": "image/jpeg",
+						"filename": "young-family-sunday-school.jpg",
+						"meta": {
+							"storageKey": "01K00000002KS05EZ6R5A0D479.jpg"
+						}
 					},
 					"body": [
 						{
@@ -9060,6 +11829,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"sunday-school"
+					],
+					"audience": [
+						"families"
+					],
+					"card_type": [
+						"program"
+					]
 				}
 			}
 		],
@@ -9074,7 +11854,7 @@
 					"archived": false,
 					"image": {
 						"provider": "external",
-						"id": "mig-8ff70ef39253a154",
+						"id": "01K0000000FQEKJK1MR7CW2SBC",
 						"src": "/images/adventurecamp2018.jpg",
 						"alt": "Youth Adventure Camp"
 					},
@@ -9104,6 +11884,18 @@
 					],
 					"link": "/documents/Adventure%20Camp%20Registration.pdf",
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"camps",
+						"youth"
+					],
+					"audience": [
+						"youth"
+					],
+					"card_type": [
+						"action"
+					]
 				}
 			},
 			{
@@ -9115,14 +11907,31 @@
 					"weight": 130,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-d6303f6a62180395",
-						"src": "/images/youth-page/Bouldering.jpg",
-						"alt": "Bouldering"
+						"provider": "local",
+						"id": "01K0000000PGZA2R3N5ZH1TRMQ",
+						"alt": "Bouldering",
+						"width": 750,
+						"height": 704,
+						"mimeType": "image/jpeg",
+						"filename": "Bouldering.jpg",
+						"meta": {
+							"storageKey": "01K0000000PGZA2R3N5ZH1TRMQ.jpg"
+						}
 					},
 					"tags": "BOULDERING",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"youth"
+					],
+					"audience": [
+						"youth"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -9134,14 +11943,31 @@
 					"weight": 100,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-09aea97b1cbfe84f",
-						"src": "/images/youth-page/Calvin_Adam-Canoeing-the-Minnehaha-Creek.jpg",
-						"alt": "Canoeing the Minnehaha Creek"
+						"provider": "local",
+						"id": "01K00000009E9VWZ8FBDT27JNB",
+						"alt": "Canoeing the Minnehaha Creek",
+						"width": 750,
+						"height": 550,
+						"mimeType": "image/jpeg",
+						"filename": "Calvin_Adam-Canoeing-the-Minnehaha-Creek.jpg",
+						"meta": {
+							"storageKey": "01K00000009E9VWZ8FBDT27JNB.jpg"
+						}
 					},
 					"tags": "CANOEING THE MINNEHAHA CREEK",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"youth"
+					],
+					"audience": [
+						"youth"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -9153,14 +11979,31 @@
 					"weight": 50,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-9c7f8b6de582d002",
-						"src": "/images/youth-page/D_D-Adventure.jpg",
-						"alt": "Dungeons and Dragons Adventure"
+						"provider": "local",
+						"id": "01K0000000WZBD52G2KM88B3Y6",
+						"alt": "Dungeons and Dragons Adventure",
+						"width": 1328,
+						"height": 943,
+						"mimeType": "image/jpeg",
+						"filename": "D_D-Adventure.jpg",
+						"meta": {
+							"storageKey": "01K0000000WZBD52G2KM88B3Y6.jpg"
+						}
 					},
 					"tags": "DUNGEONS AND DRAGONS ADVENTURE",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"youth"
+					],
+					"audience": [
+						"youth"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -9172,14 +12015,32 @@
 					"weight": 120,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-35bc0d74ab25bd22",
-						"src": "/images/youth-page/Easter-Sunrise-Musicians-2.jpg",
-						"alt": "Music for the Easter Sunrise Worship Service"
+						"provider": "local",
+						"id": "01K0000000NWDMB5X2EQH1V4H3",
+						"alt": "Music for the Easter Sunrise Worship Service",
+						"width": 750,
+						"height": 533,
+						"mimeType": "image/jpeg",
+						"filename": "Easter-Sunrise-Musicians-2.jpg",
+						"meta": {
+							"storageKey": "01K0000000NWDMB5X2EQH1V4H3.jpg"
+						}
 					},
 					"tags": "MUSIC FOR THE EASTER SUNRISE WORSHIP SERVICE",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"worship",
+						"youth"
+					],
+					"audience": [
+						"youth"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -9191,14 +12052,32 @@
 					"weight": 70,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-0ba150563d308b20",
-						"src": "/images/youth-page/Easter-Sunrise-Message.jpg",
-						"alt": "Easter Sunrise Worship Service"
+						"provider": "local",
+						"id": "01K0000000B1GPXGB0R5D6HW4E",
+						"alt": "Easter Sunrise Worship Service",
+						"width": 750,
+						"height": 451,
+						"mimeType": "image/jpeg",
+						"filename": "Easter-Sunrise-Message.jpg",
+						"meta": {
+							"storageKey": "01K0000000B1GPXGB0R5D6HW4E.jpg"
+						}
 					},
 					"tags": "EASTER SUNRISE WORSHIP SERVICE",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"worship",
+						"youth"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -9210,10 +12089,16 @@
 					"weight": 140,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-d9fd3f7a20ba9f27",
-						"src": "/images/enewssignup.jpg",
-						"alt": "Sign up for our eNews"
+						"provider": "local",
+						"id": "01K0000000SXZT0TZ76GNN3TB0",
+						"alt": "Sign up for our eNews",
+						"width": 450,
+						"height": 190,
+						"mimeType": "image/jpeg",
+						"filename": "enewssignup.jpg",
+						"meta": {
+							"storageKey": "01K0000000SXZT0TZ76GNN3TB0.jpg"
+						}
 					},
 					"body": [
 						{
@@ -9240,6 +12125,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"connect"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"action"
+					]
 				}
 			},
 			{
@@ -9251,13 +12147,31 @@
 					"weight": 220,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-310d157f89cfa34f",
-						"src": "/images/feed-my-starving-children-feb.jpg",
-						"alt": "Feed My Starving Children"
+						"provider": "local",
+						"id": "01K0000000HDNZ9F3FW6BKC9P8",
+						"alt": "Feed My Starving Children",
+						"width": 600,
+						"height": 600,
+						"mimeType": "image/jpeg",
+						"filename": "feed-my-starving-children-feb.jpg",
+						"meta": {
+							"storageKey": "01K0000000HDNZ9F3FW6BKC9P8.jpg"
+						}
 					},
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"food",
+						"youth"
+					],
+					"audience": [
+						"youth"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -9269,14 +12183,31 @@
 					"weight": 80,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-e96b20e2a2785022",
-						"src": "/images/youth-page/Halloween-Costume-Party.jpg",
-						"alt": "Halloween Costume Party"
+						"provider": "local",
+						"id": "01K00000009B022RG2X4P3Q67D",
+						"alt": "Halloween Costume Party",
+						"width": 750,
+						"height": 509,
+						"mimeType": "image/jpeg",
+						"filename": "Halloween-Costume-Party.jpg",
+						"meta": {
+							"storageKey": "01K00000009B022RG2X4P3Q67D.jpg"
+						}
 					},
 					"tags": "HALLOWEEN COSTUME PARTY",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"youth"
+					],
+					"audience": [
+						"youth"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -9288,14 +12219,31 @@
 					"weight": 20,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-972cb9ab18d480cd",
-						"src": "/images/youth-page/_Hungry-Hungry,-Hippos_-Game.jpg",
-						"alt": "Hungry Hungry Hippos Game"
+						"provider": "local",
+						"id": "01K0000000QCSBRM0D4WTR1J2Y",
+						"alt": "Hungry Hungry Hippos Game",
+						"width": 750,
+						"height": 453,
+						"mimeType": "image/jpeg",
+						"filename": "_Hungry-Hungry,-Hippos_-Game.jpg",
+						"meta": {
+							"storageKey": "01K0000000QCSBRM0D4WTR1J2Y.jpg"
+						}
 					},
 					"tags": "HUNGRY, HUNGRY HIPPOS GAME",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"youth"
+					],
+					"audience": [
+						"youth"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -9307,14 +12255,31 @@
 					"weight": 60,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-352d51ccebd063b6",
-						"src": "/images/youth-page/Making-Desserts-for-Wed-Night-Dinner-2.jpg",
-						"alt": "Making Desserts for Wednesday Night Dinner"
+						"provider": "local",
+						"id": "01K0000000NDHCBG3PG4ZSP57Z",
+						"alt": "Making Desserts for Wednesday Night Dinner",
+						"width": 750,
+						"height": 475,
+						"mimeType": "image/jpeg",
+						"filename": "Making-Desserts-for-Wed-Night-Dinner-2.jpg",
+						"meta": {
+							"storageKey": "01K0000000NDHCBG3PG4ZSP57Z.jpg"
+						}
 					},
 					"tags": "MAKING DESSERTS FOR WEDNESDAY NIGHT DINNER",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"youth"
+					],
+					"audience": [
+						"youth"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -9326,14 +12291,31 @@
 					"weight": 30,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-420692bda13c9d25",
-						"src": "/images/youth-page/Minute-2-Win-It-Games.jpg",
-						"alt": "Minute to Win It Games"
+						"provider": "local",
+						"id": "01K000000026JX1WX5SXMJNCSK",
+						"alt": "Minute to Win It Games",
+						"width": 750,
+						"height": 617,
+						"mimeType": "image/jpeg",
+						"filename": "Minute-2-Win-It-Games.jpg",
+						"meta": {
+							"storageKey": "01K000000026JX1WX5SXMJNCSK.jpg"
+						}
 					},
 					"tags": "MINUTE TO WIN IT GAMES",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"youth"
+					],
+					"audience": [
+						"youth"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -9345,14 +12327,32 @@
 					"weight": 40,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-dafcd92a4678b7b5",
-						"src": "/images/youth-page/Sandwich-Making-for-The-Dignity-Center.jpg",
-						"alt": "Sandwich Making for The Dignity Center"
+						"provider": "local",
+						"id": "01K0000000TWSA6RQNYRC97QD2",
+						"alt": "Sandwich Making for The Dignity Center",
+						"width": 750,
+						"height": 499,
+						"mimeType": "image/jpeg",
+						"filename": "Sandwich-Making-for-The-Dignity-Center.jpg",
+						"meta": {
+							"storageKey": "01K0000000TWSA6RQNYRC97QD2.jpg"
+						}
 					},
 					"tags": "SANDWICH MAKING FOR THE DIGNITY CENTER",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"food",
+						"youth"
+					],
+					"audience": [
+						"youth"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -9364,14 +12364,31 @@
 					"weight": 90,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-d1cb4961a1a9cc0b",
-						"src": "/images/youth-page/Sledding.jpg",
-						"alt": "Sledding"
+						"provider": "local",
+						"id": "01K0000000HB9119CB6F7V0C0A",
+						"alt": "Sledding",
+						"width": 750,
+						"height": 452,
+						"mimeType": "image/jpeg",
+						"filename": "Sledding.jpg",
+						"meta": {
+							"storageKey": "01K0000000HB9119CB6F7V0C0A.jpg"
+						}
 					},
 					"tags": "SLEDDING",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"youth"
+					],
+					"audience": [
+						"youth"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -9384,7 +12401,7 @@
 					"archived": false,
 					"image": {
 						"provider": "external",
-						"id": "mig-02b911a85a3b5121",
+						"id": "01K00000002SH8TVH19W69D26V",
 						"src": "/images/wildernesscamp2018.jpg",
 						"alt": "Youth Wilderness Camp"
 					},
@@ -9414,6 +12431,18 @@
 					],
 					"link": "/documents/Wilderness%20Camp%20Registration.pdf",
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"camps",
+						"youth"
+					],
+					"audience": [
+						"youth"
+					],
+					"card_type": [
+						"action"
+					]
 				}
 			},
 			{
@@ -9425,14 +12454,31 @@
 					"weight": 110,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-dbea15a356687e85",
-						"src": "/images/youth-page/Winter-Retreat-Youth-Painting.jpg",
-						"alt": "Painting at the Winter Retreat"
+						"provider": "local",
+						"id": "01K0000000VAN3P8Y56JJFXWKD",
+						"alt": "Painting at the Winter Retreat",
+						"width": 750,
+						"height": 489,
+						"mimeType": "image/jpeg",
+						"filename": "Winter-Retreat-Youth-Painting.jpg",
+						"meta": {
+							"storageKey": "01K0000000VAN3P8Y56JJFXWKD.jpg"
+						}
 					},
 					"tags": "PAINTING AT THE WINTER RETREAT",
 					"body": [],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"youth"
+					],
+					"audience": [
+						"youth"
+					],
+					"card_type": [
+						"event"
+					]
 				}
 			},
 			{
@@ -9444,10 +12490,16 @@
 					"weight": 10,
 					"archived": false,
 					"image": {
-						"provider": "external",
-						"id": "mig-264ed82234e8a999",
-						"src": "/images/summer-2022-worship.jpg",
-						"alt": "Join us for worship"
+						"provider": "local",
+						"id": "01K00000006ER2M89SSMV16HYQ",
+						"alt": "Join us for worship",
+						"width": 600,
+						"height": 600,
+						"mimeType": "image/jpeg",
+						"filename": "summer-2022-worship.jpg",
+						"meta": {
+							"storageKey": "01K00000006ER2M89SSMV16HYQ.jpg"
+						}
 					},
 					"body": [
 						{
@@ -9474,6 +12526,17 @@
 						}
 					],
 					"external": false
+				},
+				"taxonomies": {
+					"ministry": [
+						"worship"
+					],
+					"audience": [
+						"everyone"
+					],
+					"card_type": [
+						"announcement"
+					]
 				}
 			}
 		],
@@ -9486,12 +12549,16 @@
 					"title": "We're your neighborhood church - Good things happen here",
 					"weight": 10,
 					"image": {
-						"provider": "external",
-						"id": "mig-0f15df23e8984197",
-						"src": "/images/pic-slider-good-things-happen-here.jpg",
+						"provider": "local",
+						"id": "01K0000000FNZ38R1QWAKF13V0",
 						"alt": "We're your neighborhood church - Good things happen here",
 						"width": 1600,
-						"height": 738
+						"height": 738,
+						"mimeType": "image/jpeg",
+						"filename": "pic-slider-good-things-happen-here.jpg",
+						"meta": {
+							"storageKey": "01K0000000FNZ38R1QWAKF13V0.jpg"
+						}
 					}
 				}
 			},
@@ -9503,12 +12570,16 @@
 					"title": "All are welcome - we're all part of the same puzzle",
 					"weight": 20,
 					"image": {
-						"provider": "external",
-						"id": "mig-76feeabc348a3e98",
-						"src": "/images/puzzle-top-22.jpg",
+						"provider": "local",
+						"id": "01K0000000PYAWMAYR28A4RP0A",
 						"alt": "All are welcome - we're all part of the same puzzle",
 						"width": 950,
-						"height": 438
+						"height": 438,
+						"mimeType": "image/jpeg",
+						"filename": "puzzle-top-22.jpg",
+						"meta": {
+							"storageKey": "01K0000000PYAWMAYR28A4RP0A.jpg"
+						}
 					}
 				}
 			},
@@ -9520,12 +12591,16 @@
 					"title": "We have four food ministries fighting hunger in our community",
 					"weight": 30,
 					"image": {
-						"provider": "external",
-						"id": "mig-831302a67e60291f",
-						"src": "/images/slider-4food-ministries.jpg",
+						"provider": "local",
+						"id": "01K00000003K26Y09ZWS50VVMV",
 						"alt": "We have four food ministries fighting hunger in our community",
 						"width": 950,
-						"height": 438
+						"height": 438,
+						"mimeType": "image/jpeg",
+						"filename": "slider-4food-ministries.jpg",
+						"meta": {
+							"storageKey": "01K00000003K26Y09ZWS50VVMV.jpg"
+						}
 					}
 				}
 			},
@@ -9537,12 +12612,16 @@
 					"title": "Black Lives Matter - we stand for racial justice",
 					"weight": 40,
 					"image": {
-						"provider": "external",
-						"id": "mig-72805d545e31f4e6",
-						"src": "/images/black-lives-matter-banner-header.jpg",
+						"provider": "local",
+						"id": "01K0000000J0XMYHM6X4NBJYEJ",
 						"alt": "Black Lives Matter - we stand for racial justice",
 						"width": 950,
-						"height": 438
+						"height": 438,
+						"mimeType": "image/jpeg",
+						"filename": "black-lives-matter-banner-header.jpg",
+						"meta": {
+							"storageKey": "01K0000000J0XMYHM6X4NBJYEJ.jpg"
+						}
 					}
 				}
 			},
@@ -9554,12 +12633,16 @@
 					"title": "We're solar powered - committed to sustainability",
 					"weight": 50,
 					"image": {
-						"provider": "external",
-						"id": "mig-eaf35beb4ea18f9b",
-						"src": "/images/solar-powered-picslider.jpg",
+						"provider": "local",
+						"id": "01K0000000AKVBE1FVJ18MV6XQ",
 						"alt": "We're solar powered - committed to sustainability",
 						"width": 1600,
-						"height": 738
+						"height": 738,
+						"mimeType": "image/jpeg",
+						"filename": "solar-powered-picslider.jpg",
+						"meta": {
+							"storageKey": "01K0000000AKVBE1FVJ18MV6XQ.jpg"
+						}
 					}
 				}
 			}

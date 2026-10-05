@@ -12,6 +12,10 @@
 import { readFileSync, readdirSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { basename, join, resolve } from "node:path";
 import { createHash } from "node:crypto";
+import { statSync } from "node:fs";
+import { extname } from "node:path";
+import { imageSize } from "image-size";
+import { taxonomies, assignTaxonomies } from "./taxonomy.mjs";
 import { parse as parseYaml } from "yaml";
 import { fromMarkdown } from "mdast-util-from-markdown";
 
@@ -21,10 +25,39 @@ const warnings = [];
 const warn = (m) => warnings.push(m);
 
 // ---------- helpers ----------
-const mediaId = (src) => "mig-" + createHash("sha1").update(src).digest("hex").slice(0, 16);
-/** Local file in public/ -> EmDash "external" media value (served as a static file). */
-const img = (src, alt, extra = {}) =>
-	src ? { provider: "external", id: mediaId(src), src, alt: alt ?? "", ...extra } : undefined;
+// Every local image becomes a media-library item. The importer (scripts/import-media.mjs) creates
+// the rows + files from seed/media-manifest.json using these same deterministic ids.
+const MIME = { ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".gif": "image/gif", ".webp": "image/webp", ".svg": "image/svg+xml" };
+const CROCKFORD = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
+/** Deterministic 26-char ULID-shaped id derived from the public path. */
+const mediaId = (src) => {
+	const h = createHash("sha1").update(src).digest();
+	let out = "01K0000000"; // fixed timestamp prefix
+	for (let i = 0; i < 16; i++) out += CROCKFORD[h[i] % 32];
+	return out;
+};
+const manifest = new Map();
+const img = (src, alt, extra = {}) => {
+	if (!src) return undefined;
+	const file = join(HUGO, "static", decodeURI(src));
+	const ext = extname(src).toLowerCase();
+	if (!existsSync(file) || !MIME[ext]) {
+		warn(`image not found or unsupported, left as plain URL: ${src}`);
+		return { provider: "external", id: mediaId(src), src, alt: alt ?? "", ...extra };
+	}
+	let m = manifest.get(src);
+	if (!m) {
+		let dims = {};
+		try { dims = ext === ".svg" ? {} : imageSize(readFileSync(file)); } catch { warn(`no dimensions for ${src}`); }
+		const id = mediaId(src);
+		m = { id, src, filename: basename(src), mimeType: MIME[ext], size: statSync(file).size, width: dims.width, height: dims.height, alt: alt ?? "", storageKey: id + ext };
+		manifest.set(src, m);
+	}
+	return {
+		provider: "local", id: m.id, alt: alt ?? "", width: extra.width ?? m.width, height: extra.height ?? m.height,
+		mimeType: m.mimeType, filename: m.filename, meta: { storageKey: m.storageKey },
+	};
+};
 const clean = (o) => Object.fromEntries(Object.entries(o).filter(([, v]) => v !== undefined && v !== null && v !== ""));
 
 function readMd(file) {
@@ -157,6 +190,7 @@ const cardFields = [
 	F("title", "Title (internal name)", "string", { required: true, searchable: true }),
 	F("weight", "Display order (lower shows first)", "integer"),
 	F("archived", "Archived (moves to the Archive page)", "boolean"),
+	F("expires", "Hide after (moves to the Archive page automatically)", "datetime"),
 	F("image", "Image", "image"),
 	F("tags", "Caption above text", "string"),
 	F("body", "Text", "portableText", { searchable: true }),
@@ -208,9 +242,9 @@ const collections = [
 			F("email", "Email", "string"),
 		],
 	},
-	{ slug: "homepage_cards", label: "Homepage cards", labelSingular: "Homepage card", icon: "layout-grid", sortOrder: 3, routable: false, supports: ["drafts", "revisions"], fields: cardFields },
-	{ slug: "kids_cards", label: "Kids page cards", labelSingular: "Kids card", icon: "layout-grid", sortOrder: 4, routable: false, supports: ["drafts", "revisions"], fields: cardFields },
-	{ slug: "youth_cards", label: "Youth page cards", labelSingular: "Youth card", icon: "layout-grid", sortOrder: 5, routable: false, supports: ["drafts", "revisions"], fields: cardFields },
+	{ slug: "homepage_cards", label: "Homepage cards", labelSingular: "Homepage card", icon: "layout-grid", sortOrder: 3, routable: false, supports: ["drafts", "revisions"], admin: { listColumns: ["archived", "expires", "weight"] }, fields: cardFields },
+	{ slug: "kids_cards", label: "Kids page cards", labelSingular: "Kids card", icon: "layout-grid", sortOrder: 4, routable: false, supports: ["drafts", "revisions"], admin: { listColumns: ["archived", "expires", "weight"] }, fields: cardFields },
+	{ slug: "youth_cards", label: "Youth page cards", labelSingular: "Youth card", icon: "layout-grid", sortOrder: 5, routable: false, supports: ["drafts", "revisions"], admin: { listColumns: ["archived", "expires", "weight"] }, fields: cardFields },
 	{
 		slug: "slider", label: "Homepage slider", labelSingular: "Slide", icon: "image", sortOrder: 6, routable: false, supports: ["drafts"],
 		fields: [F("title", "Name", "string", { required: true }), F("weight", "Display order (lower shows first)", "integer"), F("image", "Slide image (wide, about 1600x738)", "image", { required: true })],
@@ -221,6 +255,12 @@ const collections = [
 const content = { pages: [], staff: [], homepage_cards: [], kids_cards: [], youth_cards: [], slider: [] };
 const cardKeys = new Set(["title", "weight", "draft", "archived", "image", "image_alt", "image_width", "image_height", "link", "external", "tags", "video", "video_ogg", "video_fallback"]);
 
+// Dated cards hide themselves after the event (UTC; times are Central).
+const EXPIRES = {
+	"homepage_cards/taize-worship": "2026-10-10T03:00:00.000Z", // Fri Oct 9, 7 p.m. service
+	"homepage_cards/pasta-dinner": "2026-10-23T00:30:00.000Z", // Thu Oct 22, 5:30-7:30 p.m.
+	"homepage_cards/all-church-service-project": "2026-10-19T05:00:00.000Z", // Sun Oct 18, after worship
+};
 function convertCards(dir, collection) {
 	for (const f of readdirSync(dir).filter((x) => x.endsWith(".md") && x !== "_index.md").sort()) {
 		const { fm, body } = readMd(join(dir, f));
@@ -229,7 +269,7 @@ function convertCards(dir, collection) {
 		content[collection].push({
 			id: `${collection}-${slug}`, slug, status: fm.draft ? "draft" : "published",
 			data: clean({
-				title: fm.title, weight: fm.weight, archived: !!fm.archived,
+				title: fm.title, weight: fm.weight, archived: !!fm.archived, expires: EXPIRES[`${collection}/${slug}`],
 				image: img(fm.image, fm.image_alt), tags: fm.tags,
 				body: mdToPortableText(body, `${collection}-${slug}-`),
 				link: fm.link, external: !!fm.external,
@@ -318,27 +358,51 @@ const menus = [
 		name: "secondary", label: "Main menu (below the logo)",
 		items: [L("HOME", "/"), L("WELCOME", "/welcome/"), L("FIRST VISIT", "/first-visit/"), L("WE SEEK", "/we-seek/"), L("WE SERVE", "/we-serve/"), L("WE CELEBRATE", "/we-celebrate/"), L("STAFF", "/staff/"), L("CONTACT US", "/contact/")],
 	},
-	{ name: "footer", label: "Footer quick links", items: [L("First Visit", "/first-visit/"), L("Calendar", "/calendar/"), L("Staff", "/staff/"), L("Contact Us", "/contact/")] },
+	{ name: "footer", label: "Footer quick links", items: [L("First Visit", "/first-visit/"), L("Calendar", "/calendar/"), L("Staff", "/staff/"), L("Ministries", "/ministries/"), L("Contact Us", "/contact/")] },
 ];
 
-// Old minnehaha.org URLs -> new routes, so existing links keep working.
-const redirects = Object.entries({
-	"/index.html": "/", "/welcome.html": "/welcome/", "/1firstvisit.html": "/first-visit/", "/firstvisit.html": "/first-visit/",
-	"/seek.html": "/we-seek/", "/serve.html": "/we-serve/", "/celebrate.html": "/we-celebrate/", "/MUMC_staff.html": "/staff/",
-	"/contact.html": "/contact/", "/calendar.html": "/calendar/", "/kids.html": "/kids/", "/youth.html": "/youth/",
-	"/racialjustice.html": "/racial-justice/", "/climateaction.html": "/climate-action/", "/goodthingshappenhere.html": "/good-things-happen-here/",
-	"/solar.html": "/solar/", "/building.html": "/building/", "/umw.html": "/uwf/", "/weddings_funerals.html": "/weddings-funerals/", "/slideshow.html": "/church-history/",
-}).map(([source, destination]) => ({ source, destination, type: 301, groupName: "Old minnehaha.org pages" }));
+// Old minnehaha.org .html URLs are redirected by legacy-redirects.mjs (EmDash's admin redirects skip URLs with file extensions).
+const redirects = [];
 
 const seed = {
 	$schema: "https://emdashcms.com/seed.schema.json",
 	version: "1",
 	meta: { name: "Minnehaha UMC", description: "Website for Minnehaha United Methodist Church, Minneapolis", author: "Minnehaha UMC" },
 	settings: { title: "Minnehaha United Methodist Church", tagline: "Minnehaha United Methodist Church - Your neighborhood church in Minneapolis" },
-	collections, menus, redirects, content,
+	collections, taxonomies, menus, redirects, content,
 };
+const fallbacks = assignTaxonomies(content);
+for (const f of fallbacks) warn(`no taxonomy mapping for ${f}; used the collection default`);
+// Documents (PDFs etc.) live in the media library too; /documents/<filename> serves them (src/pages/documents).
+const DOC_MIME = { ".pdf": "application/pdf", ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document", ".png": "image/png" };
+const docsDir = join(HUGO, "static/documents");
+if (existsSync(docsDir)) {
+	for (const f of readdirSync(docsDir).sort()) {
+		const ext = extname(f).toLowerCase();
+		if (!DOC_MIME[ext]) { warn(`document skipped (type): ${f}`); continue; }
+		const src = `/documents/${f}`;
+		const id = mediaId(src);
+		manifest.set(src, { id, src, filename: f, mimeType: DOC_MIME[ext], size: statSync(join(docsDir, f)).size, alt: "", storageKey: id + ext, folder: "Documents" });
+	}
+}
+
+// Media folders: group library items by where they are first used.
+const FOLDER = { homepage_cards: "Homepage cards", kids_cards: "Kids cards", youth_cards: "Youth cards", pages: "Pages & banners", staff: "Staff", slider: "Homepage slider" };
+const byId = new Map([...manifest.values()].map((m) => [m.id, m]));
+const tag = (o, folder) => {
+	if (Array.isArray(o)) return o.forEach((v) => tag(v, folder));
+	if (!o || typeof o !== "object") return;
+	if (o.provider === "local" && byId.has(o.id) && !byId.get(o.id).folder) byId.get(o.id).folder = folder;
+	Object.values(o).forEach((v) => tag(v, folder));
+};
+for (const [coll, entries] of Object.entries(content)) for (const e of entries) tag(e.data, FOLDER[coll] || "Other");
+writeFileSync(resolve("seed/media-manifest.json"), JSON.stringify([...manifest.values()], null, "\t") + "\n");
+console.log(`  media: ${manifest.size} images`);
 mkdirSync(resolve("seed"), { recursive: true });
 writeFileSync(OUT, JSON.stringify(seed, null, "\t") + "\n");
+// Schema-only copy (no content): lets the media library be filled before content references it.
+const { content: _omit, ...schemaOnly } = seed;
+writeFileSync(resolve("seed/seed-schema.json"), JSON.stringify(schemaOnly, null, "\t") + "\n");
 console.log(`Wrote ${OUT}`);
 for (const [k, v] of Object.entries(content)) console.log(`  ${k}: ${v.length}`);
 console.log(`  menus: ${menus.length}, redirects: ${redirects.length}`);

@@ -3,11 +3,12 @@ import { getEmDashCollection } from "emdash";
 import Base from "../layouts/Base.astro";
 import Card from "../components/Card.astro";
 import { byWeight, imageSrc, imageAlt } from "../utils/media";
+import { isCurrent } from "../utils/cards";
 import { site } from "../site";
 
 const { entries: slides } = await getEmDashCollection("slider");
 const { entries: all } = await getEmDashCollection("homepage_cards", { limit: 500 });
-const cards = byWeight(all.filter((c: any) => !c.data.archived));
+const cards = byWeight(all.filter((c: any) => isCurrent(c)));
 ---
 <Base title={site.name} isHome={true}>
 	<div class="inner">

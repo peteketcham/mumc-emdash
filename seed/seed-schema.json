@@ -1,0 +1,976 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "Minnehaha UMC",
+		"description": "Website for Minnehaha United Methodist Church, Minneapolis",
+		"author": "Minnehaha UMC"
+	},
+	"settings": {
+		"title": "Minnehaha United Methodist Church",
+		"tagline": "Minnehaha United Methodist Church - Your neighborhood church in Minneapolis"
+	},
+	"collections": [
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"icon": "file-text",
+			"sortOrder": 1,
+			"supports": [
+				"drafts",
+				"revisions",
+				"search",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "subtitle",
+					"label": "Subtitle",
+					"type": "string"
+				},
+				{
+					"slug": "description",
+					"label": "Description (search engines)",
+					"type": "text"
+				},
+				{
+					"slug": "template",
+					"label": "Page type",
+					"type": "select",
+					"validation": {
+						"options": [
+							"default",
+							"kids",
+							"youth",
+							"staff",
+							"contact",
+							"slideshow",
+							"archive"
+						]
+					}
+				},
+				{
+					"slug": "banner",
+					"label": "Banner image",
+					"type": "image"
+				},
+				{
+					"slug": "intro",
+					"label": "Intro text",
+					"type": "text"
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "featured_title",
+					"label": "Featured box: title",
+					"type": "string"
+				},
+				{
+					"slug": "featured_heading",
+					"label": "Featured box: heading",
+					"type": "string"
+				},
+				{
+					"slug": "featured_text",
+					"label": "Featured box: text",
+					"type": "text"
+				},
+				{
+					"slug": "featured_image",
+					"label": "Featured box: image",
+					"type": "image"
+				},
+				{
+					"slug": "featured_position",
+					"label": "Featured box: position",
+					"type": "select",
+					"validation": {
+						"options": [
+							"left",
+							"right"
+						]
+					}
+				},
+				{
+					"slug": "video",
+					"label": "Video file (MP4 path)",
+					"type": "string"
+				},
+				{
+					"slug": "video_ogg",
+					"label": "Video fallback (OGG path)",
+					"type": "string"
+				},
+				{
+					"slug": "video_fallback",
+					"label": "Video fallback link (YouTube URL)",
+					"type": "string"
+				},
+				{
+					"slug": "location_link",
+					"label": "Map link (shows a \"where are we\" link)",
+					"type": "url"
+				},
+				{
+					"slug": "downloads_title",
+					"label": "Downloads: heading",
+					"type": "string"
+				},
+				{
+					"slug": "downloads",
+					"label": "Downloads",
+					"type": "repeater",
+					"validation": {
+						"subFields": [
+							{
+								"slug": "name",
+								"label": "Name",
+								"type": "string",
+								"required": true
+							},
+							{
+								"slug": "url",
+								"label": "File path or URL",
+								"type": "string",
+								"required": true
+							},
+							{
+								"slug": "description",
+								"label": "Description",
+								"type": "string"
+							}
+						]
+					}
+				},
+				{
+					"slug": "embeds",
+					"label": "Embedded content (iframes)",
+					"type": "repeater",
+					"validation": {
+						"subFields": [
+							{
+								"slug": "title",
+								"label": "Title",
+								"type": "string"
+							},
+							{
+								"slug": "url",
+								"label": "URL",
+								"type": "url",
+								"required": true
+							},
+							{
+								"slug": "width",
+								"label": "Width",
+								"type": "string"
+							},
+							{
+								"slug": "height",
+								"label": "Height",
+								"type": "string"
+							}
+						]
+					}
+				},
+				{
+					"slug": "slides",
+					"label": "Slideshow images",
+					"type": "repeater",
+					"validation": {
+						"subFields": [
+							{
+								"slug": "image",
+								"label": "Image",
+								"type": "image",
+								"required": true
+							}
+						]
+					}
+				},
+				{
+					"slug": "office_hours",
+					"label": "Office hours",
+					"type": "string"
+				},
+				{
+					"slug": "staff_photo",
+					"label": "Staff photo",
+					"type": "image"
+				},
+				{
+					"slug": "staff_contacts",
+					"label": "Staff contact list",
+					"type": "repeater",
+					"validation": {
+						"subFields": [
+							{
+								"slug": "name",
+								"label": "Name",
+								"type": "string",
+								"required": true
+							},
+							{
+								"slug": "role",
+								"label": "Role",
+								"type": "string"
+							},
+							{
+								"slug": "email",
+								"label": "Email",
+								"type": "string"
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"slug": "staff",
+			"label": "Staff",
+			"labelSingular": "Staff member",
+			"icon": "users",
+			"sortOrder": 2,
+			"routable": false,
+			"supports": [
+				"drafts"
+			],
+			"fields": [
+				{
+					"slug": "name",
+					"label": "Name",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "display_title",
+					"label": "Heading shown on the page (e.g. REV. NAME, PASTOR:)",
+					"type": "string"
+				},
+				{
+					"slug": "weight",
+					"label": "Display order (lower shows first)",
+					"type": "integer"
+				},
+				{
+					"slug": "photo",
+					"label": "Photo",
+					"type": "image"
+				},
+				{
+					"slug": "bio",
+					"label": "Bio",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "email",
+					"label": "Email",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"slug": "homepage_cards",
+			"label": "Homepage cards",
+			"labelSingular": "Homepage card",
+			"icon": "layout-grid",
+			"sortOrder": 3,
+			"routable": false,
+			"supports": [
+				"drafts",
+				"revisions"
+			],
+			"admin": {
+				"listColumns": [
+					"archived",
+					"expires",
+					"weight"
+				]
+			},
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title (internal name)",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "weight",
+					"label": "Display order (lower shows first)",
+					"type": "integer"
+				},
+				{
+					"slug": "archived",
+					"label": "Archived (moves to the Archive page)",
+					"type": "boolean"
+				},
+				{
+					"slug": "expires",
+					"label": "Hide after (moves to the Archive page automatically)",
+					"type": "datetime"
+				},
+				{
+					"slug": "image",
+					"label": "Image",
+					"type": "image"
+				},
+				{
+					"slug": "tags",
+					"label": "Caption above text",
+					"type": "string"
+				},
+				{
+					"slug": "body",
+					"label": "Text",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "link",
+					"label": "Link (URL or /page)",
+					"type": "string"
+				},
+				{
+					"slug": "external",
+					"label": "Open link in a new tab",
+					"type": "boolean"
+				},
+				{
+					"slug": "video",
+					"label": "Video file (MP4 path)",
+					"type": "string"
+				},
+				{
+					"slug": "video_ogg",
+					"label": "Video fallback (OGG path)",
+					"type": "string"
+				},
+				{
+					"slug": "video_fallback",
+					"label": "Video fallback link (YouTube URL)",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"slug": "kids_cards",
+			"label": "Kids page cards",
+			"labelSingular": "Kids card",
+			"icon": "layout-grid",
+			"sortOrder": 4,
+			"routable": false,
+			"supports": [
+				"drafts",
+				"revisions"
+			],
+			"admin": {
+				"listColumns": [
+					"archived",
+					"expires",
+					"weight"
+				]
+			},
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title (internal name)",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "weight",
+					"label": "Display order (lower shows first)",
+					"type": "integer"
+				},
+				{
+					"slug": "archived",
+					"label": "Archived (moves to the Archive page)",
+					"type": "boolean"
+				},
+				{
+					"slug": "expires",
+					"label": "Hide after (moves to the Archive page automatically)",
+					"type": "datetime"
+				},
+				{
+					"slug": "image",
+					"label": "Image",
+					"type": "image"
+				},
+				{
+					"slug": "tags",
+					"label": "Caption above text",
+					"type": "string"
+				},
+				{
+					"slug": "body",
+					"label": "Text",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "link",
+					"label": "Link (URL or /page)",
+					"type": "string"
+				},
+				{
+					"slug": "external",
+					"label": "Open link in a new tab",
+					"type": "boolean"
+				},
+				{
+					"slug": "video",
+					"label": "Video file (MP4 path)",
+					"type": "string"
+				},
+				{
+					"slug": "video_ogg",
+					"label": "Video fallback (OGG path)",
+					"type": "string"
+				},
+				{
+					"slug": "video_fallback",
+					"label": "Video fallback link (YouTube URL)",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"slug": "youth_cards",
+			"label": "Youth page cards",
+			"labelSingular": "Youth card",
+			"icon": "layout-grid",
+			"sortOrder": 5,
+			"routable": false,
+			"supports": [
+				"drafts",
+				"revisions"
+			],
+			"admin": {
+				"listColumns": [
+					"archived",
+					"expires",
+					"weight"
+				]
+			},
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title (internal name)",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "weight",
+					"label": "Display order (lower shows first)",
+					"type": "integer"
+				},
+				{
+					"slug": "archived",
+					"label": "Archived (moves to the Archive page)",
+					"type": "boolean"
+				},
+				{
+					"slug": "expires",
+					"label": "Hide after (moves to the Archive page automatically)",
+					"type": "datetime"
+				},
+				{
+					"slug": "image",
+					"label": "Image",
+					"type": "image"
+				},
+				{
+					"slug": "tags",
+					"label": "Caption above text",
+					"type": "string"
+				},
+				{
+					"slug": "body",
+					"label": "Text",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "link",
+					"label": "Link (URL or /page)",
+					"type": "string"
+				},
+				{
+					"slug": "external",
+					"label": "Open link in a new tab",
+					"type": "boolean"
+				},
+				{
+					"slug": "video",
+					"label": "Video file (MP4 path)",
+					"type": "string"
+				},
+				{
+					"slug": "video_ogg",
+					"label": "Video fallback (OGG path)",
+					"type": "string"
+				},
+				{
+					"slug": "video_fallback",
+					"label": "Video fallback link (YouTube URL)",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"slug": "slider",
+			"label": "Homepage slider",
+			"labelSingular": "Slide",
+			"icon": "image",
+			"sortOrder": 6,
+			"routable": false,
+			"supports": [
+				"drafts"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Name",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "weight",
+					"label": "Display order (lower shows first)",
+					"type": "integer"
+				},
+				{
+					"slug": "image",
+					"label": "Slide image (wide, about 1600x738)",
+					"type": "image",
+					"required": true
+				}
+			]
+		}
+	],
+	"taxonomies": [
+		{
+			"name": "ministry",
+			"label": "Ministry areas",
+			"labelSingular": "Ministry area",
+			"hierarchical": true,
+			"collections": [
+				"pages",
+				"homepage_cards",
+				"kids_cards",
+				"youth_cards"
+			],
+			"terms": [
+				{
+					"slug": "worship",
+					"label": "Worship & Music",
+					"description": "Sunday worship, Taizé, music and special services."
+				},
+				{
+					"slug": "kids-families",
+					"label": "Kids & Families",
+					"description": "Sunday School, Playgroup, family dinners, camps and more for children and their families."
+				},
+				{
+					"slug": "sunday-school",
+					"label": "Sunday School",
+					"parent": "kids-families"
+				},
+				{
+					"slug": "playgroup",
+					"label": "Playgroup",
+					"parent": "kids-families"
+				},
+				{
+					"slug": "family-events",
+					"label": "Family Events",
+					"parent": "kids-families"
+				},
+				{
+					"slug": "camps",
+					"label": "Camps & Retreats",
+					"parent": "kids-families"
+				},
+				{
+					"slug": "youth",
+					"label": "Youth",
+					"description": "Programs, trips and camps for middle school and high school youth."
+				},
+				{
+					"slug": "food",
+					"label": "Food & Hunger Relief",
+					"description": "MinneHarvest, the Minnehaha Food Shelf, Meals on Wheels and other ways we fight hunger."
+				},
+				{
+					"slug": "justice",
+					"label": "Justice & Inclusion",
+					"description": "Welcoming everyone and working for racial and social justice."
+				},
+				{
+					"slug": "racial-justice",
+					"label": "Racial Justice",
+					"parent": "justice"
+				},
+				{
+					"slug": "welcome",
+					"label": "Welcome & Reconciling",
+					"parent": "justice"
+				},
+				{
+					"slug": "creation",
+					"label": "Climate & Creation",
+					"description": "Solar power, carbon-free energy and caring for creation."
+				},
+				{
+					"slug": "community",
+					"label": "Community & Building",
+					"description": "Our building, groups and neighborhood partnerships."
+				},
+				{
+					"slug": "giving",
+					"label": "Giving & Mission",
+					"description": "Giving, disaster relief and mission support."
+				},
+				{
+					"slug": "connect",
+					"label": "Connect & Communicate",
+					"description": "Newcomers, membership, staff, newsletters and ways to stay in touch."
+				}
+			]
+		},
+		{
+			"name": "audience",
+			"label": "Audiences",
+			"labelSingular": "Audience",
+			"hierarchical": false,
+			"collections": [
+				"pages",
+				"homepage_cards",
+				"kids_cards",
+				"youth_cards"
+			],
+			"terms": [
+				{
+					"slug": "everyone",
+					"label": "Everyone"
+				},
+				{
+					"slug": "families",
+					"label": "Families with kids"
+				},
+				{
+					"slug": "youth",
+					"label": "Youth"
+				},
+				{
+					"slug": "adults",
+					"label": "Adults"
+				},
+				{
+					"slug": "newcomers",
+					"label": "Visitors & new members"
+				}
+			]
+		},
+		{
+			"name": "card_type",
+			"label": "Card types",
+			"labelSingular": "Card type",
+			"hierarchical": false,
+			"collections": [
+				"homepage_cards",
+				"kids_cards",
+				"youth_cards"
+			],
+			"terms": [
+				{
+					"slug": "event",
+					"label": "Event",
+					"description": "A dated happening or a photo from one."
+				},
+				{
+					"slug": "announcement",
+					"label": "Announcement",
+					"description": "Time-sensitive news."
+				},
+				{
+					"slug": "program",
+					"label": "Ongoing program",
+					"description": "Something that happens regularly."
+				},
+				{
+					"slug": "resource",
+					"label": "Information / resource"
+				},
+				{
+					"slug": "action",
+					"label": "Call to action",
+					"description": "Sign up, donate, subscribe, volunteer."
+				}
+			]
+		}
+	],
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Top menu (dropdowns)",
+			"items": [
+				{
+					"type": "custom",
+					"label": "HOME",
+					"url": "/"
+				},
+				{
+					"type": "custom",
+					"label": "CALENDAR",
+					"url": "/calendar/"
+				},
+				{
+					"type": "custom",
+					"label": "KIDS/YOUTH",
+					"url": "#",
+					"children": [
+						{
+							"type": "custom",
+							"label": "Kids",
+							"url": "/kids/"
+						},
+						{
+							"type": "custom",
+							"label": "Youth",
+							"url": "/youth/"
+						}
+					]
+				},
+				{
+					"type": "custom",
+					"label": "CLIMATE",
+					"url": "#",
+					"children": [
+						{
+							"type": "custom",
+							"label": "Solar Power",
+							"url": "/solar/"
+						},
+						{
+							"type": "custom",
+							"label": "Climate Action",
+							"url": "/climate-action/"
+						}
+					]
+				},
+				{
+					"type": "custom",
+					"label": "GROUPS",
+					"url": "/groups/",
+					"children": [
+						{
+							"type": "custom",
+							"label": "Racial Justice",
+							"url": "/racial-justice/"
+						},
+						{
+							"type": "custom",
+							"label": "United Women in Faith",
+							"url": "/uwf/"
+						}
+					]
+				},
+				{
+					"type": "custom",
+					"label": "FOOD MISSIONS",
+					"url": "#",
+					"children": [
+						{
+							"type": "custom",
+							"label": "Food Shelf",
+							"url": "/food-shelf/"
+						},
+						{
+							"type": "custom",
+							"label": "3 Food Missions",
+							"url": "/food-ministries/"
+						}
+					]
+				},
+				{
+					"type": "custom",
+					"label": "BLDG. USE",
+					"url": "#",
+					"children": [
+						{
+							"type": "custom",
+							"label": "Work Orders, Building & Kitchen",
+							"url": "/building/"
+						},
+						{
+							"type": "custom",
+							"label": "Major Event Cleanup Checklist",
+							"url": "/documents/majorcleanupchecklist.pdf"
+						},
+						{
+							"type": "custom",
+							"label": "Group Cleanup Checklist",
+							"url": "/documents/groupcleanupchecklist.pdf"
+						},
+						{
+							"type": "custom",
+							"label": "Room Rentals",
+							"url": "/documents/MUMC Room Rental.pdf"
+						}
+					]
+				},
+				{
+					"type": "custom",
+					"label": "WEDDING/FUNERAL",
+					"url": "/weddings-funerals/"
+				},
+				{
+					"type": "custom",
+					"label": "FORMS",
+					"url": "#",
+					"children": [
+						{
+							"type": "custom",
+							"label": "Event Media Form",
+							"url": "/documents/eventmediaform.pdf"
+						},
+						{
+							"type": "custom",
+							"label": "Claim Form",
+							"url": "/documents/MUMC_Claim_Form.pdf"
+						},
+						{
+							"type": "custom",
+							"label": "Gym Rules & Liability Waiver",
+							"url": "/documents/Gym Rules and Liability Waiver.pdf"
+						}
+					]
+				},
+				{
+					"type": "custom",
+					"label": "FAQs",
+					"url": "#",
+					"children": [
+						{
+							"type": "custom",
+							"label": "Good Things Happen Here",
+							"url": "/good-things-happen-here/"
+						},
+						{
+							"type": "custom",
+							"label": "Questions? Answers!",
+							"url": "/documents/QandA.pdf"
+						},
+						{
+							"type": "custom",
+							"label": "Who Do I Talk To?",
+							"url": "/documents/whointhechurch.pdf"
+						},
+						{
+							"type": "custom",
+							"label": "Church history",
+							"url": "/church-history/"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "secondary",
+			"label": "Main menu (below the logo)",
+			"items": [
+				{
+					"type": "custom",
+					"label": "HOME",
+					"url": "/"
+				},
+				{
+					"type": "custom",
+					"label": "WELCOME",
+					"url": "/welcome/"
+				},
+				{
+					"type": "custom",
+					"label": "FIRST VISIT",
+					"url": "/first-visit/"
+				},
+				{
+					"type": "custom",
+					"label": "WE SEEK",
+					"url": "/we-seek/"
+				},
+				{
+					"type": "custom",
+					"label": "WE SERVE",
+					"url": "/we-serve/"
+				},
+				{
+					"type": "custom",
+					"label": "WE CELEBRATE",
+					"url": "/we-celebrate/"
+				},
+				{
+					"type": "custom",
+					"label": "STAFF",
+					"url": "/staff/"
+				},
+				{
+					"type": "custom",
+					"label": "CONTACT US",
+					"url": "/contact/"
+				}
+			]
+		},
+		{
+			"name": "footer",
+			"label": "Footer quick links",
+			"items": [
+				{
+					"type": "custom",
+					"label": "First Visit",
+					"url": "/first-visit/"
+				},
+				{
+					"type": "custom",
+					"label": "Calendar",
+					"url": "/calendar/"
+				},
+				{
+					"type": "custom",
+					"label": "Staff",
+					"url": "/staff/"
+				},
+				{
+					"type": "custom",
+					"label": "Ministries",
+					"url": "/ministries/"
+				},
+				{
+					"type": "custom",
+					"label": "Contact Us",
+					"url": "/contact/"
+				}
+			]
+		}
+	],
+	"redirects": []
+}

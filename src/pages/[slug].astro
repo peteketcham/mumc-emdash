@@ -8,20 +8,21 @@ import Contact from "../components/pages/Contact.astro";
 import Slideshow from "../components/pages/Slideshow.astro";
 import Archive from "../components/pages/Archive.astro";
 import { byWeight } from "../utils/media";
+import { isCurrent, isArchivedOrExpired } from "../utils/cards";
 
 const { slug } = Astro.params;
 const { entry: page } = await getEmDashEntry("pages", slug!);
 if (!page) return new Response(null, { status: 404 });
 
 const template = page.data.template || "default";
-const live = (e: any[]) => byWeight(e.filter((c) => !c.data.archived));
+const live = (e: any[]) => byWeight(e.filter((c) => isCurrent(c)));
 let cards: any[] = [];
 let staff: any[] = [];
 if (template === "kids") cards = live((await getEmDashCollection("kids_cards", { limit: 500 })).entries);
 else if (template === "youth") cards = live((await getEmDashCollection("youth_cards", { limit: 500 })).entries);
 else if (template === "archive") {
 	const all = (await getEmDashCollection("homepage_cards", { limit: 500 })).entries;
-	cards = byWeight(all.filter((c: any) => c.data.archived));
+	cards = byWeight(all.filter((c: any) => isArchivedOrExpired(c)));
 } else if (template === "staff") staff = (await getEmDashCollection("staff", { limit: 100 })).entries;
 ---
 <Base title={page.data.title} description={page.data.description} content={{ collection: "pages", id: page.id, slug }}>
